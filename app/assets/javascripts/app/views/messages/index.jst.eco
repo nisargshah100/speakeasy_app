@@ -1,9 +1,21 @@
-<h1>Listing Messages</h1>
+<h1>Speakeasy</h1>
 
 <% for message in @messages: %>
   <div class="item" data-id="<%= message.id %>">
     <a data-type="show"><%= message.body %></a>
   </div>
 <% end %>
+----------
+<form>
+  
+  <label>
+    <span>New Message</span>
+    <input 
+      type="text" name="body" 
+      value="<%= @body %>" required
+ autofocus>
+  </label>
+  
+  <button>Create</button>
 
-<p><a data-type="new">New Message</a></p>
+</form>

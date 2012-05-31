@@ -6,46 +6,9 @@ $.fn.item = ->
   elementID or= $(@).parents('[data-id]').data('id')
   Message.find(elementID)
 
-class New extends Spine.Controller
-  events:
-    'click [data-type=back]': 'back'
-    'submit form': 'submit'
-    
-  constructor: ->
-    super
-    @active @render
-    
-  render: ->
-    @html @view('messages/new')
-
-  submit: (e) ->
-    e.preventDefault()
-    message = Message.fromForm(e.target).save()
-    @navigate '/messages'
-
-class Show extends Spine.Controller
-  events:
-    'click [data-type=edit]': 'edit'
-    'click [data-type=back]': 'back'
-
-  constructor: ->
-    super
-    @active (params) ->
-      @change(params.id)
-
-  change: (id) ->
-    @item = Message.find(id)
-    @render()
-
-  render: ->
-    @html @view('messages/show')(@item)
-
 class Index extends Spine.Controller
   events:
-    'click [data-type=edit]':    'edit'
-    'click [data-type=destroy]': 'destroy'
-    'click [data-type=show]':    'show'
-    'click [data-type=new]':     'new'
+    'submit form': 'submit'
 
   constructor: ->
     super
@@ -56,22 +19,16 @@ class Index extends Spine.Controller
     messages = Message.all()
     @html @view('messages/index')(messages: messages)
     
-  show: (e) ->
-    item = $(e.target).item()
-    @navigate '/messages', item.id
-    
-  new: ->
-    @navigate '/messages/new'
+  submit: (e) ->
+    e.preventDefault()
+    message = Message.fromForm(e.target).save()
+    @navigate '/messages'
     
 class App.Messages extends Spine.Stack
   controllers:
     index: Index
-    show:  Show
-    new:   New
     
   routes:
-    '/messages/new':      'new'
-    '/messages/:id':      'show'
     '/messages':          'index'
     
   default: 'index'
