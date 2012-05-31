@@ -6,7 +6,7 @@ $.fn.item = ->
   elementID or= $(@).parents('[data-id]').data('id')
   Message.find(elementID)
 
-class Index extends Spine.Controller
+class App.MessagesIndex extends Spine.Controller
   events:
     'submit form': 'submit'
 
@@ -26,10 +26,10 @@ class Index extends Spine.Controller
     
 class App.Messages extends Spine.Stack
   controllers:
-    index: Index
+    index: App.MessagesIndex
     
   routes:
-    'home/':          'index'
+    '/messages':          'index'
     
-  default: 'index'
+
   className: 'stack messages'

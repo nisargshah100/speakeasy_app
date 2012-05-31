@@ -1,8 +1,8 @@
 Vaudeville::Application.routes.draw do
-  resources :home, only: [:index]
+  resources :app, only: [:index]
 
   resources :messages
   resources :rooms
 
-  root to: "home#index"
+  root to: "app#index"
 end
