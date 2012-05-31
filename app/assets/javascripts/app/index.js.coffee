@@ -23,6 +23,6 @@ class App extends Spine.Controller
     #  ...
     @append(@messages = new App.Messages)
     
-    Spine.Route.setup(history: true)
+    Spine.Route.setup()
 
 window.App = App
