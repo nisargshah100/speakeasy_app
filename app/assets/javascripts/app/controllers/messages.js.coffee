@@ -31,5 +31,4 @@ class App.Messages extends Spine.Stack
   routes:
     '/messages':          'index'
     
-
   className: 'stack messages'
