@@ -1,0 +1,18 @@
+<h1>Edit Message</h1>
+
+<a data-type="back">Back</a>
+
+<form>
+  
+  <label>
+    <span>Body</span>
+    <input 
+      type="text" name="body" 
+      value="<%= @body %>" required
+ autofocus>
+    <br />
+  </label>
+  
+  <button>Edit</button>
+
+</form>

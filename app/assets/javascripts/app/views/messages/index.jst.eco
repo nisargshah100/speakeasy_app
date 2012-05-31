@@ -1,0 +1,12 @@
+<h1>Listing Messages</h1>
+
+<% for message in @messages: %>
+  <div class="item" data-id="<%= message.id %>">
+    <a data-type="show"><%= message.body %></a>
+    
+    <a data-type="edit">Edit</a> 
+    <a data-type="destroy">Destroy</a>
+  </div>
+<% end %>
+
+<p><a data-type="new">New Message</a></p>
