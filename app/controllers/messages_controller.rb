@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
-  # GET /posts
-  # GET /posts.json
+  # GET /messages
+  # GET /messages.json
   def index
     @messages = Message.all
 
@@ -10,73 +10,73 @@ class MessagesController < ApplicationController
     end
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
+  # GET /messages/1
+  # GET /messages/1.json
   def show
-    @post = Post.find(params[:id])
+    @message = Message.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @post }
+      format.json { render json: @message }
     end
   end
 
-  # GET /posts/new
-  # GET /posts/new.json
+  # GET /messages/new
+  # GET /messages/new.json
   def new
-    @post = Post.new
+    @message = Message.new
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @post }
+      format.json { render json: @message }
     end
   end
 
-  # GET /posts/1/edit
+  # GET /messages/1/edit
   def edit
-    @post = Post.find(params[:id])
+    @message = Message.find(params[:id])
   end
 
-  # POST /posts
-  # POST /posts.json
+  # POST /messages
+  # POST /messages.json
   def create
-    @post = Post.new(params[:post])
+    @message = Message.new(params[:message])
 
     respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render json: @post, status: :created, location: @post }
+      if @message.save
+        format.html { redirect_to @message, notice: 'Message was successfully created.' }
+        format.json { render json: @message, status: :created, location: @message }
       else
         format.html { render action: "new" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+        format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PUT /posts/1
-  # PUT /posts/1.json
+  # PUT /messages/1
+  # PUT /messages/1.json
   def update
-    @post = Post.find(params[:id])
+    @message = Message.find(params[:id])
 
     respond_to do |format|
-      if @post.update_attributes(params[:post])
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+      if @message.update_attributes(params[:message])
+        format.html { redirect_to @message, notice: 'Message was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+        format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.json
+  # DELETE /messages/1
+  # DELETE /messages/1.json
   def destroy
-    @post = Post.find(params[:id])
-    @post.destroy
+    @message = Message.find(params[:id])
+    @message.destroy
 
     respond_to do |format|
-      format.html { redirect_to posts_url }
+      format.html { redirect_to messages_url }
       format.json { head :ok }
     end
   end
