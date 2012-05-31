@@ -22,7 +22,7 @@ class Index extends Spine.Controller
   submit: (e) ->
     e.preventDefault()
     message = Message.fromForm(e.target).save()
-    @navigate '/messages'
+    @navigate '/'
     
 class App.Messages extends Spine.Stack
   controllers:
