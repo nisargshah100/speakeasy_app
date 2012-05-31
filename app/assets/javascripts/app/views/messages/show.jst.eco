@@ -1,5 +1,3 @@
 <h1>Show Message</h1>
 
-<a data-type="edit">Edit</a> <a data-type="back">Back</a>
-
 <p>Body: <%= @body %></p>

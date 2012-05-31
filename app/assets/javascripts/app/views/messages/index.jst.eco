@@ -3,9 +3,6 @@
 <% for message in @messages: %>
   <div class="item" data-id="<%= message.id %>">
     <a data-type="show"><%= message.body %></a>
-    
-    <a data-type="edit">Edit</a> 
-    <a data-type="destroy">Destroy</a>
   </div>
 <% end %>
 
