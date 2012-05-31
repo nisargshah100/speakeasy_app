@@ -1,3 +1,0 @@
-<h1>Show Message</h1>
-
-<p>Body: <%= @body %></p>
