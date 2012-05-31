@@ -29,7 +29,7 @@ class App.Messages extends Spine.Stack
     index: Index
     
   routes:
-    '/messages':          'index'
+    '/':          'index'
     
   default: 'index'
   className: 'stack messages'
