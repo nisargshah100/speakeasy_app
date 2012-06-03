@@ -1,6 +1,0 @@
-<% for message in @messages: %>
-  <li class="item">
-    <span class="room-id"><%= message.room_id %></span>
-    <span class="body"><%= message.body %></span>
-  </li>
-<% end %>
