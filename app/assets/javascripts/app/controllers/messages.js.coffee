@@ -10,8 +10,12 @@ window.MessagesItem = App.Messages
 class App.MessagesItem extends Spine.Controller
   tag: "li"
   proxied: [ "render", "remove" ]
-  template: (data) ->
-    $("#messageTemplate").tmpl data
+  
+  # template: (data) ->
+  #   $("#messageTemplate").tmpl data
+
+  template: (message) ->
+    @view('messages/item')(message: message)
 
   init: ->
     @item.bind "update", @render
