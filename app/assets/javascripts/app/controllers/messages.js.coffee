@@ -1,6 +1,6 @@
 $ = jQuery.sub()
 Message = App.Message
-window.MessagesItem = App.Messages
+window.MessagesItem = App.MessagesItem
 
 # $.fn.item = ->
 #   elementID   = $(@).data('id')
@@ -46,7 +46,6 @@ class App.Messages extends Spine.Controller
     
   render: =>
     messages = Message.all()
-    #@html @view('messages/index')(messages: messages)
     Message.each(@addOne)
 
   addOne: (item) ->

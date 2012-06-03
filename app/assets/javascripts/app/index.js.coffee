@@ -21,6 +21,7 @@ class App extends Spine.Controller
     #  ...
     #@append(@messages = new App.Messages)
     @append(@messages = new App.Messages)
+    @append(@rooms = new App.Rooms)
 
     # Spine.Route.setup
 
