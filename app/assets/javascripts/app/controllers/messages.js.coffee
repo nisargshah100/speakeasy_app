@@ -26,8 +26,6 @@ class App.MessagesItem extends Spine.Controller
     elements = @template(@item)
     @el.replaceWith elements
     @el = elements
-    # @el.autolink()
-    # @el.mailto()
     @
 
   remove: ->
