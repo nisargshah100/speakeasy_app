@@ -12,4 +12,5 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require app/index
+//= require jquery.tmpl
+//= require app

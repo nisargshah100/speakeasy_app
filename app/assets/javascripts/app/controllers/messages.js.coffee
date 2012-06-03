@@ -1,14 +1,41 @@
 $ = jQuery.sub()
 Message = App.Message
+window.MessagesItem = App.Messages
 
-$.fn.item = ->
-  elementID   = $(@).data('id')
-  elementID or= $(@).parents('[data-id]').data('id')
-  Message.find(elementID)
+# $.fn.item = ->
+#   elementID   = $(@).data('id')
+#   elementID or= $(@).parents('[data-id]').data('id')
+#   Message.find(elementID)
 
-class App.MessagesIndex extends Spine.Controller
-  events:
-    'submit form': 'submit'
+class App.MessagesItem extends Spine.Controller
+  tag: "li"
+  proxied: [ "render", "remove" ]
+  template: (data) ->
+    $("#messageTemplate").tmpl data
+
+  init: ->
+    @item.bind "update", @render
+    @item.bind "destroy", @remove
+
+  render: (item) ->
+    @item = item if item
+    elements = @template(@item)
+    @el.replaceWith elements
+    @el = elements
+    # @el.autolink()
+    # @el.mailto()
+    @
+
+  remove: ->
+    @el.remove()
+
+class App.Messages extends Spine.Controller
+  elements:
+    ".items": "items"
+    ".new textarea": "input"
+
+  # events:
+  #   'submit form': 'submit'
 
   constructor: ->
     super
@@ -17,18 +44,22 @@ class App.MessagesIndex extends Spine.Controller
     
   render: =>
     messages = Message.all()
-    @html @view('messages/index')(messages: messages)
+    #@html @view('messages/index')(messages: messages)
+    Message.each(@addOne)
+
+  addOne: (item) ->
+    msgItem = App.MessagesItem.init(item: item)
+    $(".items").append msgItem.render().el
     
-  submit: (e) ->
-    e.preventDefault()
-    message = Message.fromForm(e.target).save()
-    @navigate '/messages'
+  # submit: (e) ->
+  #   e.preventDefault()
+  #   message = Message.fromForm(e.target).save() 
     
-class App.Messages extends Spine.Stack
-  controllers:
-    index: App.MessagesIndex
+# class App.Messages extends Spine.Stack
+#   controllers:
+#     index: App.MessagesIndex
     
-  routes:
-    '/messages':          'index'
+#   routes:
+#     '/messages':          'index'
     
-  className: 'stack messages'
+#   className: 'stack messages'

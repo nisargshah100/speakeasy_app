@@ -12,8 +12,6 @@
 #= require_tree ./views
 
 class App extends Spine.Controller
-  # @view: (name) ->
-  #   JST["app/views/#{name}"]
 
   constructor: ->
     super
@@ -21,8 +19,9 @@ class App extends Spine.Controller
     # Initialize controllers:
     #  @append(@items = new App.Items)
     #  ...
+    #@append(@messages = new App.Messages)
     @append(@messages = new App.Messages)
-    
-    Spine.Route.setup(history: true)
+
+    # Spine.Route.setup
 
 window.App = App

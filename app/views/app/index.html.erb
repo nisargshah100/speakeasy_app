@@ -1,0 +1,71 @@
+<h1>Chat app</h1>
+
+<header id="title">
+  <h1>Speakeasy</h1>    
+</header>
+
+<div id="app">
+  <div id="wrapper">
+    <div id="sidebar">
+      <h3>Rooms</h3>
+      <ul id="rooms">
+      </ul>
+    
+      <h3>Options</h3>
+      <ul id="options">
+        <li data-name="settings">Settings</li>
+      </ul>
+      
+      <h3>Search</h3>
+      <input type="search" results="0" incremental="true" placeholder="Search">
+    </div>
+    
+    <div class="vdivide"></div>
+
+    <div id="content">
+      <div id="messages">
+        <ul class="items">
+        </ul>
+        
+        <div class="new">
+          <textarea></textarea>
+          <button>Send</button>
+        </div>
+      </div>
+      
+      <div id="searches">
+        <h2>Search results: <span class="query"></span></h2>
+        <ul class="search-items"></ul>
+      </div>
+      
+      <div id="settings">
+        <h2>Rooms</h2>
+        <ul class="rooms">    
+        </ul>
+        
+        <h2>Create Room</h2>
+        <div class="createChannel">
+          <form>
+            <input type="text" placeholder="Room name">
+            <button class="pill">New Room</button>
+          </form>
+        </div>
+
+        <h2>Profile</h2>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  jQuery(function(){
+    new App({el: $('#app')});
+  })
+</script>
+<script id="messageTemplate" type="text/template">
+  <li class="item">
+    <span class="body">${body}</span>
+    <span class="room_id">${room_id}</span>
+  </li>
+</script>
