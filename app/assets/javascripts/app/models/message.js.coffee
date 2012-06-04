@@ -6,8 +6,8 @@ Message.include
   room: ->
     Room.find @room_id
 
-  forChannel: (record) ->
-    return false  unless record
-    @room_id is record.id
+  forRoom: (message) ->
+    return false unless message
+    @room_id is message.id
 
 window.Message = Message

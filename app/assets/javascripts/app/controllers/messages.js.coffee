@@ -34,7 +34,9 @@ class Messages extends Spine.Controller
 
   constructor: ->
     super
-    Message.bind 'refresh change', @render
+    Message.bind 'create', @addNew
+    Message.bind 'refresh', @render
+    Sidebar.bind 'changeRoom', @changeRoom
     Message.fetch()
     
   render: =>
@@ -43,15 +45,23 @@ class Messages extends Spine.Controller
     Message.each(@addOne)
 
   addOne: (item) =>
+    return unless item.forRoom(Sidebar.room())
     msgItem = new MessagesItem(item)
     @items.append msgItem.render()
+
+  addNew: (item) =>
+    @addOne(item)
     
+  changeRoom: (room) =>
+    @room = room
+    @render()
+
   # create: (e) ->
   #   e.preventDefault()
   #   message = Message.fromForm(e.target).save()
 
   create: ->
-      throw "Channel required"  unless Sidebar.channel()
+      throw "Room required"  unless Sidebar.room()
       value = @input.val()
       return false  unless value
       Message.create
