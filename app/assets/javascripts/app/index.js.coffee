@@ -20,8 +20,8 @@ class App extends Spine.Controller
     #  @append(@items = new App.Items)
     #  ...
     #@append(@messages = new App.Messages)
-    @append(@messages = new App.Messages)
-    @append(@rooms = new App.Rooms)
+    @append(@messages = new Messages)
+    @append(@rooms = new Rooms)
 
     # Spine.Route.setup
 

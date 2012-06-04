@@ -1,7 +1,7 @@
 $ = jQuery.sub()
-Room = App.Room
+# Room = App.Room
 
-class App.RoomsItem extends Spine.Controller
+class RoomsItem extends Spine.Controller
   tag: "li"
   proxied: [ "render", "remove" ]
 
@@ -22,7 +22,7 @@ class App.RoomsItem extends Spine.Controller
   remove: ->
     @el.remove()
 
-class App.Rooms extends Spine.Controller
+class Rooms extends Spine.Controller
   elements:
     ".items": "items"
 
@@ -36,5 +36,7 @@ class App.Rooms extends Spine.Controller
     Room.each(@addOne)
 
   addOne: (item) ->
-    roomsItem = App.RoomsItem.init(item: item)
+    roomsItem = RoomsItem.init(item: item)
     $("#rooms").append roomsItem.render().el
+
+window.Rooms = Rooms

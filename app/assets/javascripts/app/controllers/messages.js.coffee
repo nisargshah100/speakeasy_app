@@ -1,13 +1,13 @@
 $ = jQuery.sub()
-Message = App.Message
-window.MessagesItem = App.MessagesItem
+# Message = App.Message
+# window.MessagesItem = App.MessagesItem
 
 # $.fn.item = ->
 #   elementID   = $(@).data('id')
 #   elementID or= $(@).parents('[data-id]').data('id')
 #   Message.find(elementID)
 
-class App.MessagesItem extends Spine.Controller
+class MessagesItem extends Spine.Controller
   tag: "li"
   proxied: [ "render", "remove" ]
   
@@ -31,13 +31,13 @@ class App.MessagesItem extends Spine.Controller
   remove: ->
     @el.remove()
 
-class App.Messages extends Spine.Controller
+class Messages extends Spine.Controller
   elements:
     ".items": "items"
     ".new textarea": "input"
 
-  # events:
-  #   'submit form': 'submit'
+  events:
+    'submit form': 'submit'
 
   constructor: ->
     super
@@ -49,12 +49,14 @@ class App.Messages extends Spine.Controller
     Message.each(@addOne)
 
   addOne: (item) ->
-    msgItem = App.MessagesItem.init(item: item)
+    msgItem = MessagesItem.init(item: item)
     $(".items").append msgItem.render().el
     
-  # submit: (e) ->
-  #   e.preventDefault()
-  #   message = Message.fromForm(e.target).save() 
+  submit: (e) ->
+    e.preventDefault()
+    message = Message.fromForm(e.target).save()
+
+window.Messages = Messages
     
 # class App.Messages extends Spine.Stack
 #   controllers:
