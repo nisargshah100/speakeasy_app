@@ -26,7 +26,7 @@ class Sidebar extends Spine.Controller
 
   constructor: ->
     super
-    Room.bind 'refresh change', @render
+    Room.bind 'refresh change', @render 
     Room.fetch()
     
   render: =>
@@ -36,17 +36,21 @@ class Sidebar extends Spine.Controller
   change: (item) =>
     @deactivate()
     $(item).addClass("current")
+    Sidebar.channel()
 
   click: (e) =>
     item = $(e.target).parent()
     @change(item)
 
   deactivate: =>
-    console.log $("[data-name]")
     $("[data-name]").removeClass("current")
 
   addOne: (item) =>
     roomItem = new RoomsItem(item)
     @rooms.append roomItem.render()
+
+  @channel: =>
+    id = $(".item.current").first().children().first().attr('id')
+    Room.find(id)
 
 window.Sidebar = Sidebar
