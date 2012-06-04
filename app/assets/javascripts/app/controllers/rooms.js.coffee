@@ -32,6 +32,8 @@ class Sidebar extends Spine.Controller
   render: =>
     rooms = Room.all()
     Room.each(@addOne)
+    $("[data-name=rooms]:first").addClass("current")
+    @log Sidebar.channel()
 
   change: (item) =>
     @deactivate()
@@ -52,5 +54,8 @@ class Sidebar extends Spine.Controller
   @channel: =>
     id = $(".item.current").first().children().first().attr('id')
     Room.find(id)
+
+  currentChannelEmpty: =>
+    return false unless Sidebar.channel() == "Unknown record"
 
 window.Sidebar = Sidebar

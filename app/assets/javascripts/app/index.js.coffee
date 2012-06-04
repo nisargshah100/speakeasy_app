@@ -24,8 +24,8 @@ class App extends Spine.Controller
     # Initialize controllers:
     #  @append(@items = new App.Items)
     #  ...
-    @messages = new Messages({el: @messagesEl})
     @sidebar = new Sidebar({el: @sidebarEl})
+    @messages = new Messages({el: @messagesEl})
 
     # Spine.Route.setup
 

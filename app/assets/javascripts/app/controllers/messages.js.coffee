@@ -8,7 +8,6 @@ $ = jQuery.sub()
 #   Message.find(elementID)
 
 class MessagesItem extends Spine.Controller
-  # tag: "li"
   proxied: [ "render", "remove" ]
 
   template: (message) ->
@@ -52,12 +51,12 @@ class Messages extends Spine.Controller
   #   message = Message.fromForm(e.target).save()
 
   create: ->
-      throw "Channel required"  unless @channel
+      throw "Channel required"  unless Sidebar.channel()
       value = @input.val()
       return false  unless value
       Message.create
-        name: @handle
-        channel_id: @channel.id
+        user_id: 1
+        room_id: Sidebar.channel().id
         body: value
 
       @input.val ""
