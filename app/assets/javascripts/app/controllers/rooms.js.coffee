@@ -1,30 +1,27 @@
 $ = jQuery.sub()
-# Room = App.Room
 
 class RoomsItem extends Spine.Controller
-  tag: "li"
+
   proxied: [ "render", "remove" ]
 
   template: (room) ->
-    @view('rooms/item')(room: room)
+    @view('rooms/room')(room: room)
 
-  init: ->
+  constructor: (@item) ->
     @item.bind "update", @render
     @item.bind "destroy", @remove
 
-  render: (item) ->
-    @item = item if item
-    elements = @template(@item)
-    @el.replaceWith elements
-    @el = elements
-    @
+  render: =>
+    @template(@item)
 
   remove: ->
     @el.remove()
 
-class Rooms extends Spine.Controller
+class Sidebar extends Spine.Controller
+  events:
+    "click [data-name]": "click"
+
   elements:
-    ".items": "items"
     "#rooms": "rooms"
 
   constructor: ->
@@ -36,8 +33,20 @@ class Rooms extends Spine.Controller
     rooms = Room.all()
     Room.each(@addOne)
 
-  addOne: (item) =>
-    roomsItem = RoomsItem.init(item: item)
-    @rooms.append roomsItem.render().el
+  change: (item) =>
+    @deactivate()
+    $(item).addClass("current")
 
-window.Rooms = Rooms
+  click: (e) =>
+    item = $(e.target).parent()
+    @change(item)
+
+  deactivate: =>
+    console.log $("[data-name]")
+    $("[data-name]").removeClass("current")
+
+  addOne: (item) =>
+    roomItem = new RoomsItem(item)
+    @rooms.append roomItem.render()
+
+window.Sidebar = Sidebar

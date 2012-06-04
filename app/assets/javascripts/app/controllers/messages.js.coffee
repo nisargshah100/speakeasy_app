@@ -9,24 +9,17 @@ $ = jQuery.sub()
 
 class MessagesItem extends Spine.Controller
   # tag: "li"
-  el: $("li")
   proxied: [ "render", "remove" ]
-  
-  # template: (data) ->
-  #   $("#messageTemplate").tmpl data
 
   template: (message) ->
-    @view('messages/item')(message: message)
+    @view('messages/message')(message: message)
 
   constructor: (@item) ->
     @item.bind "update", @render
     @item.bind "destroy", @remove
 
   render: =>
-    elements = @template(@item)
-    @el.replaceWith elements
-    @el = elements
-    return this
+    @template(@item)
 
   remove: ->
     @el.remove()
@@ -38,7 +31,7 @@ class Messages extends Spine.Controller
     ".new textarea": "input"
 
   events:
-    'submit form': 'submit'
+    "click .new button": "create"
 
   constructor: ->
     super
@@ -47,24 +40,28 @@ class Messages extends Spine.Controller
     
   render: =>
     messages = Message.all()
+    @items.empty()
     Message.each(@addOne)
 
   addOne: (item) =>
-    # msgItem = MessagesItem.init(item: item)
     msgItem = new MessagesItem(item)
-    @items.append msgItem.render().el
+    @items.append msgItem.render()
     
-  submit: (e) ->
-    e.preventDefault()
-    message = Message.fromForm(e.target).save()
+  # create: (e) ->
+  #   e.preventDefault()
+  #   message = Message.fromForm(e.target).save()
+
+  create: ->
+      throw "Channel required"  unless @channel
+      value = @input.val()
+      return false  unless value
+      Message.create
+        name: @handle
+        channel_id: @channel.id
+        body: value
+
+      @input.val ""
+      @input.focus()
+      false
 
 window.Messages = Messages
-    
-# class App.Messages extends Spine.Stack
-#   controllers:
-#     index: App.MessagesIndex
-    
-#   routes:
-#     '/messages':          'index'
-    
-#   className: 'stack messages'
