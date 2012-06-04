@@ -30,13 +30,14 @@ class Sidebar extends Spine.Controller
 
   constructor: ->
     super
-    #Room.bind 'refresh change', @render
     Room.bind 'refresh', @render
     Room.bind 'create', @addNew
     Room.fetch()
     
   render: =>
     Room.each(@addOne)
+    # adds current to the first room everytime render is called
+    # we should probably change this behavior
     $("[data-name=rooms]:first").addClass("current")
 
   createRoom: ->

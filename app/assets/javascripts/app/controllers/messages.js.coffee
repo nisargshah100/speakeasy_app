@@ -56,10 +56,6 @@ class Messages extends Spine.Controller
     @room = room
     @render()
 
-  # create: (e) ->
-  #   e.preventDefault()
-  #   message = Message.fromForm(e.target).save()
-
   create: ->
     throw "Room required"  unless Sidebar.room()
     value = @input.val()
