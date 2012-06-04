@@ -61,16 +61,16 @@ class Messages extends Spine.Controller
   #   message = Message.fromForm(e.target).save()
 
   create: ->
-      throw "Room required"  unless Sidebar.room()
-      value = @input.val()
-      return false  unless value
-      Message.create
-        user_id: 1
-        room_id: Sidebar.channel().id
-        body: value
+    throw "Room required"  unless Sidebar.room()
+    value = @input.val()
+    return false  unless value
+    Message.create
+      user_id: 1
+      room_id: Sidebar.room().id
+      body: value
 
-      @input.val ""
-      @input.focus()
-      false
+    @input.val ""
+    @input.focus()
+    false
 
 window.Messages = Messages
