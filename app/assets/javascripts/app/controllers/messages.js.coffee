@@ -8,7 +8,8 @@ $ = jQuery.sub()
 #   Message.find(elementID)
 
 class MessagesItem extends Spine.Controller
-  tag: "li"
+  # tag: "li"
+  el: $("li")
   proxied: [ "render", "remove" ]
   
   # template: (data) ->
@@ -17,21 +18,21 @@ class MessagesItem extends Spine.Controller
   template: (message) ->
     @view('messages/item')(message: message)
 
-  init: ->
+  constructor: (@item) ->
     @item.bind "update", @render
     @item.bind "destroy", @remove
 
-  render: (item) ->
-    @item = item if item
+  render: =>
     elements = @template(@item)
     @el.replaceWith elements
     @el = elements
-    @
+    return this
 
   remove: ->
     @el.remove()
 
 class Messages extends Spine.Controller
+
   elements:
     ".items": "items"
     ".new textarea": "input"
@@ -48,9 +49,10 @@ class Messages extends Spine.Controller
     messages = Message.all()
     Message.each(@addOne)
 
-  addOne: (item) ->
-    msgItem = MessagesItem.init(item: item)
-    $(".items").append msgItem.render().el
+  addOne: (item) =>
+    # msgItem = MessagesItem.init(item: item)
+    msgItem = new MessagesItem(item)
+    @items.append msgItem.render().el
     
   submit: (e) ->
     e.preventDefault()

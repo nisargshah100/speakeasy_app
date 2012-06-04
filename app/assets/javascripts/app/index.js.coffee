@@ -11,7 +11,12 @@
 #= require_tree ./controllers
 #= require_tree ./views
 
+$ = jQuery.sub()
+
 class App extends Spine.Controller
+  elements:
+    "#messages": "messagesEl"
+    "#sidebar": "sidebarEl"
 
   constructor: ->
     super
@@ -19,9 +24,8 @@ class App extends Spine.Controller
     # Initialize controllers:
     #  @append(@items = new App.Items)
     #  ...
-    #@append(@messages = new App.Messages)
-    @append(@messages = new Messages)
-    @append(@rooms = new Rooms)
+    @messages = new Messages({el: @messagesEl})
+    @rooms = new Rooms({el: @sidebarEl})
 
     # Spine.Route.setup
 

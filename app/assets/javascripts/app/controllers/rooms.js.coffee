@@ -25,6 +25,7 @@ class RoomsItem extends Spine.Controller
 class Rooms extends Spine.Controller
   elements:
     ".items": "items"
+    "#rooms": "rooms"
 
   constructor: ->
     super
@@ -35,8 +36,8 @@ class Rooms extends Spine.Controller
     rooms = Room.all()
     Room.each(@addOne)
 
-  addOne: (item) ->
+  addOne: (item) =>
     roomsItem = RoomsItem.init(item: item)
-    $("#rooms").append roomsItem.render().el
+    @rooms.append roomsItem.render().el
 
 window.Rooms = Rooms
