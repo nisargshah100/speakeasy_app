@@ -30,7 +30,7 @@ class Messages extends Spine.Controller
     ".new textarea": "input"
 
   events:
-    "click .new button": "create"
+    "click .new input[type='submit']": "create"
 
   constructor: ->
     super

@@ -16,7 +16,7 @@ $ = jQuery.sub()
 class App extends Spine.Controller
   elements:
     "#messages": "messagesEl"
-    "#sidebar": "sidebarEl"
+    ".lobby": "sidebarEl"
 
   constructor: ->
     super
