@@ -64,7 +64,7 @@ class Sidebar extends Spine.Controller
     Sidebar.trigger 'changeRoom', Sidebar.room()
 
   click: (e) =>
-    item = $(e.target).parent()
+    item = $(e.target)
     @change(item)
 
   deactivate: =>
@@ -75,7 +75,7 @@ class Sidebar extends Spine.Controller
     @rooms.append roomItem.render()
 
   @room: =>
-    id = $(".item.current").first().children().first().attr('id')
+    id = $(".item.current").attr('id')
     Room.find(id)
 
   currentChannelEmpty: =>
