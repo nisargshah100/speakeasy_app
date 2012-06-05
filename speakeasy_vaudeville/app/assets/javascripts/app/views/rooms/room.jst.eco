@@ -1,3 +1,0 @@
-<li data-name="rooms" class="item">
-  <span class="body" id="<%= @room.id %>"><%= @room.name %></span>
-</li>
