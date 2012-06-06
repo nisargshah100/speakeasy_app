@@ -1,6 +1,4 @@
-json.rooms @rooms do |json, room|
-  json.id room.id
+json.array! @rooms do |json, room|
   json.name room.name
   json.description room.description
-  json.user_id room.user_id
 end

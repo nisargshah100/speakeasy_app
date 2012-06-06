@@ -1,3 +1,5 @@
 Speakeasy::Application.routes.draw do
-  resources :messages, :rooms
+  resources :rooms do
+    resources :messages
+  end
 end
