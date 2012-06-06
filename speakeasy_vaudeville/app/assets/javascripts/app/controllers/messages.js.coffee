@@ -63,9 +63,9 @@ class Messages extends Spine.Controller
     @render()
 
   create: ->
-    throw "Room required"  unless Sidebar.room()
+    alert "Room required"  unless Sidebar.room()
     value = @input.val()
-    return false  unless value
+    return false unless value 
     Message.create
       user_id: 1
       room_id: Sidebar.room().id
