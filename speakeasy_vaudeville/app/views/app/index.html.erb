@@ -3,8 +3,9 @@
   <%= current_user_email_tag %>
   <script type="text/javascript">
   $(function(){
-    $("textarea").keyup(function(event){
+    $("textarea").keydown(function(event){
         if(event.keyCode == 13){
+            event.preventDefault();
             $("#scroll").click();
         }
     });
