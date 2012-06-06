@@ -1,3 +1,5 @@
+#= require app
+
 jQuery ->
   $('#log-in-form').submit (e) ->
     e.preventDefault()
