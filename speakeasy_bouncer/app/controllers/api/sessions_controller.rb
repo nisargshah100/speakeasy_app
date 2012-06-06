@@ -13,6 +13,6 @@ class Api::SessionsController < ApplicationController
   private
 
   def session_store
-    cookies.signed
+    cookies
   end
 end
