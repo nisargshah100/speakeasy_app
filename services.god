@@ -12,6 +12,8 @@ FRONTEND_SERVER_PORT = 5002
 
 CORE_SERVER_PORT = 5003
 
+GITHUB_PORT = 5004
+
 God.watch do |w|
   w.name = "authentication server"
   w.start = "cd #{path}/speakeasy_bouncer/; bundle exec thin start -p #{AUTH_SERVER_PORT}"
@@ -39,5 +41,11 @@ end
 God.watch do |w|
   w.name = "core server"
   w.start = "cd #{path}/speakeasy_core/; bundle exec thin start -p #{CORE_SERVER_PORT}"
+  w.keepalive
+end
+
+God.watch do |w|
+  w.name = "github server"
+  w.start = "cd #{path}/speakeasy_github/; bundle exec thin start -p #{GITHUB_PORT}"
   w.keepalive
 end
