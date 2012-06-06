@@ -1,6 +1,10 @@
-<h1>Home page</h1>
-
-<p>
-  Start chatting!
-  <%= link_to "Chat app", app_index_path %>
-</p>
+<h1>Sign in</h1>
+<%= form_tag "/api/users/sessions", id: "log-in-form", method: :post do %>
+  <%= label_tag("Email") %>
+  <%= text_field_tag("email") %>
+  <br>
+  <%= label_tag("Password") %>
+  <%= password_field_tag("password") %>
+  <br>
+  <%= submit_tag("Sign In") %>
+<% end %>
