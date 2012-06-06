@@ -29,6 +29,6 @@ class MessagesController < ApplicationController
   end
 
   def authenticate_user
-    head status: :unauthorized unless get_user_from_auth_service(cookies.signed["user"])
+    head status: :unauthorized unless get_user_from_auth_service(cookies['user'])
   end
 end
