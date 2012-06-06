@@ -5,6 +5,7 @@ $chocolate: #4F2D2D;
 $ladybug-light: #801C1C; 
 $ladybug-dark: #B30C0C; 
 $pencil: #D6AA0B;
+$user-border: #262626;
 
 /*---------------MAIN-----------------------*/
 
@@ -55,6 +56,161 @@ z-index: 100; }
 @font-face { font-family: 'SF Speakeasy'; src: url('SFSpeakeasy.ttf'); }
 
 h1#logo { font-family:"SF Speakeasy", Helvetica, Palatino, "Palatino Linotype", "Book Antiqua", Georgia, "Times New Roman", serif; font-size:44pt; color: #1C031E; }
+
+/*--------USERNAV/SEARCH--------*/
+
+#search {
+  position:absolute;
+  left:350px;
+  top:26px;
+  
+  li {
+    float: left;
+  }
+}
+
+#usernav {
+  position:absolute;
+  right:25px;
+  top:22px;
+  
+  li { float: left; float:left; margin-right:25px; background-color: $weathervane;
+
+    li { float:none; border-bottom:1px solid $user-border; width:105%; font-size: 14px;
+
+      a { border:0; border-left:1px solid $user-border; border-right: 1px solid $user-border; }
+    }
+
+    &:hover ul { display:block; z-index:100; right: 28px; top: 28px }
+
+    a { display:block; padding:0.5em; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85);
+
+      &:hover { background-color: $ladybug-dark; text-decoration:none; }
+
+    }
+
+    ul { display:none; padding:0; position:absolute; width:80px; -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0em;
+    font-size: 9pt;
+    font-weight: bold;
+    float: left;
+    position: relative;
+  }
+}
+
+/*-------------USERNAV-DROPDOWN--------------*/
+
+
+#usernav li#parent {
+    background-color: $weathervane;
+    font-size: 14px;
+    padding: 0.5em;
+    color: #fff;
+}
+
+#usernav li#parent:hover { cursor: pointer; background-color: $ladybug-dark; border-top-right-radius:5px 5px; border-top-left-radius:5px 5px; -moz-border-top-left-radius:5px 5px; -moz-border-top-right-radius:5px 5px; -webkit-border-top-left-radius:5px 5px; -webkit-border-top-right-radius:5px 5px; }
+
+#usernav li#parent > a {
+    border-top-right-radius:5px 5px;
+    border-top-left-radius:5px 5px;
+    -moz-border-top-left-radius:5px 5px;
+    -moz-border-top-right-radius:5px 5px;
+    -webkit-border-top-left-radius:5px 5px;
+    -webkit-border-top-right-radius:5px 5px;
+    border-top:1px solid #E3F2E7;
+    border-right: 1px solid #E3F2E7;
+    border-left:1px solid #E3F2E7;
+    border-bottom: 1px solid transparent;
+}
+
+#usernav li#parent:hover > a {
+    background-color: $ladybug-dark;
+    border-color: $user-border;
+    border-bottom-color: transparent;
+}
+
+#usernav li#parent > a:hover {
+    background-color: $ladybug-dark;
+    border-top:1px solid $user-border;
+    border-right:1px solid $user-border;
+    border-bottom: 1px solid transparent;
+    border-left:1px solid $user-border;
+    -moz-border-top-left-radius:5px 5px;
+    -moz-border-top-right-radius:5px 5px;
+    -webkit-border-top-left-radius:5px 5px;
+    -webkit-border-top-right-radius:5px 5px;
+}
+
+#usernav li#parent:hover ul {
+    padding:0px;
+    z-index:350;
+}
+
+#usernav #children li:hover {
+    background-color: $weathervane;
+}
+
+#usernav #children li:hover a {
+    color:#fff;
+}
+
+#usernav ul#children li:first-child {
+    border-top-left-radius:5px 5px;
+    -moz-border-top-left-radius:5px 5px;
+    -webkit-border-top-left-radius:5px 5px;
+    border-left:1px solid $user-border;
+    border-right:1px solid $user-border;
+    border-top:1px solid $user-border;
+    border-bottom: 1px solid transparent;
+}
+
+#usernav ul#children li:last-child {
+    border-bottom-right-radius:5px 5px;
+    border-bottom-left-radius:5px 5px;
+    -moz-border-bottom-left-radius:5px 5px;
+    -moz-border-bottom-right-radius:5px 5px;
+    -webkit-border-bottom-left-radius:5px 5px;
+    -webkit-border-bottom-right-radius:5px 5px;
+    border-left:1px solid $user-border;
+    border-right:1px solid $user-border;
+    border-bottom:1px solid $user-border;
+    border-top:1px solid $user-border;
+}
+
+#usernav ul#children li:first-child:hover {
+    border-left:1px solid $user-border;
+    border-right:1px solid $user-border;
+    border-top:1px solid $user-border;
+    border-bottom: 1px solid transparent;
+}
+
+#usernav ul#children li:last-child:hover {
+    border-left:1px solid $user-border;
+    border-right:1px solid $user-border;
+    border-bottom:1px solid $user-border;
+    border-top:1px solid $user-border;
+}
+
+#usernav ul#children li:first-child a:hover {
+    border-top-left-radius:5px 5px;
+    -moz-border-top-left-radius:5px 5px;
+    -webkit-border-top-left-radius:5px 5px;
+}
+
+#usernav ul#children li:last-child a:hover {
+    border-bottom-right-radius:5px 5px;
+    border-bottom-left-radius:5px 5px;
+    -moz-border-bottom-left-radius:5px 5px;
+    -moz-border-bottom-right-radius:5px 5px;
+    -webkit-border-bottom-left-radius:5px 5px;
+    -webkit-border-bottom-right-radius:5px 5px;
+}
 
 /*---------CONTAINER-----------*/
 

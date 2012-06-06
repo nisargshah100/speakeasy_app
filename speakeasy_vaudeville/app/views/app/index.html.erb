@@ -12,8 +12,19 @@
   })
   </script>
 <% end %>
+
 <div id="header">
   <h1 id="logo"><a href="/">Speakeasy</a></h1>
+  <div id="usernav">
+    <ul>
+      <li id="parent"><%= current_user.name %>
+        <ul id="children">
+          <li><%= link_to 'Settings', nil %></li>
+          <li><%= link_to 'Log Out', nil %></li>
+        </ul>
+      </li>
+    </ul>
+  </div><!-- end usernav -->
 </div><!-- end header -->
 
 <div class="container">
