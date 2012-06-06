@@ -1,24 +1,34 @@
 class MessagesController < ApplicationController
+  before_filter :find_room, :authenticate_user
+
   def index
-    room = Room.where(id: params["room_id"]).first
-    if room
-      @messages = room.messages
+    if @room
+      @messages = @room.messages
     else
-      render status: :bad_request, json: "Invalid Room"
+      head status: :not_found
     end
   end
 
   def create
-    room = Room.where(id: params["room_id"]).first
-    if room
-      message = room.messages.build(body: params["body"])
+    if @room
+      message = @room.messages.build(params[:message])
       if message.save
-        render status: :created, json: "Message Created"
+        head status: :created, :location => [@room, message]
       else
-        render status: :bad_request, json: "Bad Request"
+        head status: :bad_request
       end
     else
-      render status: :bad_request, json: "Room does not exist"
+      head status: :not_found
     end
+  end
+
+  private
+
+  def find_room
+    @room = Room.find_by_id(params[:room_id])
+  end
+
+  def authenticate_user
+    head status: :unauthorized unless get_user_from_auth_service(cookies.signed["user"])
   end
 end

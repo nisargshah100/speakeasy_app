@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :room do
+  factory :room, :aliases => [:empty_room] do
     sequence(:name) { |n| "room_#{n}" }
     description "Goings on"
   end
