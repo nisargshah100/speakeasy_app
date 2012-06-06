@@ -1,3 +1,14 @@
+<%= content_for(:head) do %>
+  <script type="text/javascript">
+  $(function(){
+    $("textarea").keyup(function(event){
+        if(event.keyCode == 13){
+            $("#scroll").click();
+        }
+    });
+  })
+  </script>
+<% end %>
 <div id="header">
   <h1 id="logo"><a href="/">Speakeasy</a></h1>
 </div><!-- end header -->
@@ -22,8 +33,10 @@
     </div>
 
     <div id="messages">
-      <ul class="items">
-      </ul>
+      <div id="stuff">
+        <ul class="items">
+        </ul>
+      </div>
       <div class="new">
         <textarea placeholder="Enter a chat..." autofocus="true"></textarea>
         <input type="submit" value="Enter" class="btn" id="scroll"></input>

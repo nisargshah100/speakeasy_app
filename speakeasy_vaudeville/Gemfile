@@ -23,6 +23,7 @@ end
 gem 'jquery-rails'
 gem 'spine-rails'
 gem 'eco'
+gem 'pusher'
 gem 'thin'
 
 # To use ActiveModel has_secure_password

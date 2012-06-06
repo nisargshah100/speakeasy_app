@@ -4,7 +4,9 @@
   <title>Vaudeville</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+  <%= pusher_meta_tags %>
   <%= csrf_meta_tags %>
+  <%= yield :head %>
 </head>
 <body>
 
