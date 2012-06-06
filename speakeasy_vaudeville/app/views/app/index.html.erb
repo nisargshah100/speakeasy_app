@@ -1,4 +1,6 @@
 <%= content_for(:head) do %>
+  <%= current_user_name_tag %>
+  <%= current_user_email_tag %>
   <script type="text/javascript">
   $(function(){
     $("textarea").keyup(function(event){
