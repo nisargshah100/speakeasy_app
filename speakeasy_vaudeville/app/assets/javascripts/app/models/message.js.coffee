@@ -1,12 +1,28 @@
+# Model = Spine.Model
+# window.Room = Room
+
 class Message extends Spine.Model
   @configure 'Message', 'body', 'room_id'
   @extend Spine.Model.Ajax
+  @belongsTo 'room', 'Room'
 
-  @url: 'api/core/rooms/:room_id/messages'
+  @url: 'api/core/messages/'
 
-  validate: ->
-    unless @body
-      alert "Message is required"
+  # validate: ->
+  #   unless @body
+  #     alert "Message is required"
+
+  # create: (params, options) ->
+  #   # console.log Message
+  #   # console.log Spine.Ajax.getURL(Message)
+  #   @queue =>
+  #     @ajax(
+  #       params,
+  #       type: 'POST'
+  #       data: JSON.stringify(@record)
+  #       url:  Ajax.getURL(@model)
+  #     ).success(@recordResponse(options))
+  #      .error(@errorResponse(options))
 
 Message.include
   room: ->
