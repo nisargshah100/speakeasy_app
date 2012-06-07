@@ -16,6 +16,16 @@ GITHUB_PORT = 5004
 
 SEARCH_PORT = 5005
 
+# System files
+
+God.watch do |w|
+  w.name = "redis"
+  w.start = "redis-server"
+  w.keepalive
+end
+
+# Our Processes
+
 God.watch do |w|
   w.name = "authentication server"
   w.start = "cd #{path}/speakeasy_bouncer/; bundle exec thin start -p #{AUTH_SERVER_PORT}"

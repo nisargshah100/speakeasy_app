@@ -24,6 +24,10 @@ class Message extends Spine.Model
   #     ).success(@recordResponse(options))
   #      .error(@errorResponse(options))
 
+  @fetch_all: ->
+    Message.deleteAll()
+    Message.fetch(url: "/api/core/rooms/#{room.id}/messages") for room in Room.all()
+
 Message.include
   room: ->
     Room.find @room_id

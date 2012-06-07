@@ -20,9 +20,9 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'mysql2'
 gem 'jquery-rails'
 gem 'thinking-sphinx'
-gem 'pg'
 gem 'draper'
 gem 'redis'
 gem 'thin'

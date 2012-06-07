@@ -5,10 +5,10 @@ class Room extends Spine.Model
 
   @url: "/api/core/rooms"
 
-Room.include
-  messages: ->
-    room_id = @id
-    Message.select (m) ->
-      m.room_id is room_id
+# Room.include
+#   messages: ->
+#     room_id = @id
+#     Message.select (m) ->
+#       m.room_id is room_id
 
 window.Room = Room
