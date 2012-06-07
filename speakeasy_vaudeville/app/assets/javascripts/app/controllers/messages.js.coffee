@@ -67,7 +67,6 @@ class Messages extends Spine.Controller
     value = @input.val()
     return false unless value 
     Message.create
-      user_id: 1
       room_id: Sidebar.room().id
       body: value
 
@@ -75,5 +74,11 @@ class Messages extends Spine.Controller
     @input.focus()
     Message.fetch()
     false
+
+  username: =>
+    $("meta[name=current-user-name]").attr("content")
+
+  email: => 
+    $("meta[name=current-user-email]").attr("content")
 
 window.Messages = Messages

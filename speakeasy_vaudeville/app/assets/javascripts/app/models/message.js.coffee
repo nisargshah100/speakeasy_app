@@ -2,6 +2,8 @@ class Message extends Spine.Model
   @configure 'Message', 'body', 'room_id'
   @extend Spine.Model.Ajax
 
+  @url: 'api/core/'
+
   validate: ->
     unless @body
       alert "Message is required"
