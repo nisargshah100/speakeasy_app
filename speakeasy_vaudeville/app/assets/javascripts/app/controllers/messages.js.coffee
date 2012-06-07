@@ -8,7 +8,7 @@ $ = jQuery.sub()
 #   Message.find(elementID)
 
 class MessagesItem extends Spine.Controller
-  proxied: [ "render", "remove" ]
+  #proxied: [ "render", "remove" ]
 
   template: (message) ->
     @view('messages/message')(message: message)
@@ -36,7 +36,7 @@ class Messages extends Spine.Controller
     super
     Room.bind 'refresh', @loadMessages
     Message.bind 'create', @addNew
-    Message.bind 'refresh change', @render
+    Message.bind 'refresh', @render
     Sidebar.bind 'changeRoom', @changeRoom
     
   render: =>
@@ -69,14 +69,14 @@ class Messages extends Spine.Controller
     alert "Room required"  unless Sidebar.room()
     value = @input.val()
     return false unless value 
-    # Message.unbind 'refresh change', @render
-    Message.create
+    Message.unbind('create', @addNew)
+    m = Message.create
       room_id: Sidebar.room().id
       body: value
-
+    m.destroy(ajax: false)
+    Message.bind('create', @addNew)
     @input.val ""
     @input.focus()
-    #Message.fetch()
     false
 
   username: =>
