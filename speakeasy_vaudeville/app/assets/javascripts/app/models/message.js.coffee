@@ -6,7 +6,7 @@ class Message extends Spine.Model
   @extend Spine.Model.Ajax
   @belongsTo 'room', 'Room'
 
-  @url: 'api/core/messages/'
+  @url: => "api/core/rooms/#{Sidebar.room().id}/messages"
 
   # validate: ->
   #   unless @body

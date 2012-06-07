@@ -30,9 +30,9 @@ class Sidebar extends Spine.Controller
 
   constructor: ->
     super
+    Room.fetch()
     Room.bind 'refresh', @render
     Room.bind 'create', @addNewRoom
-    Room.fetch()
     
   render: =>
     Room.each(@addOneRoom)

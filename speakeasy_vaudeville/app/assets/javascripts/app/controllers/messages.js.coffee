@@ -30,20 +30,23 @@ class Messages extends Spine.Controller
     ".new textarea": "input"
 
   events:
-    "click .new input#scroll": "create"
+    "click .new input#scroll": "createMessage"
 
   constructor: ->
     super
+    Room.bind 'refresh', @loadMessages
     Message.bind 'create', @addNew
-    Message.bind 'refresh', @render
+    Message.bind 'refresh change', @render
     Sidebar.bind 'changeRoom', @changeRoom
-    Message.fetch()
     
   render: =>
-    messages = Message.all()
+    Message.all()
     @items.empty()
     Message.each(@addOne)
     @scroll()
+
+  loadMessages: =>
+    Message.fetch_all()
 
   scroll: =>
     objDiv = $("#stuff")[0]
@@ -62,17 +65,18 @@ class Messages extends Spine.Controller
     @room = room
     @render()
 
-  create: ->
+  createMessage: ->
     alert "Room required"  unless Sidebar.room()
     value = @input.val()
     return false unless value 
+    # Message.unbind 'refresh change', @render
     Message.create
       room_id: Sidebar.room().id
       body: value
 
     @input.val ""
     @input.focus()
-    Message.fetch()
+    #Message.fetch()
     false
 
   username: =>
