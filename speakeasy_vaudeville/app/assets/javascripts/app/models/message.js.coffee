@@ -2,7 +2,7 @@ class Message extends Spine.Model
   @configure 'Message', 'body', 'room_id'
   @extend Spine.Model.Ajax
 
-  @url: 'api/core/'
+  @url: 'api/core/rooms/:room_id/messages'
 
   validate: ->
     unless @body
