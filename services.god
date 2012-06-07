@@ -14,6 +14,8 @@ CORE_SERVER_PORT = 5003
 
 GITHUB_PORT = 5004
 
+SEARCH_PORT = 5005
+
 God.watch do |w|
   w.name = "authentication server"
   w.start = "cd #{path}/speakeasy_bouncer/; bundle exec thin start -p #{AUTH_SERVER_PORT}"
@@ -47,5 +49,23 @@ end
 God.watch do |w|
   w.name = "github server"
   w.start = "cd #{path}/speakeasy_github/; bundle exec thin start -p #{GITHUB_PORT}"
+  w.keepalive
+end
+
+God.watch do |w|
+  w.name = "search server"
+  w.start = "cd #{path}/speakeasy_gumshoe/; bundle exec thin start -p #{SEARCH_PORT}"
+  w.keepalive
+end
+
+God.watch do |w|
+  w.name = "search redis server"
+  w.start = "cd #{path}/speakeasy_gumshoe/; rake subscribe"
+  w.keepalive
+end
+
+God.watch do |w|
+  w.name = "search indexer"
+  w.start = "cd #{path}/speakeasy_gumshoe/; rake index"
   w.keepalive
 end

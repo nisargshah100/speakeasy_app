@@ -1,18 +1,25 @@
 require 'spec_helper'
 
+def AuthService
+end
+
 describe "Rooms" do
   let!(:room) { FactoryGirl.create(:room) }
 
   describe "#index" do
-    before(:each) { get rooms_url(:format => :json) }
-    it "returns a successful json response of all rooms" do
-      response_room = JSON.parse(response.body).first
-      response_room.values.should include(room.name)
-      response_room.values.should include(room.description)
-    end
-
-    it "returns a 200 response" do
-      response.status.should == 200
+    context "the request has a valid token" do
+      before(:each) do
+        AuthService.stub(:get_user).and_return(double)
+        get rooms_url(:format => :json)
+      end
+      it "returns a successful json response of all rooms" do
+        response_room = JSON.parse(response.body).first
+        response_room.values.should include(room.name)
+        response_room.values.should include(room.description)
+      end
+      it "returns a 200 response" do
+        response.status.should == 200
+      end
     end
   end
 

@@ -1,5 +1,7 @@
 Speakeasy::Application.routes.draw do
-  resources :rooms do
-    resources :messages
+  scope "api/core" do
+    resources :rooms do
+      resources :messages
+    end
   end
 end

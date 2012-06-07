@@ -1,6 +1,7 @@
 require 'spec_helper'
 
-class AuthService
+def AuthService
+
 end
 
 describe "Messages" do
@@ -9,7 +10,7 @@ describe "Messages" do
   describe "#index" do
     context "the request has a valid token" do
       before(:each) do
-        AuthService.stub(:get_user).with(nil).and_return(double)
+        AuthService.stub(:get_user).and_return(double)
         get room_messages_url(room, :format => :json)
       end
       context "the request has a valid room id in the body" do
@@ -62,7 +63,7 @@ describe "Messages" do
     let!(:message_count) { Message.count }
     let(:room)    { FactoryGirl.create(:empty_room) }
     before(:each) do
-      AuthService.stub(:get_user).with(nil).and_return(double)
+      AuthService.stub(:get_user).and_return(double)
       post room_messages_path(room, :format => :json), params
     end
     context "the request has a valid token" do
