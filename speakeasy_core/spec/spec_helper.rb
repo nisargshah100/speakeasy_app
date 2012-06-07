@@ -10,6 +10,9 @@ def app
   Rails.application
 end
 
+def AuthService
+end
+
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
