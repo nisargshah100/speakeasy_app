@@ -16,13 +16,19 @@ class PusherObserver < ActiveRecord::Observer
   protected
 
   def publish(type, rec)
-    Pusher['testing'].trigger!(
-      type, 
-      {
-        id:   rec.id,
-        class:  rec.class.name,
-        record: rec
-      }
-    )
+    Messenger.ping('testing', {
+      id:   rec.id,
+      class:  rec.class.name,
+      record: rec
+    }.to_json, 'create')
+
+    # Pusher['testing'].trigger!(
+    #   type, 
+    #   {
+    #     id:   rec.id,
+    #     class:  rec.class.name,
+    #     record: rec
+    #   }
+    # )
   end
 end
