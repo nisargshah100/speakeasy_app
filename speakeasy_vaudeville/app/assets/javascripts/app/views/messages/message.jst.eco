@@ -1,3 +1,4 @@
 <li class="item">
+  <span class="username"><%= @message.username %>:</span>
   <span class="body"><%= @message.body %></span>
 </li>

@@ -1,6 +1,6 @@
 class Message < ActiveRecord::Base
-  attr_accessible :body, :room_id
+  attr_accessible :body, :room_id, :username
   belongs_to :room
 
-  validates_presence_of :body, :room_id
+  validates_presence_of :body, :room_id, :username
 end

@@ -71,6 +71,7 @@ class Messages extends Spine.Controller
     return false unless value 
     Message.unbind('create', @addNew)
     m = Message.create
+      username: @username()
       room_id: Sidebar.room().id
       body: value
     m.destroy(ajax: false)
