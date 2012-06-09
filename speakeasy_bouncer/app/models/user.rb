@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   attr_accessible :password, :as => :admin
 
   uniquify :token, :length => 24
+  uniquify :sid, :length => 24
 
   validates :email, :presence => true,
                     :email => true,
