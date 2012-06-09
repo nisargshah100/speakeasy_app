@@ -11,20 +11,32 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120602213006) do
+<<<<<<< HEAD
+ActiveRecord::Schema.define(:version => 20120607194159) do
+=======
+ActiveRecord::Schema.define(:version => 20120609183238) do
+>>>>>>> 0bf678836054af1e981bf53787838c839c890e45
 
   create_table "messages", :force => true do |t|
     t.text     "body"
     t.integer  "room_id"
-    t.integer  "user_id"
+    t.string   "sid"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "permissions", :force => true do |t|
+    t.string   "sid"
+    t.integer  "room_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "username"
   end
 
   create_table "rooms", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.integer  "user_id"
+    t.string   "sid"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

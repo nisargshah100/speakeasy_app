@@ -2,7 +2,7 @@
 # window.Room = Room
 
 class Message extends Spine.Model
-  @configure 'Message', 'body', 'room_id'
+  @configure 'Message', 'body', 'room_id', 'username'
   @extend Spine.Model.Ajax
   @belongsTo 'room', 'Room'
 
