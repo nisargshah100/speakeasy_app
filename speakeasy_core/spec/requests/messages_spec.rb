@@ -16,7 +16,7 @@ describe "Messages" do
       context "the request has a valid room id in the body" do
         context "the room has messages" do
           it "returns a json with the room's messages" do
-            messages_json = room.messages.to_json(only: [:id, :room_id, :body])
+            messages_json = room.messages.to_json(only: [:id, :room_id, :body, :username])
             response.body.should == messages_json
           end
 
@@ -68,7 +68,7 @@ describe "Messages" do
     end
     context "the request has a valid token" do
       context "with valid request body" do
-        let(:params) { {:message => {body: "Boom"}} }
+        let(:params) { {:message => {body: "Boom", username: "testuser"}} }
 
         it "creates the message" do
           Message.last.body.should == "Boom"
