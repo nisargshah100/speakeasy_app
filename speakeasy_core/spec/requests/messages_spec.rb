@@ -16,7 +16,7 @@ describe "Messages" do
       context "the request has a valid room id in the body" do
         context "the room has messages" do
           it "returns a json with the room's messages" do
-            messages_json = room.messages.to_json(only: :body)
+            messages_json = room.messages.to_json(only: [:id, :room_id, :body])
             response.body.should == messages_json
           end
 
