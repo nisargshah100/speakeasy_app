@@ -26,7 +26,7 @@ class MessagesController < ApplicationController
 
   def attach_usernames_to(messages)
     username_array = get_username_array_for(messages)
-    messages.each_with_index { |message, index| message.username = username_array[index] }
+    messages.each_with_index { |message, index| message.username = username_array[index].name }
   end
 
   def get_username_array_for(messages)
