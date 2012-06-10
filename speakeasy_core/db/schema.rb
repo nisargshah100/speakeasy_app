@@ -11,11 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20120607194159) do
-=======
-ActiveRecord::Schema.define(:version => 20120609183238) do
->>>>>>> 0bf678836054af1e981bf53787838c839c890e45
 
   create_table "messages", :force => true do |t|
     t.text     "body"
@@ -30,7 +26,6 @@ ActiveRecord::Schema.define(:version => 20120609183238) do
     t.integer  "room_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "username"
   end
 
   create_table "rooms", :force => true do |t|

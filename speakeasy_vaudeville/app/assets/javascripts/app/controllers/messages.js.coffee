@@ -71,7 +71,7 @@ class Messages extends Spine.Controller
     return false unless value 
     Message.unbind('create', @addNew)
     m = Message.create
-      username: @username()
+      sid: @id()
       room_id: Sidebar.room().id
       body: value
     m.destroy(ajax: false)
@@ -85,5 +85,8 @@ class Messages extends Spine.Controller
 
   email: => 
     $("meta[name=current-user-email]").attr("content")
+
+  id: =>
+    $("meta[name=current-user-id]").attr("content")
 
 window.Messages = Messages

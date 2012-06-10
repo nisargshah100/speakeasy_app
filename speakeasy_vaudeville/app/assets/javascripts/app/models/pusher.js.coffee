@@ -14,12 +14,19 @@ class PusherHandler extends Spine.Module
         xhr.setRequestHeader 'X-Session-ID', @pusher.connection.socket_id
 
     Room.bind 'refresh', @subscribeToChannels
+    Room.bind 'create', @subscribeToNewChannel
 
   subscribeToChannels: =>
     @rooms = Room.all()
     for room in @rooms
       @channel = @pusher.subscribe room.id.toString()
       @channel.bind_all @processWithoutAjax
+
+  subscribeToNewChannel: =>
+    # Room.fetch()
+    room = Room.last()
+    @channel = @pusher.subscribe room.id.toString()
+    @channel.bind_all @processWithoutAjax
 
   process: (type, msg) =>
     if msg

@@ -45,6 +45,7 @@ class Sidebar extends Spine.Controller
     return false  unless value
     Room.create
       name: value
+      sid: @id()
 
     @input.val ""
     @input.focus()
@@ -75,5 +76,8 @@ class Sidebar extends Spine.Controller
 
   currentChannelEmpty: =>
     return false unless Sidebar.channel() == "Unknown record"
+
+  id: =>
+    $("meta[name=current-user-id]").attr("content")
 
 window.Sidebar = Sidebar

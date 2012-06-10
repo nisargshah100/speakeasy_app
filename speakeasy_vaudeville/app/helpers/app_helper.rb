@@ -6,4 +6,8 @@ module AppHelper
   def current_user_email_tag
     tag('meta', name: 'current-user-email', content: current_user.email)
   end
+
+  def current_user_sid_tag
+    tag('meta', name: 'current-user-id', content: current_user.sid)
+  end
 end
