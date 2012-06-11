@@ -33,6 +33,6 @@ class MessagesController < ApplicationController
 
   def get_username_array_for(messages)
    users = AuthService.get_users_by_sid(messages.map { |message| message.sid })
-   users.map { |user| user ? user['name'] : "" }
+   users.map { |message_user| message_user ? message_user['name'] : "" }
   end
 end
