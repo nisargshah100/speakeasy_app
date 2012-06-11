@@ -35,7 +35,7 @@ gem 'jquery-rails'
 gem 'thin'
 gem 'pusher'
 gem 'hashie'
-gem 'redis'
+gem 'speakeasy_on_tap', path: '../speakeasy_on_tap'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
