@@ -4,7 +4,7 @@ class AuthService
     user ? user.attributes.as_json : nil
   end
 
-  def self.get_user(token=nil)
+  def self.get_user(token)
     user = User.where(:token => token).first
     user ? user.attributes.as_json : nil
   end

@@ -11,7 +11,9 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user
-    unless @user = Hashie::Mash.new(get_user_from_auth_service(cookies['user']))
+    if @user = get_user_from_auth_service(cookies['user'])
+      @user = Hashie::Mash.new(@user)
+    else
       head status: :unauthorized
     end
   end
