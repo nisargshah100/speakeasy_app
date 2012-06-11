@@ -11,7 +11,7 @@ class RoomsController < ApplicationController
     room.sid = @user.sid
 
     if room.save
-      head status: :created, :location => [room]
+      render json: room, status: :created, location: [room]
     else
       head status: :bad_request
     end
