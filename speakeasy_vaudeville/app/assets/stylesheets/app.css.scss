@@ -6,6 +6,7 @@ $ladybug-light: #801C1C;
 $ladybug-dark: #B30C0C; 
 $pencil: #D6AA0B;
 $user-border: #262626;
+$light-gray: #737373;
 
 /*---------------MAIN-----------------------*/
 
@@ -46,11 +47,16 @@ a { text-decoration: none; outline: none; }
 #header, #footer { width:100%; }
 
 #header { position: absolute; height: 70px; background: $weathervane url(http://www.hungryacademy.com/images/noise.png) repeat top left; bottom:0px; left:0px; right:0px; top:0px;
-z-index: 100; }
+z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weathervane), to(#323239)); }
 
-#logo { padding: 8px 0 0 25px; 
-  a { color: $pencil; 
+/*#logo { padding: 8px 0 0 25px; 
+  a { text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000; color: #000; opacity: 0.3; 
+    &:hover { color: $pencil; text-shadow: 0 0 0 $pencil, 0 0 0 $pencil; opacity: 1; }
   } 
+}*/
+
+#logo { position: absolute; overflow:hidden; padding: 0; width: 400px; height: 58px; left:25px; top:2px;
+  a { padding-top: 58px; background-image: url("speakeasy_sprite.png"); position: absolute; height: 0; width: 400px; background-position: left top; background-repeat: no-repeat; }
 }
 
 @font-face { font-family: 'SF Speakeasy'; src: url('SFSpeakeasy.ttf'); }
@@ -71,10 +77,10 @@ h1#logo { font-family:"SF Speakeasy", Helvetica, Palatino, "Palatino Linotype", 
 
 #usernav {
   position:absolute;
-  right:25px;
+  right:45px;
   top:22px;
   
-  li { float: left; float:left; margin-right:25px; background-color: $weathervane;
+  li { float: left; margin-right:25px; background-color: $weathervane;
 
     li { float:none; border-bottom:1px solid $user-border; width:105%; font-size: 14px;
 
@@ -83,14 +89,14 @@ h1#logo { font-family:"SF Speakeasy", Helvetica, Palatino, "Palatino Linotype", 
 
     &:hover ul { display:block; z-index:100; right: 28px; top: 28px }
 
-    a { display:block; padding:0.5em; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85);
+    a { display:block; padding:0.5em; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85); color: #fff;
 
-      &:hover { background-color: $ladybug-dark; text-decoration:none; }
+      &:hover { background-color: $light-gray; text-decoration:none; }
 
     }
 
-    ul { display:none; padding:0; position:absolute; width:80px; -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    }
+    ul { /*position: absolute; top: 100%; left: 0; right: 100px; z-index: 1000; display: none; float: left; min-width: 80px; padding: 4px 0; margin: 1px 0 0; list-style: none; background-color: #ffffff; border: 1px solid #ccc; border: 1px solid rgba(0, 0, 0, 0.2); *border-right-width: 2px; *border-bottom-width: 2px; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); -webkit-background-clip: padding-box; -moz-background-clip: padding; background-clip: padding-box;*/ 
+      display:none; padding:0; position:absolute; width:80px; -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); }
   }
 
   ul {
@@ -108,13 +114,13 @@ h1#logo { font-family:"SF Speakeasy", Helvetica, Palatino, "Palatino Linotype", 
 
 
 #usernav li#parent {
-    background-color: $weathervane;
+    background-color: transparent;
     font-size: 14px;
     padding: 0.5em;
-    color: #fff;
+    color: #ccc;
 }
 
-#usernav li#parent:hover { cursor: pointer; background-color: $ladybug-dark; border-top-right-radius:5px 5px; border-top-left-radius:5px 5px; -moz-border-top-left-radius:5px 5px; -moz-border-top-right-radius:5px 5px; -webkit-border-top-left-radius:5px 5px; -webkit-border-top-right-radius:5px 5px; }
+#usernav li#parent:hover { color: #fff; cursor: pointer; background-color: $weathervane; border-top-right-radius:5px 5px; border-top-left-radius:5px 5px; -moz-border-top-left-radius:5px 5px; -moz-border-top-right-radius:5px 5px; -webkit-border-top-left-radius:5px 5px; -webkit-border-top-right-radius:5px 5px; }
 
 #usernav li#parent > a {
     border-top-right-radius:5px 5px;
@@ -130,13 +136,13 @@ h1#logo { font-family:"SF Speakeasy", Helvetica, Palatino, "Palatino Linotype", 
 }
 
 #usernav li#parent:hover > a {
-    background-color: $ladybug-dark;
+    background-color: $light-gray;
     border-color: $user-border;
     border-bottom-color: transparent;
 }
 
 #usernav li#parent > a:hover {
-    background-color: $ladybug-dark;
+    background-color: $light-gray;
     border-top:1px solid $user-border;
     border-right:1px solid $user-border;
     border-bottom: 1px solid transparent;
@@ -212,14 +218,30 @@ h1#logo { font-family:"SF Speakeasy", Helvetica, Palatino, "Palatino Linotype", 
     -webkit-border-bottom-right-radius:5px 5px;
 }
 
+/*-------------HOME------------*/
+
+.home-image { background: url("http://theworldsmostexclusivewebsite.com/img/eml18a.jpg"); }
+
+#home_form { position: absolute; left: 20px;
+  label { color: #fff; }
+  input[type="text"], input[type="password"] { padding: 5px; width: 200px; font-size: 14px; }
+
+}
+
 /*---------CONTAINER-----------*/
 
-.header { padding: 20px 0; }
+.header { padding: 20px 0 10px;
+  h4 { color: #878797; text-transform: uppercase; text-shadow: 0px 2px 3px #4E4E4E; font-weight: 600; font-size: 15px; }
+}
 
-.new { height: 100px; background:#EEE; position:absolute; bottom:0px; left:0px; right:0px; -webkit-box-shadow: rgba(0, 0, 0, 0.549219) 0px .5px 10px; -moz-box-shadow: rgba(0, 0,
+.github h4 { 
+  &:after { margin-left: 8px; vertical-align: -2px; content: url("http://www.maxcutler.com/wp-content/themes/pixelpower/images/social_icons/octocat.png"); }
+}
+
+.new { height: 80px; background:#EEE; position:absolute; bottom:0px; left:0px; right:0px; -webkit-box-shadow: rgba(0, 0, 0, 0.549219) 0px .5px 10px; -moz-box-shadow: rgba(0, 0,
 0, 0.249219) 0px .5px 10px; -o-box-shadow: rgba(0, 0, 0, 0.449219) 0px .5px 10px; box-shadow: rgba(0, 0, 0, 0.449219) 0px .5px 10px;
 
- textarea { position:absolute; top:25px; bottom:25px; left:20px; right:180px; resize: none; padding: 10px; font-size: 16px; -moz-box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px
+ textarea { position:absolute; top:15px; bottom:15px; left:18px; right:110px; resize: none; padding: 10px; font-size: 16px; -moz-box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px
 8px -8px #696868; -webkit-box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868; box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868;
 
  &:focus { border-color:rgba(35,146,231,0.8); outline:0; outline:thin dotted \9; -webkit-box-shadow:inset 0 1px 3px rgba(0,0,0,0.075),0 0 12px rgba(82,168,236,0.6) !important;
@@ -228,44 +250,74 @@ h1#logo { font-family:"SF Speakeasy", Helvetica, Palatino, "Palatino Linotype", 
   }
 }
 
-.new input[type="submit"] { position:absolute; top:25px; bottom:50px; right:45px; width:100px; }
+.new input[type="submit"] { position:absolute; top:15px; bottom:50px; right:20px; width:75px; font-size: 16px; }
 
-.new { padding:10px; }
+.new { padding:10px 20px; }
 
-#messages { position: absolute; top:0; bottom:0; left:240px; right:235px; background: #F8F8F8 url("https://www.simple.com/img/bg_pixel_texture.gif") repeat;
+/*http://dribbble.s3.amazonaws.com/users/1521/screenshots/338082/attachments/15648/wood.png*/
 
-  #stuff { overflow:auto; position: absolute; top: 0; bottom: 120px; left: 0; right: 0;
+#messages { position: absolute; top:0; bottom:0; left:215px; right:315px; background: url("wood-bright.png") repeat;
 
-    ul.items li.item { padding: 10px 20px; border-bottom: 1px solid #fff;
-  
-      &:last-child { border-bottom: 0px solid #fff; }
+  #stuff { overflow:auto; position: absolute; top: 0; bottom: 100px; left: 0; right: 0;
+
+    ul.items { margin: 20px 20px 20px; background: #F8F8F8 url("https://www.simple.com/img/bg_pixel_texture.gif") repeat; border-top-right-radius:3px 3px; border-top-left-radius:3px 3px; border-bottom-left-radius: 3px 3px; border-bottom-right-radius: 3px 3px; -moz-border-radius-topleft:3px 3px; -moz-border-radius-topright:3px 3px; -moz-border-radius-bottomright: 3px 3px; -moz-border-radius-bottomleft: 3px 3px; -moz-box-shadow: 0 0 5px 1px $weathervane; -webkit-box-shadow: 0 0 5px 1px $weathervane; box-shadow: 0 0 5px 1px $weathervane;
+      li.item { padding: 10px 20px; border-bottom: 1px solid #E4E4E4;
+        &:last-child { border-bottom: 0px solid #E4E4E4; }
+      }
     }
   }
 }
 
-#messages li.item span.body { margin-right: 20px; }
+#messages li.item {
+  div { float: left; }
+  &:after { visibility: hidden; display: block; content: ""; clear: both; height: 0; }
+  span.author { margin-right: 10px; text-align: right; width: 75px; display: inline-block; }
+  div.author-image { margin-right: 10px; text-align: right; width: 48px; display: inline-block; 
+    img { width: 48px; height: 48px; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; border: 1px solid $weathervane; }
+  }
+  div.author-body { margin-right: 10px; text-align: right; display: inline-block; width: 93%; min-height: 48px;
+    span { width: 100%; display: inline-block; }
+    span.author-name { margin-right: 10px; text-align: left; color: #969696; font-size: 15px; font-weight: 600; padding-bottom: 5px; }
+  }
+  span.body { margin-right: 20px; display: inline-block; text-align: left; font-size: 15px; }
+}
 
-.lobby, .room-info { padding: 0 20px; }
+.lobby, .room-info { padding: 0 15px; }
 
 .chat-room { position: absolute; top:69px; left:0; right:0; bottom:0px; }
 
-.room-info { position: absolute; top:0; bottom:0; width:200px; right:0; background: $chocolate url("http://www.hungryacademy.com/images/noise.png") repeat top left; overflow:auto;
+.room-info { position: absolute; top:0; bottom:0; width:285px; right:0; background: url("http://www.hungryacademy.com/images/noise.png") repeat top left; overflow:auto; background: -webkit-gradient(linear, 100% 100%, 100% 0%, from($weathervane), to(#26262C));
+  #room_name { padding: 25px 0 10px; color: #ccc; font-size: 26px; }
+  #data { margin: 10px 0;
+    #ci_status {  }
+    ul { 
+      li { text-align: left; list-style-type:none; padding: 2px 0; color: #fff; font-size: 15px; }
+    }    
+  }
+}
 
- ul { text-align:right; } }
+.lobby { position: absolute; top:0; bottom:0; width:185px; left:0; background: url("http://www.hungryacademy.com/images/noise.png") repeat top left; overflow:auto; background: -webkit-gradient(linear, 100% 100%, 100% 0%, from($weathervane), to(#26262C));
+  #existing_rooms { overflow:auto; position: absolute; top: 0; bottom: 120px; left: 0; right: 0; padding: 15px; }
+  #new_room { padding: 10px 15px; height: 80px; position:absolute; bottom:0px; left:0px; right:0px; -webkit-box-shadow: rgba(0, 0, 0, 0.549219) 0px .5px 10px; -moz-box-shadow: rgba(0, 0,
+  0, 0.249219) 0px .5px 10px; -o-box-shadow: rgba(0, 0, 0, 0.449219) 0px .5px 10px; box-shadow: rgba(0, 0, 0, 0.449219) 0px .5px 10px; }
+}
 
-.lobby { position: absolute; top:0; bottom:0; width:200px; left:0; background: $chocolate url("http://www.hungryacademy.com/images/noise.png") repeat top left; overflow:auto; }
+#new_room {
+  h3 { padding: 20px 0 10px 0; }
+  a { padding: 0px 4px 4px; }
+}
 
-#new_room h3 { padding: 20px 0 10px 0; }
-
-#rooms li { list-style-type: none; padding: 5px 0;
-    a { padding: 5px; display:block;
-      &.current { background-color: $ladybug-dark; color: #fff; box-shadow: inset 0 1px 1px $chocolate; -moz-box-shadow: inset 0 1px 1px $chocolate; -webkit-box-shadow: inset 0 1px 1px $chocolate;
-        &:hover { background-color: $ladybug-dark; color: #fff; box-shadow: inset 0 1px 1px $chocolate; -moz-box-shadow: inset 0 1px 1px $chocolate; -webkit-box-shadow: inset 0 1px 1px $chocolate; cursor: pointer; }
+#rooms { width: 220px; margin: 0 -20px;
+  li { list-style-type: none; padding: 1px 0;
+    a { padding: 7px 20px; display:block; text-shadow: 0px 1px 1px #000; font-size: 14px;
+      &.current { background: url("http://www.hungryacademy.com/images/noise.png") repeat top left, -webkit-linear-gradient(#3770B4, #2663AC, #175396); color: #fff; box-shadow: inset 0 1px 1px $chocolate; -moz-box-shadow: inset 0 1px 1px $chocolate; -webkit-box-shadow: inset 0 1px 1px $chocolate; box-shadow: 0 4px 2px -2px $weathervane; -moz-box-shadow: 0 4px 2px -2px $weathervane; -webkit-box-shadow: 0 3px 2px -2px $weathervane;
+        &:hover { color: #fff; cursor: pointer; }
       }      
-    &:hover { background-color: $chocolate; color: #fff; box-shadow: 0 0px 2px $weathervane; -moz-box-shadow: 0 0px 2px $weathervane; -webkit-box-shadow: 0px 1px 2px 1px $weathervane; cursor: pointer; }
+    &:hover { cursor: pointer; } /* background-color: $chocolate; color: #fff; box-shadow: 0 0px 2px $weathervane; -moz-box-shadow: 0 0px 2px $weathervane; -webkit-box-shadow: 0px 1px 2px 1px $weathervane; }*/
     }
   }
   a { color: #fff; }
+}
 
 .container { position:absolute; top:0; bottom:0; left:0; right:0; border:1px solid #333; }
 
