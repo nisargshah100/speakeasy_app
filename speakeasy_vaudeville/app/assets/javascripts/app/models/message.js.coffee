@@ -32,8 +32,8 @@ Message.include
   room: ->
     Room.find @room_id
 
-  forRoom: (message) ->
-    return false unless message
-    @room_id is message.id
+  forRoom: (room) ->
+    return false unless room
+    @room_id is room.id
 
 window.Message = Message

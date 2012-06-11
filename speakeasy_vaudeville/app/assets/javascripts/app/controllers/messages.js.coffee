@@ -40,10 +40,20 @@ class Messages extends Spine.Controller
     Sidebar.bind 'changeRoom', @changeRoom
     
   render: =>
+    @loadMessages()
     Message.all()
     @items.empty()
     Message.each(@addOne)
     @scroll()
+
+  introMessage: =>
+    @items.empty()
+    Message.unbind 'refresh', @render
+    Message.create
+      body: "no!"
+      room_id: Sidebar.room().id,
+      {ajax: false}
+    Message.bind 'refresh', @render
 
   loadMessages: =>
     Message.fetch_all()
@@ -63,7 +73,11 @@ class Messages extends Spine.Controller
 
   changeRoom: (room) =>
     @room = room
-    @render()
+    if @room.isEmpty()
+      @introMessage()
+    else
+      # console.log "wtf"
+      @render()
 
   createMessage: ->
     alert "Room required" unless Sidebar.room()

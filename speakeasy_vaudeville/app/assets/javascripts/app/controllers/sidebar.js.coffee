@@ -39,6 +39,7 @@ class Sidebar extends Spine.Controller
     # adds current to the first room everytime render is called
     # we should probably change this behavior
     $("[data-name=rooms]:last").addClass("current")
+    Sidebar.trigger 'changeRoom', Sidebar.room()
 
   createRoom: ->
     url = Room.url()
@@ -78,9 +79,6 @@ class Sidebar extends Spine.Controller
   @room: =>
     id = $(".item.current").attr('id')
     Room.find(id)
-
-  # sid: =>
-  #   $("meta[name=current-sid]").attr('content')
 
   currentChannelEmpty: =>
     return false unless Sidebar.channel() == "Unknown record"
