@@ -30,6 +30,7 @@ gem 'spine-rails'
 gem 'eco'
 gem 'pusher'
 gem 'thin'
+gem 'hashie'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

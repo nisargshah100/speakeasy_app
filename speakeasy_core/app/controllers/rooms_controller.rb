@@ -1,12 +1,15 @@
 class RoomsController < ApplicationController
   before_filter :authenticate_user
   before_filter :find_room, :verify_room_owner, only: [:update, :destroy]
+
   def index
-    @rooms = Room.for_user(@user.sid)
+    @rooms = (Room.for_user(@user.sid) | Room.where('sid = ?', @user.sid)).uniq
   end
 
   def create
     room = Room.new(params[:room])
+    room.sid = @user.sid
+
     if room.save
       head status: :created, :location => [room]
     else

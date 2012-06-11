@@ -16,19 +16,14 @@ class PusherObserver < ActiveRecord::Observer
   protected
 
   def publish(type, rec)
+    attrs = rec.attributes
+    user = AuthService.get_user_by_sid(rec.sid)
+    attrs['username'] = user['name'] if user
+
     Messenger.ping(rec.room_id.to_s, {
       id:   rec.id,
       class:  rec.class.name,
-      record: rec
+      record: attrs,
     }.to_json, 'create')
-
-    # Pusher['testing'].trigger!(
-    #   type, 
-    #   {
-    #     id:   rec.id,
-    #     class:  rec.class.name,
-    #     record: rec
-    #   }
-    # )
   end
 end

@@ -66,19 +66,22 @@ class Messages extends Spine.Controller
     @render()
 
   createMessage: ->
-    alert "Room required"  unless Sidebar.room()
+    alert "Room required" unless Sidebar.room()
+    url = Message.url()
     value = @input.val()
-    return false unless value 
-    Message.unbind('create', @addNew)
-    m = Message.create
-      username: @username()
-      room_id: Sidebar.room().id
-      body: value
-    m.destroy(ajax: false)
-    Message.bind('create', @addNew)
+    return false unless value
+
+    $.post url, {
+      sid: @sid()
+      'message[body]': value
+    }
+
     @input.val ""
     @input.focus()
     false
+
+  sid: =>
+    $("meta[name=current-sid]").attr('content')
 
   username: =>
     $("meta[name=current-user-name]").attr("content")
