@@ -22,7 +22,7 @@ describe Api::SessionsController, :type => :api do
         :password => 'foobar'
       }
 
-      response.status.should == 400
+      response.status.should == 403
     end
   end
 

@@ -243,7 +243,9 @@ h1#logo { font-family:"SF Speakeasy", Helvetica, Palatino, "Palatino Linotype", 
   }
 }
 
+#messages li.item span.username { font-weight:bold; }
 #messages li.item span.body { margin-right: 20px; }
+
 
 .lobby, .room-info { padding: 0 20px; }
 

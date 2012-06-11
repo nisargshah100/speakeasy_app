@@ -1,32 +1,55 @@
 require 'spec_helper'
 
-def AuthService
-
-end
-
 describe "Messages" do
-  let(:room) { FactoryGirl.create(:room_with_messages) }
+  let!(:room) { FactoryGirl.create(:room_with_messages) }
 
   describe "#index" do
     context "the request has a valid token" do
-      before(:each) do
-        AuthService.stub(:get_user).and_return(double)
-        get room_messages_url(room, :format => :json)
-      end
       context "the request has a valid room id in the body" do
         context "the room has messages" do
-          it "returns a json with the room's messages" do
-            messages_json = room.messages.to_json(only: :body)
-            response.body.should == messages_json
+          context "the room has under 50 messages" do
+            it "returns a json with all of the room's messages" do
+              AuthService.stub(:get_user).with(nil).and_return(double)
+              AuthService.stub(:get_users_by_sid).and_return(["First", "Second", "Third"])
+              get room_messages_url(room, :format => :json)
+              response_json = JSON.parse(response.body)
+              response_json.any? { |message_hash| message_hash.value?(Message.first.body) }.should be_true
+              response_json.any? { |message_hash| message_hash.value?(Message.last.body) }.should be_true
+              response_json.any? { |message_hash| message_hash.value?("First") }.should be_true
+              response_json.any? { |message_hash| message_hash.value?("Second") }.should be_true
+              response_json.any? { |message_hash| message_hash.value?("Third") }.should be_true
+            end
+          end
+
+          context "the room has over 50 messages", slow: true do
+            let(:room) { FactoryGirl.create(:room_with_many_messages) }
+            it "returns a json with the room's 50 most recent messages" do
+              AuthService.stub(:get_user).with(nil).and_return(double)
+              AuthService.stub(:get_users_by_sid).and_return((1..50).collect{|i| "Username"})
+              get room_messages_url(room, :format => :json)
+              response_json = JSON.parse(response.body)
+              response_json.length.should == 50
+              response_json.any? { |message_hash| message_hash.value?(Message.first.body) }.should be_false
+              response_json.any? { |message_hash| message_hash.value?(Message.last.body) }.should be_true
+              response_json.all? { |message_hash| message_hash.value?("Username") }.should be_true
+            end
           end
 
           it "returns a 200 response" do
+            AuthService.stub(:get_user).with(nil).and_return(double)
+            AuthService.stub(:get_users_by_sid).and_return(["First", "Second", "Third"])
+            get room_messages_url(room, :format => :json)
             response.status.should == 200
           end
         end
 
         context "the room has no messages" do
           let(:room) { FactoryGirl.create(:empty_room) }
+          before(:each) do
+            AuthService.stub(:get_user).with(nil).and_return(double)
+            AuthService.stub(:get_users_by_sid).and_return([])
+            get room_messages_url(room, :format => :json)
+          end
 
           it "returns an empty json" do
             response.body.should == "[]"
@@ -42,18 +65,17 @@ describe "Messages" do
         let(:room) { double(:to_param => 9999) }
 
         it "returns a 404 response" do
+          AuthService.stub(:get_user).with(nil).and_return(double)
+          get room_messages_url(room, :format => :json)
           response.status.should == 404
         end
       end
     end
 
     context "the request does not have a valid token" do
-      before(:each) do
+      it "returns a 401 response" do
         AuthService.stub(:get_user).with(nil).and_return(nil)
         get room_messages_url(room, :format => :json)
-      end
-
-      it "returns a 401 response" do
         response.status.should == 401
       end
     end
@@ -63,7 +85,7 @@ describe "Messages" do
     let!(:message_count) { Message.count }
     let(:room)    { FactoryGirl.create(:empty_room) }
     before(:each) do
-      AuthService.stub(:get_user).and_return(double)
+      AuthService.stub(:get_user).with(nil).and_return(double)
       post room_messages_path(room, :format => :json), params
     end
     context "the request has a valid token" do

@@ -12,6 +12,7 @@ group :development, :test do
   gem "rack-test", require: "rack/test"
   gem "factory_girl"
   gem 'guard-rspec'
+  gem 'database_cleaner'
 end
 
 group :production do
@@ -32,6 +33,7 @@ end
 
 gem 'jquery-rails'
 gem 'thin'
+gem 'pusher'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

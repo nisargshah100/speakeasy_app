@@ -8,7 +8,7 @@ $ = jQuery.sub()
 #   Message.find(elementID)
 
 class MessagesItem extends Spine.Controller
-  proxied: [ "render", "remove" ]
+  #proxied: [ "render", "remove" ]
 
   template: (message) ->
     @view('messages/message')(message: message)
@@ -30,20 +30,23 @@ class Messages extends Spine.Controller
     ".new textarea": "input"
 
   events:
-    "click .new input#scroll": "create"
+    "click .new input#scroll": "createMessage"
 
   constructor: ->
     super
+    Room.bind 'refresh', @loadMessages
     Message.bind 'create', @addNew
     Message.bind 'refresh', @render
     Sidebar.bind 'changeRoom', @changeRoom
-    Message.fetch()
     
   render: =>
-    messages = Message.all()
+    Message.all()
     @items.empty()
     Message.each(@addOne)
     @scroll()
+
+  loadMessages: =>
+    Message.fetch_all()
 
   scroll: =>
     objDiv = $("#stuff")[0]
@@ -62,18 +65,25 @@ class Messages extends Spine.Controller
     @room = room
     @render()
 
-  create: ->
+  createMessage: ->
     alert "Room required"  unless Sidebar.room()
     value = @input.val()
     return false unless value 
-    Message.create
-      user_id: 1
+    Message.unbind('create', @addNew)
+    m = Message.create
+      username: @username()
       room_id: Sidebar.room().id
       body: value
-
+    m.destroy(ajax: false)
+    Message.bind('create', @addNew)
     @input.val ""
     @input.focus()
-    Message.fetch()
     false
+
+  username: =>
+    $("meta[name=current-user-name]").attr("content")
+
+  email: => 
+    $("meta[name=current-user-email]").attr("content")
 
 window.Messages = Messages

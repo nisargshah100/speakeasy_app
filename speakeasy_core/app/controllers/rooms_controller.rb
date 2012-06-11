@@ -1,6 +1,8 @@
 class RoomsController < ApplicationController
+  before_filter :authenticate_user
+  before_filter :find_room, :verify_room_owner, only: [:update, :destroy]
   def index
-    @rooms = Room.all
+    @rooms = Room.for_user(@user.sid)
   end
 
   def create
@@ -13,25 +15,21 @@ class RoomsController < ApplicationController
   end
 
   def update
-    room = Room.find_by_id(params[:id])
-    if room
-      if room.update_attributes(params[:room])
-        head status: :ok, :location => [room]
-      else
-        head status: :bad_request
-      end
+    if @room.update_attributes(params[:room])
+      head status: :ok, :location => [@room]
     else
-      head status: :not_found
+      head status: :bad_request
     end
   end
 
   def destroy
-    room = Room.find_by_id(params[:id])
-    if room
-      room.destroy
-      head status: :ok
-    else
-      head status: :bad_request
-    end
+    @room.destroy
+    head status: :ok
+  end
+
+  private
+
+  def verify_room_owner
+    head status: :unauthorized unless @user.sid == @room.sid
   end
 end
