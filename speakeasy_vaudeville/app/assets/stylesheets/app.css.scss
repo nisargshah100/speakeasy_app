@@ -55,13 +55,11 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
   } 
 }*/
 
-#logo { position: absolute; overflow:hidden; padding: 0; width: 400px; height: 58px; left:25px; top:2px;
-  a { padding-top: 58px; background-image: url("speakeasy_sprite.png"); position: absolute; height: 0; width: 400px; background-position: left top; background-repeat: no-repeat; }
+#logo { position: absolute; overflow:hidden; padding: 0; width: 400px; height: 58px; left:25px;
+  a { padding-top: 58px; background-size: 308px 400px; background: url("speakeasy.png") no-repeat left top; position: absolute; height: 0; width: 400px; 
+    &:hover { background-size: 308px 400px; background: url("speakeasy.png") no-repeat left top; position: absolute; height: 0; width: 400px; }
+  }
 }
-
-@font-face { font-family: 'SF Speakeasy'; src: url('SFSpeakeasy.ttf'); }
-
-h1#logo { font-family:"SF Speakeasy", Helvetica, Palatino, "Palatino Linotype", "Book Antiqua", Georgia, "Times New Roman", serif; font-size:44pt; color: #1C031E; }
 
 /*--------USERNAV/SEARCH--------*/
 
@@ -220,12 +218,41 @@ h1#logo { font-family:"SF Speakeasy", Helvetica, Palatino, "Palatino Linotype", 
 
 /*-------------HOME------------*/
 
-.home-image { background: url("http://theworldsmostexclusivewebsite.com/img/eml18a.jpg"); }
+.home-image { background:#EEE; }
+  /*background: url("http://theworldsmostexclusivewebsite.com/img/eml18a.jpg");*/
 
-#home_form { position: absolute; left: 20px;
+#signin_form, #signup_form { position: relative; top: 30px;
   label { color: #fff; }
-  input[type="text"], input[type="password"] { padding: 5px; width: 200px; font-size: 14px; }
+  input[type="text"], input[type="password"] { padding: 5px; width: 275px; font-size: 14px; margin: 3px 0; -moz-box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868; -webkit-box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868; box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868; 
+    
+    &:focus { border-color:rgba(35,146,231,0.8); outline:0; outline:thin dotted \9; -webkit-box-shadow:inset 0 1px 3px rgba(0,0,0,0.075),0 0 12px rgba(82,168,236,0.6) !important;
+              -moz-box-shadow:inset 0 1px 3px rgba(0,0,0,0.075),0 0 12px rgba(82,168,236,0.6) !important; box-shadow:inset 0 1px 3px rgba(0,0,0,0.075),0 0 12px rgba(82,168,236,0.6) !important; 
+            }
+  }
+  a { margin-left: 10px; color: #949494; font-size: 13px; font-weight: 600; }
+  input[type="submit"] { margin: 4px 0; }
+}
 
+#top { height: 650px; background: url("background.png") right; color: #F2F2F2; }
+
+#bottom { position: relative; width: 900px; margin: 0 auto; padding-top: 15px; 
+  ul { float: left;
+    li { color: #949494; float: left; padding-right: 13px; font-size: 12px; 
+      a { color: #949494; font-weight: 600;
+        &:hover { color: #3484DF; }
+      }
+    }
+  }
+}
+
+#intro { position: relative; width: 900px; margin: 0 auto; top: 180px;
+  h1 { position: relative; padding-bottom: 20px; background-size: 400px 518px; background: url("speakeasy.png") no-repeat left top; left: -15px; height: 60px; width: 400px; }
+  p { margin-top: 20px; }
+  div { position: relative; }
+  #door { right: 0px; top: -60px; position:absolute; height: 463px; width: 237px; background: url("door.png"); }
+  #buttons { top: 80px;
+    a:first-child { margin-right: 10px; }
+  }
 }
 
 /*---------CONTAINER-----------*/
@@ -348,6 +375,8 @@ box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05
 outline-offset: -2px; 
   }
 }
+
+.btn-large { padding: 8px 14px 8px; }
 
 .btn.active, .btn.disabled, .btn[disabled] { background-color: #e6e6e6; *background-color: #d9d9d9; }
 
