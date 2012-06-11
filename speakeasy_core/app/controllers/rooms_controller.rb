@@ -3,7 +3,7 @@ class RoomsController < ApplicationController
   before_filter :find_room, :verify_room_owner, only: [:update, :destroy]
 
   def index
-    @rooms = (Room.for_user(@user.sid) | Room.where('sid = ?', @user.sid)).uniq
+    @rooms = Room.for_user(@user.sid)
   end
 
   def create

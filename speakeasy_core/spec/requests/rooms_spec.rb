@@ -43,6 +43,7 @@
 
     describe "#create" do
       let!(:room_count) { Room.count }
+      let!(:permission_count) { Permission.count }
       context "the request has a valid token" do
         before(:each) do
           AuthService.stub(:get_user).with(nil).and_return({})
@@ -54,6 +55,10 @@
             Room.last.name.should == "Hungry Academy"
             Room.last.description.should == "Boom"
             Room.count.should == room_count + 1
+          end
+
+          it "creates a new permission" do
+            Permission.count.should == permission_count + 1
           end
 
           it "returns a 201 response" do
@@ -159,9 +164,9 @@
         context "with a non-existent room id" do
           before(:each) do
             AuthService.stub(:get_user).with(nil).and_return({})
-            put room_url(room['id']), params
+            put room_url(room.id), params
           end
-          let!(:room) { {:id => 9999}}
+          let!(:room) { double(id: 9999) }
           let!(:params) { {:room => {name: "Hungry"}} }
 
           it "returns a 404 error" do
