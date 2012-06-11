@@ -3,6 +3,7 @@ class Room < ActiveRecord::Base
   has_many :messages
   has_many :permissions
   validates_presence_of :name
+  after_create :create_room_permission_for_owner
 
   attr_accessor :username
 
@@ -12,5 +13,9 @@ class Room < ActiveRecord::Base
 
   def self.for_user(sid)
     Permission.for_user(sid).map { |permission| permission.room }
+  end
+
+  def create_room_permission_for_owner
+    Permission.create(sid: sid, room_id: id)
   end
 end

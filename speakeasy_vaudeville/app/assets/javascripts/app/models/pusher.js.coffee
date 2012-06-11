@@ -5,21 +5,27 @@ $ = jQuery
 class PusherHandler extends Spine.Module
 
   constructor: (@options = {}) ->
-    @options.key or= $('meta[name=pusher-key]').attr('content')
-
-    @pusher = new Pusher(@options.key, @options)
+    @pusher = PusherHandler.pusher(@options)
 
     $.ajaxSetup
       beforeSend: (xhr) =>
         xhr.setRequestHeader 'X-Session-ID', @pusher.connection.socket_id
 
     Room.bind 'refresh', @subscribeToChannels
+    # Room.bind 'create', @subscribeToChannel
+
+  @pusher: (@options = {}) =>
+    @options.key or= $('meta[name=pusher-key]').attr('content')
+    new Pusher(@options.key, @options)
+
+  subscribeToChannel: (room) =>
+    @channel = @pusher.subscribe room.id.toString()
+    @channel.bind_all @processWithoutAjax
 
   subscribeToChannels: =>
     @rooms = Room.all()
     for room in @rooms
-      @channel = @pusher.subscribe room.id.toString()
-      @channel.bind_all @processWithoutAjax
+      @subscribeToChannel(room)
 
   process: (type, msg) =>
     if msg
@@ -27,7 +33,6 @@ class PusherHandler extends Spine.Module
     else
     switch type
       when 'create'
-        console.log klass.exists(msg.record.id)
         klass.create msg.record unless klass.exists(msg.record.id)
       when 'test'
         console.log klass
@@ -39,4 +44,5 @@ class PusherHandler extends Spine.Module
     Spine.Ajax.disable =>
       @process(args...)
 
+window.PusherHandler = PusherHandler
 $ -> new PusherHandler

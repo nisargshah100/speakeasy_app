@@ -3,7 +3,7 @@ class Room extends Spine.Model
   @extend Spine.Model.Ajax
   @hasMany 'messages', 'Message'
 
-  @url: "/api/core/rooms"
+  @url: => "/api/core/rooms"
 
 # Room.include
 #   messages: ->

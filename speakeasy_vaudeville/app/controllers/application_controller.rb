@@ -5,6 +5,6 @@ class ApplicationController < ActionController::Base
   private
   
   def current_user
-    @user ||= AUTH.get_user(cookies[:user])
+    @user ||= Hashie::Mash.new(AUTH.get_user(cookies[:user]))
   end
 end

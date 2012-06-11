@@ -1,7 +1,7 @@
 class Api::SessionsController < ApplicationController
 
   def create
-    user = AuthService.authenticate(params[:email], params[:password])
+    user = User.authenticate(params[:email], params[:password])
     if user
       session_store['user'] = user.token
       success(UserDecorator.decorate(user), 201)

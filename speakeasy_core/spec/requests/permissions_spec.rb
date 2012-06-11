@@ -9,7 +9,7 @@ describe "Permissions" do
     context "with a valid token" do
       context "the token user is the room owner" do
         before(:each) do
-          AuthService.stub(:get_user).with(nil).and_return(double(sid: room.sid))
+          AuthService.stub(:get_user).with(nil).and_return({ sid: room.sid })
           post room_permissions_path(room, format: :json), params
         end
         context "with a valid sid" do
@@ -27,7 +27,7 @@ describe "Permissions" do
 
       context "the token user is not the room owner" do
         before(:each) do
-          AuthService.stub(:get_user).with(nil).and_return(double(sid: "999"))
+          AuthService.stub(:get_user).with(nil).and_return({ sid: "999" })
           post room_permissions_path(room, format: :json), params
         end
         it "does not create a new room permission" do
@@ -41,7 +41,7 @@ describe "Permissions" do
 
       context "the room does not exist" do
         before(:each) do
-          AuthService.stub(:get_user).with(nil).and_return(double(sid: "999"))
+          AuthService.stub(:get_user).with(nil).and_return({ sid: "999" })
           post room_permissions_path(double, format: :json), params
         end
         it "returns a 404 bad request response" do
@@ -69,7 +69,7 @@ describe "Permissions" do
     context "with a valid token" do
       context "the token user is the room owner" do
         before(:each) do
-          AuthService.stub(:get_user).with(nil).and_return(double(sid: room.sid))
+          AuthService.stub(:get_user).with(nil).and_return({ sid: room.sid })
           delete room_permission_path(room, permission, format: :json)
         end
         it "destroys the room permission" do
@@ -83,7 +83,7 @@ describe "Permissions" do
 
       context "the token user is not the room owner" do
         before(:each) do
-          AuthService.stub(:get_user).with(nil).and_return(double(sid: "99999"))
+          AuthService.stub(:get_user).with(nil).and_return({ sid: "99999" })
           delete room_permission_path(room, permission, format: :json)
         end
         it "does not destroy the room permission" do

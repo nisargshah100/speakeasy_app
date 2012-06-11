@@ -1,14 +1,17 @@
 class RoomsController < ApplicationController
   before_filter :authenticate_user
   before_filter :find_room, :verify_room_owner, only: [:update, :destroy]
+
   def index
     @rooms = Room.for_user(@user.sid)
   end
 
   def create
     room = Room.new(params[:room])
+    room.sid = @user.sid
+
     if room.save
-      head status: :created, :location => [room]
+      render json: room, status: :created, location: [room]
     else
       head status: :bad_request
     end

@@ -11,7 +11,7 @@
         let!(:other_permission) { FactoryGirl.create(:permission, room_id: other_room.id, sid: "SID") }
 
         before(:each) do
-          AuthService.stub(:get_user).with(nil).and_return(double(sid: "SID"))
+          AuthService.stub(:get_user).with(nil).and_return({ sid: "SID" })
           get rooms_url(:format => :json)
         end
         it "returns a successful json response of all rooms the token user has access to" do
@@ -43,9 +43,10 @@
 
     describe "#create" do
       let!(:room_count) { Room.count }
+      let!(:permission_count) { Permission.count }
       context "the request has a valid token" do
         before(:each) do
-          AuthService.stub(:get_user).with(nil).and_return(double)
+          AuthService.stub(:get_user).with(nil).and_return({})
           post rooms_url(:format => :json), params
         end
         context "with a complete, valid request body" do
@@ -54,6 +55,10 @@
             Room.last.name.should == "Hungry Academy"
             Room.last.description.should == "Boom"
             Room.count.should == room_count + 1
+          end
+
+          it "creates a new permission" do
+            Permission.count.should == permission_count + 1
           end
 
           it "returns a 201 response" do
@@ -103,7 +108,7 @@
 
           context "the token user is the room owner" do
             before(:each) do
-              AuthService.stub(:get_user).with(nil).and_return(double(sid: room.sid))
+              AuthService.stub(:get_user).with(nil).and_return({ sid: room.sid })
               put room_url(room.id), params
             end
 
@@ -146,7 +151,7 @@
           context "the token user is not the room owner" do
             let(:params) { {} }
             before(:each) do
-              AuthService.stub(:get_user).with(nil).and_return(double(sid: "WRONG"))
+              AuthService.stub(:get_user).with(nil).and_return({ sid: "WRONG" })
               put room_url(room.id), params
             end
 
@@ -158,10 +163,10 @@
 
         context "with a non-existent room id" do
           before(:each) do
-            AuthService.stub(:get_user).with(nil).and_return(double)
+            AuthService.stub(:get_user).with(nil).and_return({})
             put room_url(room.id), params
           end
-          let!(:room) { double(:id => 9999)}
+          let!(:room) { double(id: 9999) }
           let!(:params) { {:room => {name: "Hungry"}} }
 
           it "returns a 404 error" do
@@ -189,7 +194,7 @@
         context "with an existing room id" do
           context "the token user is the room's owner" do
             before(:each) do
-              AuthService.stub(:get_user).with(nil).and_return(double(sid: room.sid))
+              AuthService.stub(:get_user).with(nil).and_return({ sid: room.sid })
               delete room_path(room)
             end
             it "destroys the room" do
@@ -204,7 +209,7 @@
 
         context "the token user is not the room's owner" do
           before(:each) do
-            AuthService.stub(:get_user).with(nil).and_return(double(sid: "WRONG"))
+            AuthService.stub(:get_user).with(nil).and_return({ sid: "WRONG" })
             delete room_path(room)
           end
 
@@ -214,9 +219,9 @@
         end
       end
       context "with a non-existent room id" do
-        let!(:room) { double(:id => 9999) }
+        let!(:room) { { :id => 9999 } }
         before(:each) do
-          AuthService.stub(:get_user).with(nil).and_return(double)
+          AuthService.stub(:get_user).with(nil).and_return({})
           delete room_path(room)
         end
 

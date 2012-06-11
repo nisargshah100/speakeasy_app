@@ -12,6 +12,8 @@ class MessagesController < ApplicationController
   def create
     if @room
       message = @room.messages.build(params[:message])
+      message.sid = @user.sid
+
       if message.save
         head status: :created, :location => [@room, message]
       else
@@ -30,6 +32,7 @@ class MessagesController < ApplicationController
   end
 
   def get_username_array_for(messages)
-    AuthService.get_users_by_sid(messages.map { |message| message.sid })
+   users = AuthService.get_users_by_sid(messages.map { |message| message.sid })
+   users.map { |message_user| message_user ? message_user['name'] : "" }
   end
 end

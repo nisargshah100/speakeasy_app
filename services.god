@@ -18,11 +18,11 @@ SEARCH_PORT = 5005
 
 # System files
 
-God.watch do |w|
-  w.name = "redis"
-  w.start = "redis-server"
-  w.keepalive
-end
+# God.watch do |w|
+#   w.name = "redis"
+#   w.start = "redis-server"
+#   w.keepalive
+# end
 
 # Our Processes
 

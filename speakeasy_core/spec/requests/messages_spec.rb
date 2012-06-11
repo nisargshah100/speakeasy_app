@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe "Messages" do
+  let!(:double_user) { double }
+  before(:each) do
+    AuthService.stub(:get_user_by_sid).and_return(double_user)
+    double_user.stub(:[]).with("name").and_return("Name")
+  end
   let!(:room) { FactoryGirl.create(:room_with_messages) }
 
   describe "#index" do
@@ -9,8 +14,9 @@ describe "Messages" do
         context "the room has messages" do
           context "the room has under 50 messages" do
             it "returns a json with all of the room's messages" do
-              AuthService.stub(:get_user).with(nil).and_return(double)
-              AuthService.stub(:get_users_by_sid).and_return(["First", "Second", "Third"])
+              AuthService.stub(:get_user).with(nil).and_return({})
+              AuthService.stub(:get_users_by_sid).and_return([{'name' => 'First'}, {'name' => 'Second'}, {'name' => 'Third'}])
+              AuthService.stub(:get_user_by_sid).and_return(double)
               get room_messages_url(room, :format => :json)
               response_json = JSON.parse(response.body)
               response_json.any? { |message_hash| message_hash.value?(Message.first.body) }.should be_true
@@ -24,8 +30,8 @@ describe "Messages" do
           context "the room has over 50 messages", slow: true do
             let(:room) { FactoryGirl.create(:room_with_many_messages) }
             it "returns a json with the room's 50 most recent messages" do
-              AuthService.stub(:get_user).with(nil).and_return(double)
-              AuthService.stub(:get_users_by_sid).and_return((1..50).collect{|i| "Username"})
+              AuthService.stub(:get_user).with(nil).and_return({})
+              AuthService.stub(:get_users_by_sid).and_return((1..50).collect{|i| {'name' => 'Username'}})
               get room_messages_url(room, :format => :json)
               response_json = JSON.parse(response.body)
               response_json.length.should == 50
@@ -36,7 +42,7 @@ describe "Messages" do
           end
 
           it "returns a 200 response" do
-            AuthService.stub(:get_user).with(nil).and_return(double)
+            AuthService.stub(:get_user).with(nil).and_return({})
             AuthService.stub(:get_users_by_sid).and_return(["First", "Second", "Third"])
             get room_messages_url(room, :format => :json)
             response.status.should == 200
@@ -46,7 +52,7 @@ describe "Messages" do
         context "the room has no messages" do
           let(:room) { FactoryGirl.create(:empty_room) }
           before(:each) do
-            AuthService.stub(:get_user).with(nil).and_return(double)
+            AuthService.stub(:get_user).with(nil).and_return({})
             AuthService.stub(:get_users_by_sid).and_return([])
             get room_messages_url(room, :format => :json)
           end
@@ -65,7 +71,7 @@ describe "Messages" do
         let(:room) { double(:to_param => 9999) }
 
         it "returns a 404 response" do
-          AuthService.stub(:get_user).with(nil).and_return(double)
+          AuthService.stub(:get_user).with(nil).and_return({})
           get room_messages_url(room, :format => :json)
           response.status.should == 404
         end
@@ -85,7 +91,7 @@ describe "Messages" do
     let!(:message_count) { Message.count }
     let(:room)    { FactoryGirl.create(:empty_room) }
     before(:each) do
-      AuthService.stub(:get_user).with(nil).and_return(double)
+      AuthService.stub(:get_user).with(nil).and_return({})
       post room_messages_path(room, :format => :json), params
     end
     context "the request has a valid token" do
