@@ -1,13 +1,10 @@
-require 'drb'
-
 class User < ActiveRecord::Base
-  include DRbUndumped
-
   authenticates_with_sorcery!
   attr_accessible :email, :name, :as => [:default, :admin]
   attr_accessible :password, :as => :admin
 
   uniquify :token, :length => 24
+  uniquify :sid, :length => 24
 
   validates :email, :presence => true,
                     :email => true,

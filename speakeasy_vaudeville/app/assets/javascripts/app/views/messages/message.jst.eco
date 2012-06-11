@@ -5,7 +5,7 @@
 <li class="item">
   <div class="author-image"><img src="assets/mikesea.jpg"></img></div>
   <div class="author-body">
-    <span class="author-name">Mike Sea</span>
+    <span class="author-name"><%= @message.username %></span>
     <span class="body"><%= @message.body %></span>
   </div>
 </li>

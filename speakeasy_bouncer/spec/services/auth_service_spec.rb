@@ -36,4 +36,14 @@ describe AuthService do
       AuthService.get_user('invalid_token').should be_nil
     end
   end
+
+  context "#get_users_by_sid" do
+    it 'returns all the users with a particular sid' do
+      AuthService.get_users_by_sid([user.sid]).should == [user]
+    end
+
+    it 'returns an empty array with an invalid sid' do
+      AuthService.get_users_by_sid(["test"]).should == [] 
+    end
+  end
 end

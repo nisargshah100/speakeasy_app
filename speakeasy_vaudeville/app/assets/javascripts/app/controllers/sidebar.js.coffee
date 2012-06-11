@@ -30,12 +30,12 @@ class Sidebar extends Spine.Controller
 
   constructor: ->
     super
-    Room.bind 'refresh', @render
-    Room.bind 'create', @addNew
     Room.fetch()
+    Room.bind 'refresh', @render
+    Room.bind 'create', @addNewRoom
     
   render: =>
-    Room.each(@addOne)
+    Room.each(@addOneRoom)
     # adds current to the first room everytime render is called
     # we should probably change this behavior
     $("[data-name=rooms]:first").addClass("current")
@@ -45,18 +45,17 @@ class Sidebar extends Spine.Controller
     return false  unless value
     Room.create
       name: value
-      user_id: 1
 
     @input.val ""
     @input.focus()
     false
 
-  addOne: (item) =>
+  addOneRoom: (item) =>
     roomItem = new RoomsItem(item)
-    @items.append roomItem.render()
+    @rooms.append roomItem.render()
 
-  addNew: (item) =>
-    @addOne(item)
+  addNewRoom: (item) =>
+    @addOneRoom(item)
 
   change: (item) =>
     @deactivate()
@@ -69,10 +68,6 @@ class Sidebar extends Spine.Controller
 
   deactivate: =>
     $("[data-name]").removeClass("current")
-
-  addOne: (item) =>
-    roomItem = new RoomsItem(item)
-    @rooms.append roomItem.render()
 
   @room: =>
     id = $(".item.current").attr('id')

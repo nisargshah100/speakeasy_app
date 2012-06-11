@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
 
   def index
     if @room
-      @messages = @room.messages
+      @messages = attach_usernames_to(@room.recent_messages)
     else
       head status: :not_found
     end
@@ -12,6 +12,8 @@ class MessagesController < ApplicationController
   def create
     if @room
       message = @room.messages.build(params[:message])
+      message.sid = @user.sid
+
       if message.save
         head status: :created, :location => [@room, message]
       else
@@ -24,11 +26,13 @@ class MessagesController < ApplicationController
 
   private
 
-  def find_room
-    @room = Room.find_by_id(params[:room_id])
+  def attach_usernames_to(messages)
+    username_array = get_username_array_for(messages)
+    messages.each_with_index { |message, index| message.username = username_array[index] }
   end
 
-  def authenticate_user
-    head status: :unauthorized unless get_user_from_auth_service(cookies['user'])
+  def get_username_array_for(messages)
+   users = AuthService.get_users_by_sid(messages.map { |message| message.sid })
+   users.map { |user| user ? user['name'] : "" }
   end
 end

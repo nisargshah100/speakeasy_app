@@ -13,8 +13,13 @@ class PusherHandler extends Spine.Module
       beforeSend: (xhr) =>
         xhr.setRequestHeader 'X-Session-ID', @pusher.connection.socket_id
 
-    @channel = @pusher.subscribe 'testing'
-    @channel.bind_all @processWithoutAjax
+    Room.bind 'refresh', @subscribeToChannels
+
+  subscribeToChannels: =>
+    @rooms = Room.all()
+    for room in @rooms
+      @channel = @pusher.subscribe room.id.toString()
+      @channel.bind_all @processWithoutAjax
 
   process: (type, msg) =>
     if msg
