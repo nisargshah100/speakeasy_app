@@ -5,15 +5,18 @@ $ = jQuery
 class PusherHandler extends Spine.Module
 
   constructor: (@options = {}) ->
-    @options.key or= $('meta[name=pusher-key]').attr('content')
-
-    @pusher = new Pusher(@options.key, @options)
+    @pusher = PusherHandler.pusher(@options)
 
     $.ajaxSetup
       beforeSend: (xhr) =>
         xhr.setRequestHeader 'X-Session-ID', @pusher.connection.socket_id
 
     Room.bind 'refresh', @subscribeToChannels
+    # Room.bind 'create', @subscribeToChannel
+
+  @pusher: (@options = {}) =>
+    @options.key or= $('meta[name=pusher-key]').attr('content')
+    new Pusher(@options.key, @options)
 
   subscribeToChannel: (room) =>
     @channel = @pusher.subscribe room.id.toString()

@@ -38,7 +38,7 @@ class Sidebar extends Spine.Controller
     Room.each(@addOneRoom)
     # adds current to the first room everytime render is called
     # we should probably change this behavior
-    $("[data-name=rooms]:first").addClass("current")
+    $("[data-name=rooms]:last").addClass("current")
 
   createRoom: ->
     url = Room.url()
@@ -47,7 +47,10 @@ class Sidebar extends Spine.Controller
     
     $.post "/api/core/rooms", {
       room: { name: value }
-    }
+    }, (data) =>
+      Room.deleteAll()
+      @rooms.empty()
+      Room.fetch()
 
     @input.val ""
     @input.focus()
