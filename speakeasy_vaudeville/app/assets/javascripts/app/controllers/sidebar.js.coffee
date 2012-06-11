@@ -41,10 +41,13 @@ class Sidebar extends Spine.Controller
     $("[data-name=rooms]:first").addClass("current")
 
   createRoom: ->
+    url = Room.url()
     value = @input.val()
     return false  unless value
-    Room.create
-      name: value
+    
+    $.post "/api/core/rooms", {
+      room: { name: value }
+    }
 
     @input.val ""
     @input.focus()
@@ -72,6 +75,9 @@ class Sidebar extends Spine.Controller
   @room: =>
     id = $(".item.current").attr('id')
     Room.find(id)
+
+  # sid: =>
+  #   $("meta[name=current-sid]").attr('content')
 
   currentChannelEmpty: =>
     return false unless Sidebar.channel() == "Unknown record"

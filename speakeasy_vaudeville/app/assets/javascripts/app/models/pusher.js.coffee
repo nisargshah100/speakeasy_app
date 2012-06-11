@@ -15,11 +15,14 @@ class PusherHandler extends Spine.Module
 
     Room.bind 'refresh', @subscribeToChannels
 
+  subscribeToChannel: (room) =>
+    @channel = @pusher.subscribe room.id.toString()
+    @channel.bind_all @processWithoutAjax
+
   subscribeToChannels: =>
     @rooms = Room.all()
     for room in @rooms
-      @channel = @pusher.subscribe room.id.toString()
-      @channel.bind_all @processWithoutAjax
+      @subscribeToChannel(room)
 
   process: (type, msg) =>
     if msg
@@ -38,4 +41,5 @@ class PusherHandler extends Spine.Module
     Spine.Ajax.disable =>
       @process(args...)
 
+window.PusherHandler = PusherHandler
 $ -> new PusherHandler
