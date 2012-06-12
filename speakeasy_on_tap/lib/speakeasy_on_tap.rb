@@ -16,6 +16,10 @@ module SpeakeasyOnTap
     $redis.publish :destroyed_rooms, room.to_json
   end
 
+  def self.publish_created_permission(permission)
+    $redis.publish :created_permissions, permission.to_json
+  end
+
   def self.subscribe_to_channels(channels, &block)
     $redis.subscribe(channels) do |on|
       on.message do |channel, json_data|
