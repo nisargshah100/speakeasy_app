@@ -79,3 +79,9 @@ God.watch do |w|
   w.start = "cd #{path}/speakeasy_gumshoe/; rake index"
   w.keepalive
 end
+
+God.watch do |w|
+  w.name = "logger redis server"
+  w.start = "cd #{path}/speakeasy_cheque/; rake subscribe"
+  w.keepalive
+end
