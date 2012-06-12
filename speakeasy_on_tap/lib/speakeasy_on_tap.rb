@@ -12,6 +12,10 @@ module SpeakeasyOnTap
     $redis.publish :created_rooms, room.to_json
   end
 
+  def self.publish_destroyed_room(room)
+    $redis.publish :destroyed_rooms, room.to_json
+  end
+
   def self.subscribe_to_channels(channels, &block)
     $redis.subscribe(channels) do |on|
       on.message do |channel, json_data|
