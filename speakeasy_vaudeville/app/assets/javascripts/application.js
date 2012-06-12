@@ -12,14 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require cookie
 //= require app
 //= require home/home
-
-$(document).ready(function(){
-  $(window).unload(function() {
-    jQuery.ajax({
-      url:"/api/users/connection", 
-      async:false
-    });
-  });
-});

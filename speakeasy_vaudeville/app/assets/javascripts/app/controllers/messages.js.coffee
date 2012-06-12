@@ -74,7 +74,9 @@ class Messages extends Spine.Controller
     $.post url, {
       sid: @sid()
       'message[body]': value
-    }
+    }, (data) =>
+      console.log(data)
+      new Message(data).publish()
 
     @input.val ""
     @input.focus()

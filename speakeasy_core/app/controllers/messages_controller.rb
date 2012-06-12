@@ -13,9 +13,11 @@ class MessagesController < ApplicationController
     if @room
       message = @room.messages.build(params[:message])
       message.sid = @user.sid
+      message = attach_usernames_to([message]).first
 
       if message.save
-        head status: :created, :location => [@room, message]
+        render :json => message, :status => :created
+        # head status: :created, :location => [@room, message]
       else
         head status: :bad_request
       end

@@ -39,8 +39,14 @@ God.watch do |w|
 end
 
 God.watch do |w|
-  w.name = "messaging service"
-  w.start = "cd #{path}/speakeasy_dumbwaiter/; PUSHER_APP_ID=#{PUSHER_APP_ID} PUSHER_KEY=#{PUSHER_KEY} PUSHER_SECRET=#{PUSHER_SECRET} DRB_PORT=#{MESSAGING_DRB_PORT} ruby server.rb"
+  w.name = "faye"
+  w.start = "cd #{path}/speakeasy_dumbwaiter/; ruby server.rb"
+  w.keepalive
+end
+
+God.watch do |w|
+  w.name = "messaging drb service"
+  w.start = "cd #{path}/speakeasy_dumbwaiter/; DRB_PORT=#{MESSAGING_DRB_PORT} ruby drb.rb"
   w.keepalive
 end
 
