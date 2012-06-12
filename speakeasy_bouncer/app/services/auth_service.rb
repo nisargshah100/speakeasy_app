@@ -14,6 +14,11 @@ class AuthService
     user ? user.attributes.as_json : nil
   end
 
+  def self.get_user_by_email(email)
+    user = User.where('email = ?', email).first()
+    user ? user.attributes.as_json : nil   
+  end
+
   def self.get_users_by_sid(sids)
     users = sids.map { |sid| AuthService.get_user_by_sid(sid) }
   end
