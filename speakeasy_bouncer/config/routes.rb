@@ -3,6 +3,7 @@ Bouncer::Application.routes.draw do
     resources :users do
       collection do
         resources :sessions
+        resources :connections
       end
     end
   end
