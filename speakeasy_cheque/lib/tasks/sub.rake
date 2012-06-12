@@ -1,16 +1,7 @@
 task :subscribe => :environment do
-  $redis.subscribe('messages', 'rooms') do |on|
-    on.message do |channel, json_data|
-      data = JSON.parse(json_data) rescue {}
+  CHANNELS = ['created_messages', 'created_rooms']
 
-      if data and data != {}
-        case channel
-        when 'messages'
-          CreatedMessage.create_from_on_tap(data)
-        when 'rooms'
-          CreatedRoom.create_from_on_tap(data)
-        end
-      end
-    end
+  SpeakeasyOnTap::subscribe_to_channels(CHANNELS) do |channel, data|
+    channel.classify.constantize.create_from_on_tap(data)
   end
 end

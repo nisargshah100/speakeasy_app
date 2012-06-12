@@ -4,11 +4,23 @@ require "redis"
 module SpeakeasyOnTap
   $redis = Redis.new
 
-  def self.publish_message(message)
-    $redis.publish :messages, message.to_json
+  def self.publish_created_message(message)
+    $redis.publish :created_messages, message.to_json
   end
 
-  def self.publish_room(room)
-    $redis.publish :rooms, room.to_json
+  def self.publish_created_room(room)
+    $redis.publish :created_rooms, room.to_json
+  end
+
+  def self.subscribe_to_channels(channels, &block)
+    $redis.subscribe(channels) do |on|
+      on.message do |channel, json_data|
+        data = JSON.parse(json_data) rescue {}
+
+        if data && !data.keys.empty?
+          yield(channel, data)
+        end
+      end
+    end
   end
 end

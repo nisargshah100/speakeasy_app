@@ -4,6 +4,7 @@ gem 'rails', '3.2.3'
 gem 'redis'
 gem 'mongoid'
 gem 'bson_ext'
+gem 'speakeasy_on_tap', path: "../speakeasy_on_tap"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
