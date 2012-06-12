@@ -1,3 +1,9 @@
+PATH
+  remote: ../speakeasy_on_tap
+  specs:
+    speakeasy_on_tap (0.0.1)
+      redis
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -100,6 +106,7 @@ GEM
     rake (0.9.2.2)
     rdoc (3.12)
       json (~> 1.4)
+    redis (2.2.2)
     rspec (2.9.0)
       rspec-core (~> 2.9.0)
       rspec-expectations (~> 2.9.0)
@@ -155,6 +162,7 @@ DEPENDENCIES
   rails (= 3.2.3)
   rspec-rails
   sass-rails (~> 3.2.3)
+  speakeasy_on_tap!
   sqlite3
   thin
   uglifier (>= 1.0.3)

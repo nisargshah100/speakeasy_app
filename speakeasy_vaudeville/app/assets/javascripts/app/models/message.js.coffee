@@ -2,7 +2,7 @@
 # window.Room = Room
 
 class Message extends Spine.Model
-  @configure 'Message', 'body', 'room_id', 'sid', 'username'
+  @configure 'Message', 'body', 'room_id', 'sid', 'username', 'plain'
   @extend Spine.Model.Ajax
   @belongsTo 'room', 'Room'
 
@@ -23,6 +23,7 @@ class Message extends Spine.Model
   #       url:  Ajax.getURL(@model)
   #     ).success(@recordResponse(options))
   #      .error(@errorResponse(options))
+
 
   @fetch_all: ->
     Message.deleteAll()

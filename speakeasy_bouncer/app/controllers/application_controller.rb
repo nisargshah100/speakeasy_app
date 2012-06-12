@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @current_user ||= AuthService.get_user(params[:token])
+    @current_user = AuthService.get_user(cookies[:user])
   end
 
 end

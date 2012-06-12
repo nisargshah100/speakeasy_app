@@ -14,3 +14,12 @@
 //= require jquery_ujs
 //= require app
 //= require home/home
+
+$(document).ready(function(){
+  $(window).unload(function() {
+    jQuery.ajax({
+      url:"/api/users/connection", 
+      async:false
+    });
+  });
+});
