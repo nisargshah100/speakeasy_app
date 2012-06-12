@@ -2,6 +2,7 @@
   <script type="text/javascript">
     $(function(){
       $('body').addClass('home-image');
+      $('#spotlight').toggle();
     });
     $(function(){
       $('#signin_form').toggle();
@@ -12,6 +13,7 @@
     $(function(){
       $('#sign_in').click(function(){
         $('#signin_form').slideDown();
+        $('#spotlight').toggle();
         $('#buttons').toggle();
       });
     });
@@ -25,17 +27,19 @@
       $('#signin').click(function(){
         $('#signup_form').toggle();
         $('#signin_form').slideDown();
+        $('#spotlight').toggle();
       });
     });
     $(function(){
       $('#signup').click(function(){
         $('#signin_form').toggle();
         $('#signup_form').slideDown();
+        $('#spotlight').toggle();
       });
     });
   </script>
 <% end %>
-<div id="top">
+<div id="top" class="normal">
   <div id="intro">
     <h1></h1>
     <p>Not your average chat client</p>
@@ -52,7 +56,7 @@
       <%= form_tag "/api/users", id: "sign-up-form", method: :post do %>
         <%= text_field_tag("email", nil, :placeholder => "Enter your email", :autofocus => true ) %>
         <br>
-        <%= text_field_tag("display", nil, :placeholder => "Enter your email", :autofocus => true ) %>
+        <%= text_field_tag("display", nil, :placeholder => "Enter your name", :autofocus => true ) %>
         <br>
         <%= password_field_tag("password", nil, :placeholder => 'Password') %>
         <br>
@@ -60,6 +64,9 @@
       <% end %>
     </div>
     <div id="door">
+    </div>
+    <div id="spotlight">
+      <img src="assets/lighton.png"></img>
     </div>
     <div id="buttons">
       <a href="#" id="sign_in" class="btn btn-large">Log In</a>

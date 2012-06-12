@@ -221,7 +221,7 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
 .home-image { background:#EEE; }
   /*background: url("http://theworldsmostexclusivewebsite.com/img/eml18a.jpg");*/
 
-#signin_form, #signup_form { position: relative; top: 30px;
+#signin_form, #signup_form { position: relative; top: 30px; z-index: 100;
   label { color: #fff; }
   input[type="text"], input[type="password"] { padding: 5px; width: 275px; font-size: 14px; margin: 3px 0; -moz-box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868; -webkit-box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868; box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868; 
     
@@ -233,7 +233,10 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
   input[type="submit"] { margin: 4px 0; }
 }
 
-#top { height: 650px; background: url("background.png") right; color: #F2F2F2; }
+#top { height: 650px; color: #F2F2F2; }
+
+.normal { background: url("background.png") right; }
+.spotlight { background: url("background-spotlight.png") right; }
 
 #bottom { position: relative; width: 900px; margin: 0 auto; padding-top: 15px; 
   ul { float: left;
@@ -249,7 +252,10 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
   h1 { position: relative; padding-bottom: 20px; background-size: 400px 518px; background: url("speakeasy.png") no-repeat left top; left: -15px; height: 60px; width: 400px; }
   p { margin-top: 20px; }
   div { position: relative; }
-  #door { right: 0px; top: -60px; position:absolute; height: 463px; width: 237px; background: url("door.png"); }
+  #door { right: 0px; top: -60px; position:absolute; height: 463px; width: 236px; background: url("door.png") 50% 50%; }
+  #spotlight { right: -90px; top: -65px; position:absolute; height: 648px; width: 850px; background: url("spotlight.png");
+    img { width: 32px; height: 83px; top: -61px; left: 630px; position: absolute; }
+  }
   #buttons { top: 80px;
     a:first-child { margin-right: 10px; }
   }
