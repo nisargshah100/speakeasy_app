@@ -9,6 +9,10 @@ class MessageService
   def self.ping(channel, data, event='speakeasy')
     Pusher[channel].trigger(event, data)
   end
+
+  def self.authenticate(socket_id, channel='who-online', information={})
+    Pusher[channel].authenticate(socket_id, information)
+  end
 end
 
 DRb.start_service "druby://:#{ENV['DRB_PORT']}", MessageService

@@ -64,8 +64,17 @@ class Sidebar extends Spine.Controller
     @addOneRoom(item)
 
   change: (item) =>
+    prev_room_id = $(".current").attr('id');
+
     @deactivate()
     $(item).addClass("current")
+
+    $.ajax {
+      url: "/api/users/connections"
+      data: { 'connected': $(item).attr('id'), 'disconnected': prev_room_id }
+      type: "post"
+    }
+
     Sidebar.trigger 'changeRoom', Sidebar.room()
 
   click: (e) =>

@@ -34,8 +34,16 @@ class PusherHandler extends Spine.Module
     switch type
       when 'create'
         klass.create msg.record unless klass.exists(msg.record.id)
-      when 'test'
-        console.log klass
+      when 'connected'
+        Spine.Ajax.disable =>
+          name = msg?.user?.name || "Anonymous"
+          channel = parseInt(msg?.channel || "-1")
+          Message.create(body: "#{name} joined!", room_id: channel, plain: true)
+      when 'disconnected'
+        Spine.Ajax.disable =>
+          name = msg?.user?.name || "Anonymous"
+          channel = parseInt(msg?.channel || "-1")
+          Message.create(body: "#{name} disconnected!", room_id: channel, plain: true)
       else
         console.log type
 
