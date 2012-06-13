@@ -256,9 +256,6 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
   #door { right: 0px; top: -60px; position:absolute; height: 463px; width: 236px; background: url("door.png") 50% 50%; overflow: hide;
     img#door_panel { position: relative; top: 85px; left: 73px; width: 88px; }
   }
-  #spotlight { right: -90px; top: -65px; position:absolute; height: 648px; width: 850px; background: url("spotlight.png");
-    img { width: 32px; height: 83px; top: -61px; left: 630px; position: absolute; }
-  }
   #buttons { top: 80px;
     a:first-child { margin-right: 10px; }
   }

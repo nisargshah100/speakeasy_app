@@ -2,7 +2,6 @@
   <script type="text/javascript">
     $(function(){
       $('body').addClass('home-image');
-      $('#spotlight').toggle();
     });
     $(function(){
       $('#signin_form').toggle();
@@ -30,15 +29,23 @@
     $(function(){
       $('#signin').click(function(){
         $('#signup_form').toggle();
+        $('#door_panel').animate({
+            width: 1,
+            height: 22,
+            right: 0
+        }, 200);
         $('#signin_form').slideDown();
-        $('#spotlight').toggle();
       });
     });
     $(function(){
       $('#signup').click(function(){
         $('#signin_form').toggle();
+        $('#door_panel').animate({
+            width: 88,
+            height: 22,
+            right: 0
+        }, 200);
         $('#signup_form').slideDown();
-        $('#spotlight').toggle();
       });
     });
   </script>
@@ -69,9 +76,6 @@
     </div>
     <div id="door">
       <img src="assets/door-panel.png" id="door_panel"></img>
-    </div>
-    <div id="spotlight">
-      <img src="assets/lighton.png"></img>
     </div>
     <div id="buttons">
       <a href="#" id="sign_in" class="btn btn-large">Log In</a>
