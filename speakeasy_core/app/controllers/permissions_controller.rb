@@ -12,8 +12,6 @@ class PermissionsController < ApplicationController
   end
 
   def destroy
-    #raise Permission.all.inspect
-    #raise @room.permissions.where(sid: invitee.sid).inspect
     @room.permissions.where(sid: invitee.sid).first.destroy
     head status: :ok
   end
