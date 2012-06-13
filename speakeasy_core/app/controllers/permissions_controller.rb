@@ -22,9 +22,7 @@ class PermissionsController < ApplicationController
     @invitee ||= AuthService.get_user_by_email(params[:email])
   end
 
-  def confirm_room_owner
-    unless @user.sid == @room.sid
-      head status: :unauthorized
-    end
+  def confirm_room_owner    
+    head status: :unauthorized unless @user.sid == @room.sid
   end
 end
