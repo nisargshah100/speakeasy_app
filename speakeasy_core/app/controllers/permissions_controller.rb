@@ -3,7 +3,7 @@ class PermissionsController < ApplicationController
 
   def create
     permission = @room.permissions.new(params[:permission])
-    permission.sid = invitee.sid
+    permission.sid = invitee["sid"]
     if permission.save
       head status: :created, :location => [@room, permission]
     else
