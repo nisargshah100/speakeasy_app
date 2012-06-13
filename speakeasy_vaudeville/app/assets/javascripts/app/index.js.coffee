@@ -18,6 +18,7 @@ class App extends Spine.Controller
   elements:
     "#messages": "messagesEl"
     ".lobby": "sidebarEl"
+    ".invites": "invitesEl"
 
   constructor: ->
     super
@@ -27,6 +28,7 @@ class App extends Spine.Controller
     #  ...
     @sidebar = new Sidebar({el: @sidebarEl})
     @messages = new Messages({el: @messagesEl})
+    @inviter = new Inviter({el: @invitesEl})
 
     # Spine.Route.setup
 
