@@ -3,25 +3,26 @@ require 'spec_helper'
 describe "Dashboard" do
   context "#show" do
     before(:all) do
-      # Build 10 messages with a factory
-      10.times do
-        CreatedMessage.create
-      end
+      FactoryGirl.create_list(:created_message, 10)
+      FactoryGirl.create_list(:created_room, 5)
+      FactoryGirl.create_list(:destroyed_room, 2)
     end
 
     after(:all) do
-      # Destroy those 10 messages
       CreatedMessage.destroy_all
+      CreatedRoom.destroy_all
     end
 
-    it "exists" do
+    before(:each) do
       visit dashboard_path
     end
 
-    it "displays the total number of created messages" do
-      within("#created_messages") do
-        page.should have_content("10")
-      end
+    it "displays the total number of current messages" do
+      page.should have_content("10 Messages")
+    end
+
+    it "displays the total number of current rooms" do
+      page.should have_content("3 Rooms")
     end
   end
 end
