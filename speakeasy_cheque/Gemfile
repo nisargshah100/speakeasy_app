@@ -6,11 +6,14 @@ gem 'mongoid'
 gem 'bson_ext'
 gem 'speakeasy_on_tap', path: "../speakeasy_on_tap"
 gem 'jquery-rails'
+gem 'highcharts-rails'
 
 group :development, :test do
   gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'capybara'
+  gem 'factory_girl'
+  gem 'guard'
 end
 
 group :assets do
