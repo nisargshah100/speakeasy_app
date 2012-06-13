@@ -6,6 +6,10 @@ class RoomsController < ApplicationController
     @rooms = Room.for_user(@user.sid)
   end
 
+  def show
+    @room = Room.find(params[:id])
+  end
+
   def create
     room = Room.new(params[:room])
     room.sid = @user.sid

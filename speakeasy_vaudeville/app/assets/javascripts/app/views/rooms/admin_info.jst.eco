@@ -1,0 +1,3 @@
+<h1><%= @room.name %></h1>
+<h2><%= @room.description %></h2>
+<h2>Admin stuff</h2>

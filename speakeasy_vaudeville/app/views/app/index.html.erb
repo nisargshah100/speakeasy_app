@@ -73,8 +73,11 @@
       </div>
     </div>
 
-    <div class="room-info">
-      <h1 id="room_name">Test</h1>
+    <div class="right-nav">
+      <div id="room-info">
+        <h1 id="room_name"></h1>
+        <h2 id="room_description"></h2>
+      </div>
       <img id="ci_status" src="https://secure.travis-ci.org/jcasimir/draper.png"></img>
       <div id="data">
         <div class="github header">
@@ -85,16 +88,20 @@
           <ul id="online">
           </ul>
         </div>
-        <div class="invites">
-          <input id="input" type="email" placeholder="email@address.com"></input>
-          <br />
-          <input id="submit" type="submit" value="Add"></input>
+        <div class="room-admin">
+          <h2>Room Admin Section</h2>
+          <div class="invites">
+            <h3>Add patrons</h3>
+            <input id="input" type="email" placeholder="email@address.com"></input>
+            <br />
+            <input id="submit" type="submit" value="Add"></input>
+            <h3>Delete room</h3>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 <script type="text/javascript" charset="utf-8">
   jQuery(function(){
     new App({el: $('.container')});
