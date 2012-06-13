@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   respond_to :json
 
   def get_user_from_auth_service(user_token)
-    AuthService.get_user(user_token)
+    SpeakeasyBouncerGem.get_user(user_token)
   end
 
   def find_room
@@ -11,9 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user
-    if @user = get_user_from_auth_service(cookies['user'])
-      @user = Hashie::Mash.new(@user)
-    else
+    unless @user = get_user_from_auth_service(cookies['user'])
       head status: :unauthorized
     end
   end

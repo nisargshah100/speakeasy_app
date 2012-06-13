@@ -31,6 +31,7 @@ gem 'eco'
 gem 'pusher'
 gem 'thin'
 gem 'hashie'
+gem 'speakeasy_bouncer_gem', path: '../speakeasy_bouncer_gem'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

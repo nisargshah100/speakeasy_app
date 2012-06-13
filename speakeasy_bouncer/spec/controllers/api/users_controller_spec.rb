@@ -78,13 +78,8 @@ describe Api::UsersController, :type => :api do
       response.status.should == 403
     end
 
-    it 'requires the current password' do
-      post 'edit', { :token => user.token, :user => { :name => 'Name 2', :password => 'apple' }}
-      response.status.should == 400
-      JSON.parse(response.body)[0].should match /current password/
-    end
-
     it 'successfully updates the name' do
+      cookies['user'] = user.token
       post 'edit', { :token => user.token, :user => { :name => 'Name 2', :password => 'testing' }}
       JSON.parse(response.body)['name'].should == 'Name 2'
       user.reload.name.should == 'Name 2'

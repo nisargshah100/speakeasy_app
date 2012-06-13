@@ -7,7 +7,7 @@ describe PermissionsController do
   let!(:permissions_count) { Permission.count }
 
   before(:each) do
-    AuthService.stub(:get_user_by_email).and_return(OpenStruct.new({sid: "AX798"}))
+    SpeakeasyBouncerGem.stub(:get_user_by_email).and_return(double(sid: "AX798"))
   end
 
   describe "#create" do
@@ -16,7 +16,7 @@ describe PermissionsController do
     context "with a valid token" do
       context "the token user is the room owner" do
         before(:each) do
-          AuthService.stub(:get_user).with(nil).and_return({ sid: room.sid })
+          SpeakeasyBouncerGem.stub(:get_user).with(nil).and_return(double(sid: room.sid))
         end
 
         context "with a valid sid" do
@@ -39,7 +39,7 @@ describe PermissionsController do
 
       context "the token user is not the room owner" do
         before(:each) do
-          AuthService.stub(:get_user).with(nil).and_return({ sid: "999" })
+          SpeakeasyBouncerGem.stub(:get_user).with(nil).and_return(double(sid: "999"))
           post room_permissions_path(room, format: :json), params
         end
         it "does not create a new room permission" do
@@ -53,7 +53,7 @@ describe PermissionsController do
 
       context "the room does not exist" do
         before(:each) do
-          AuthService.stub(:get_user).with(nil).and_return({ sid: "999" })
+          SpeakeasyBouncerGem.stub(:get_user).with(nil).and_return(double(sid: "999"))
           post room_permissions_path(double, format: :json), params
         end
         it "returns a 404 bad request response" do
@@ -64,7 +64,7 @@ describe PermissionsController do
 
     context "without a valid token" do
       before(:each) do
-        AuthService.stub(:get_user).with(nil).and_return(nil)
+        SpeakeasyBouncerGem.stub(:get_user).with(nil).and_return(nil)
         post room_permissions_path(room, format: :json), params
       end
       it "does not create a new room permission" do
@@ -81,7 +81,7 @@ describe PermissionsController do
     context "with a valid token" do
       context "the token user is the room owner" do
         before(:each) do
-          AuthService.stub(:get_user).with(nil).and_return({ sid: room.sid })
+          SpeakeasyBouncerGem.stub(:get_user).with(nil).and_return(double(sid: room.sid))
           FactoryGirl.create(:permission, sid: "AX798", room_id: room.id)          
         end
 
@@ -102,7 +102,7 @@ describe PermissionsController do
 
       context "the token user is not the room owner" do
         before(:each) do
-          AuthService.stub(:get_user).with(nil).and_return({ sid: "99999" })
+          SpeakeasyBouncerGem.stub(:get_user).with(nil).and_return(double(sid: "99999"))
           delete room_permission_path(room, permission, format: :json)
         end
 
@@ -138,7 +138,7 @@ describe PermissionsController do
 
     context "without a valid token" do
       before(:each) do
-        AuthService.stub(:get_user).with(nil).and_return(nil)
+        SpeakeasyBouncerGem.stub(:get_user).with(nil).and_return(nil)
         delete room_permission_path(room, permission, format: :json)
       end
 

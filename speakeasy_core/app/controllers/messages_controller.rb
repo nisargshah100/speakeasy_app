@@ -34,7 +34,7 @@ class MessagesController < ApplicationController
   end
 
   def get_username_array_for(messages)
-   users = AuthService.get_users_by_sid(messages.map { |message| message.sid })
-   users.map { |message_user| message_user ? message_user['name'] : "" }
+   users = SpeakeasyBouncerGem.get_users_by_sid(messages.map { |message| message.sid })
+   users.map { |message_user| message_user ? message_user.name : "" }
   end
 end

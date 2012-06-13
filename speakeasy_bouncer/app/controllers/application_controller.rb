@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @current_user = AuthService.get_user(cookies[:user])
+    @current_user = User.where(:token => cookies[:user]).first
   end
 
 end

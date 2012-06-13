@@ -11,7 +11,7 @@
         let!(:other_permission) { FactoryGirl.create(:permission, room_id: other_room.id, sid: "SID") }
 
         before(:each) do
-          AuthService.stub(:get_user).with(nil).and_return({ sid: "SID" })
+          SpeakeasyBouncerGem.stub(:get_user).with(nil).and_return(double(sid: "SID"))
           get rooms_url(:format => :json)
         end
         it "returns a successful json response of all rooms the token user has access to" do
@@ -31,7 +31,7 @@
 
       context "the request does not have a valid token" do
         before(:each) do
-          AuthService.stub(:get_user).with(nil).and_return(nil)
+          SpeakeasyBouncerGem.stub(:get_user).with(nil).and_return(nil)
           get rooms_url(:format => :json)
         end
 
@@ -46,7 +46,7 @@
       let!(:permission_count) { Permission.count }
       context "the request has a valid token" do
         before(:each) do
-          AuthService.stub(:get_user).with(nil).and_return({})
+          SpeakeasyBouncerGem.stub(:get_user).with(nil).and_return(double(sid: room.sid))
           post rooms_url(:format => :json), params
         end
         context "with a complete, valid request body" do
@@ -92,7 +92,7 @@
       context "the request does not have a valid token" do
         let(:params) { {} }
         before(:each) do
-          AuthService.stub(:get_user).with(nil).and_return(nil)
+          SpeakeasyBouncerGem.stub(:get_user).with(nil).and_return(nil)
           post rooms_url(:format => :json), params
         end
         it "returns a 401 response" do
@@ -108,7 +108,7 @@
 
           context "the token user is the room owner" do
             before(:each) do
-              AuthService.stub(:get_user).with(nil).and_return({ sid: room.sid })
+              SpeakeasyBouncerGem.stub(:get_user).with(nil).and_return(double(sid: room.sid))
               put room_url(room.id), params
             end
 
@@ -151,7 +151,7 @@
           context "the token user is not the room owner" do
             let(:params) { {} }
             before(:each) do
-              AuthService.stub(:get_user).with(nil).and_return({ sid: "WRONG" })
+              SpeakeasyBouncerGem.stub(:get_user).with(nil).and_return(double(sid: "WRONG"))
               put room_url(room.id), params
             end
 
@@ -163,7 +163,7 @@
 
         context "with a non-existent room id" do
           before(:each) do
-            AuthService.stub(:get_user).with(nil).and_return({})
+            SpeakeasyBouncerGem.stub(:get_user).with(nil).and_return(double)
             put room_url(room.id), params
           end
           let!(:room) { double(id: 9999) }
@@ -178,7 +178,7 @@
       context "the request does not have a valid token" do
         let!(:params) { {} }
         before(:each) do
-          AuthService.stub(:get_user).with(nil).and_return(nil)
+          SpeakeasyBouncerGem.stub(:get_user).with(nil).and_return(nil)
           put room_url(room.id), params
         end
 
@@ -194,7 +194,7 @@
         context "with an existing room id" do
           context "the token user is the room's owner" do
             before(:each) do
-              AuthService.stub(:get_user).with(nil).and_return({ sid: room.sid })
+              SpeakeasyBouncerGem.stub(:get_user).with(nil).and_return(double(sid: room.sid))
               delete room_path(room)
             end
             it "destroys the room" do
@@ -209,7 +209,7 @@
 
         context "the token user is not the room's owner" do
           before(:each) do
-            AuthService.stub(:get_user).with(nil).and_return({ sid: "WRONG" })
+            SpeakeasyBouncerGem.stub(:get_user).with(nil).and_return(double(sid: "WRONG"))
             delete room_path(room)
           end
 
@@ -221,7 +221,7 @@
       context "with a non-existent room id" do
         let!(:room) { { :id => 9999 } }
         before(:each) do
-          AuthService.stub(:get_user).with(nil).and_return({})
+          SpeakeasyBouncerGem.stub(:get_user).with(nil).and_return(double)
           delete room_path(room)
         end
 
@@ -232,7 +232,7 @@
 
       context "the request does not have a valid token" do
         before(:each) do
-          AuthService.stub(:get_user).with(nil).and_return(nil)
+          SpeakeasyBouncerGem.stub(:get_user).with(nil).and_return(nil)
           delete room_path(room)
         end
 

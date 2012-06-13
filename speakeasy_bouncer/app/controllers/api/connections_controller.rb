@@ -20,20 +20,10 @@ class Api::ConnectionsController < ApplicationController
   private
 
   def connect(channel)
-    MessengerService.ping(channel, {
-      'channel' => channel,
-      'user' => current_user.as_json(:only => ['name', 'sid'])
-    }, event='connected')
-
     set_user("/channel/#{channel}")
   end
 
   def disconnect(channel)
-    MessengerService.ping(channel, {
-      'channel' => channel,
-      'user' => current_user.as_json(:only => ['name', 'sid'])
-    }, event='disconnected')
-
     remove_user("/channel/#{channel}")
   end
 
