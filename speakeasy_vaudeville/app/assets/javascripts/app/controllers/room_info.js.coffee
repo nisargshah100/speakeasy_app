@@ -46,6 +46,6 @@ class RoomModal extends Spine.Controller
     @view('rooms/modal')(room: @room)
 
   save: =>
-    alert "saving"
+    #alert "saving"
 
 window.RoomInfo = RoomInfo

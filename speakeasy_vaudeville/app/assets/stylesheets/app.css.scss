@@ -34,7 +34,7 @@ h1 { font-size:20pt; }
 h2 { font-size:15pt; }
 h3 { font-size:14pt; }
 h4 { font-size:12pt; }
-h5 { font-size: 9pt; font-face:bold; margin:0; padding-top:7px; }
+h5 { font-size: 10pt; }
 
 a { text-decoration: none; outline: none; }
 
@@ -264,6 +264,12 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
 
 /*---------CONTAINER-----------*/
 
+.container { position:absolute; top:0; bottom:0; left:0; right:0; border:1px solid #333; }
+
+/*----------LOBBY--------------*/
+
+.lobby { padding: 0 15px; }
+
 .header { padding: 20px 0 10px;
   h4 { color: #878797; text-transform: uppercase; text-shadow: 0px 2px 3px #4E4E4E; font-weight: 600; font-size: 15px; }
 }
@@ -283,6 +289,10 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
     } 
   }
 }
+
+/*----------CHATS--------------*/
+
+.chat-room { position: absolute; top:69px; left:0; right:0; bottom:0px; }
 
 .new input[type="submit"] { position:absolute; top:15px; bottom:50px; right:20px; width:75px; font-size: 16px; }
 
@@ -316,24 +326,7 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
   span.body { margin-right: 20px; display: inline-block; text-align: left; font-size: 15px; }
 }
 
-.lobby, .right-nav { padding: 0 15px; }
-
-.chat-room { position: absolute; top:69px; left:0; right:0; bottom:0px; }
-
-.right-nav { position: absolute; top:0; bottom:0; width:285px; right:0; background: url("http://www.hungryacademy.com/images/noise.png") repeat top left; overflow:auto; background: -webkit-gradient(linear, 100% 100%, 100% 0%, from($weathervane), to(#26262C));
-  #room_name { padding: 25px 0 10px; color: #ccc; font-size: 26px; }
-  #editRoom { display: none; }
-  #data { margin: 10px 0;
-    #ci_status {  }
-    ul { 
-      li { text-align: left; list-style-type:none; padding: 2px 0; color: #fff; font-size: 15px; }
-    }    
-  }
-}
-
-.modal-body div {
-  display: inline-block;
-}
+/*-----------ROOMS------------*/
 
 .lobby { position: absolute; top:0; bottom:0; width:185px; left:0; background: url("http://www.hungryacademy.com/images/noise.png") repeat top left; overflow:auto; background: -webkit-gradient(linear, 100% 100%, 100% 0%, from($weathervane), to(#26262C));
   #existing_rooms { overflow:auto; position: absolute; top: 0; bottom: 120px; left: 0; right: 0; padding: 15px; }
@@ -358,13 +351,65 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
   a { color: #fff; }
 }
 
-.container { position:absolute; top:0; bottom:0; left:0; right:0; border:1px solid #333; }
+/*-----------ROOM-INFO----------*/
+
+.right-nav { padding: 0 15px; }
+
+.right-nav { position: absolute; top:0; bottom:0; width:285px; right:0; background: url("http://www.hungryacademy.com/images/noise.png") repeat top left; overflow:auto; background: -webkit-gradient(linear, 100% 100%, 100% 0%, from($weathervane), to(#26262C));
+  #room_name { padding: 25px 0 10px; color: #ccc; font-size: 26px; }
+  #data { margin: 10px 0;
+    #ci_status {  }
+    ul { 
+      li { text-align: left; list-style-type:none; padding: 2px 0; color: #fff; font-size: 15px; }
+    }    
+  }
+}
 
 .group:after { visibility: hidden; display: block; content: ""; clear: both; height: 0; }
 
 * html .group { zoom: 1; } /* IE6 */
 
 *:first-child+html .group { zoom: 1; } /* IE7 */
+
+/*------------MODAL-------------*/
+
+#editRoom { display: none; }
+
+.modal-header h3 { display: inline-block; 
+  &:first-child { width: 177px; margin-left: 103px; }
+}
+
+.modal-body { 
+  div { float: left; }
+  #edit_room_form, #invite_users { width: 250px;
+    label { font-size: 11px; float: right; font-weight: 600; }
+    input { padding: 5px 3px; font-size: 12px; margin: 3px 0 3px 5px; 
+      &[type="text"] { -moz-box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868; -webkit-box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868; box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868; }
+
+      &:focus { border-color:rgba(35,146,231,0.8); outline:0; outline:thin dotted \9; -webkit-box-shadow:inset 0 1px 3px rgba(0,0,0,0.075),0 0 12px rgba(82,168,236,0.6) !important;
+      -moz-box-shadow:inset 0 1px 3px rgba(0,0,0,0.075),0 0 12px rgba(82,168,236,0.6) !important; box-shadow:inset 0 1px 3px rgba(0,0,0,0.075),0 0 12px rgba(82,168,236,0.6) !important; }
+    }
+  }
+  #edit_room_form input { 
+    &[type="text"] { width: 130px; }
+    &[type="submit"] { width: 140px; }
+  }
+
+  #invite_users {
+    h5 { font-weight:bold; margin:2px 0px 5px 4px; }
+    ul { margin-left: 4px; height: 100px; overflow-y: scroll; width: 240px;
+      li { font-size: 13px; margin: 3px 0; }
+    }
+    input { 
+      &[type="email"] { width: 195px !important; }
+      &[type="submit"] { width: 35px !important; }
+    }
+  }
+
+  #empty { height: 141px; margin: 0 14px; border-left: 1px dotted #ccc; }
+}
+
+.modal-footer a { padding: 5px 13px; min-width: 35px; font-size: 12px; margin: 3px 0 3px 5px; }
 
 /*-------------BUTTON-----------*/
 
