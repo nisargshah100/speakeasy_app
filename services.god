@@ -60,11 +60,11 @@ God.watch do |w|
   w.keepalive
 end
 
-God.watch do |w|
-  w.name = "search redis server"
-  w.start = "cd #{path}/speakeasy_gumshoe/; rake subscribe"
-  w.keepalive
-end
+# God.watch do |w|
+#   w.name = "search redis server"
+#   w.start = "cd #{path}/speakeasy_gumshoe/; rake subscribe"
+#   w.keepalive
+# end
 
 God.watch do |w|
   w.name = "search indexer"

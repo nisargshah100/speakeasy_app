@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20120606231135) do
   create_table "query_items", :force => true do |t|
     t.string   "query"
     t.text     "content"
+    t.string   "ns"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
