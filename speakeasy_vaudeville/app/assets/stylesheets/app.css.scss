@@ -325,6 +325,10 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
   }
 }
 
+.modal-body div {
+  display: inline-block;
+}
+
 .lobby { position: absolute; top:0; bottom:0; width:185px; left:0; background: url("http://www.hungryacademy.com/images/noise.png") repeat top left; overflow:auto; background: -webkit-gradient(linear, 100% 100%, 100% 0%, from($weathervane), to(#26262C));
   #existing_rooms { overflow:auto; position: absolute; top: 0; bottom: 120px; left: 0; right: 0; padding: 15px; }
   #new_room { padding: 10px 15px; height: 80px; position:absolute; bottom:0px; left:0px; right:0px; -webkit-box-shadow: rgba(0, 0, 0, 0.549219) 0px .5px 10px; -moz-box-shadow: rgba(0, 0,
