@@ -1,7 +1,7 @@
 $ = jQuery.sub()
 
 class RoomInfo extends Spine.Controller
-  
+
   constructor: ->
     Sidebar.bind 'joinedRoom', @fetch_room_info
 
@@ -10,10 +10,11 @@ class RoomInfo extends Spine.Controller
       @render(data)
 
   render: (room) =>
+    $("#room-info").empty()
     if room.owner
-      $("#room-info").after(@admin_template(room))
+      $("#room-info").append(@admin_template(room))
     else
-      $("#room-info").after(@template(room))
+      $("#room-info").append(@template(room))
 
   template: (room) =>
     @view('rooms/info')(room: room)

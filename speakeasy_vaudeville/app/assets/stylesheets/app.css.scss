@@ -316,6 +316,7 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
 
 .right-nav { position: absolute; top:0; bottom:0; width:285px; right:0; background: url("http://www.hungryacademy.com/images/noise.png") repeat top left; overflow:auto; background: -webkit-gradient(linear, 100% 100%, 100% 0%, from($weathervane), to(#26262C));
   #room_name { padding: 25px 0 10px; color: #ccc; font-size: 26px; }
+  #editRoom { display: none; }
   #data { margin: 10px 0;
     #ci_status {  }
     ul { 
