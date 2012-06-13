@@ -11,7 +11,6 @@ class Inviter extends Spine.Controller
 
   constructor: ->
     super
-    # console.log @input
 
   inviteMember: =>
     value = @input.val()
