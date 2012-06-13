@@ -36,6 +36,7 @@ gem 'thin'
 gem 'pusher'
 gem 'hashie'
 gem 'speakeasy_on_tap', path: '../speakeasy_on_tap'
+gem 'speakeasy_bouncer_gem', path: '../speakeasy_bouncer_gem'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

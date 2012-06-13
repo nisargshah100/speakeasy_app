@@ -3,7 +3,7 @@ class PermissionsController < ApplicationController
 
   def create
     permission = @room.permissions.new(params[:permission])
-    permission.sid = invitee["sid"]
+    permission.sid = invitee.sid
     if permission.save
       head status: :created, :location => [@room, permission]
     else
@@ -19,7 +19,7 @@ class PermissionsController < ApplicationController
   private
 
   def invitee
-    @invitee ||= AuthService.get_user_by_email(params[:email])
+    @invitee ||= SpeakeasyBouncerGem.get_user_by_email(params[:email])
   end
 
   def confirm_room_owner    

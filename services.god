@@ -1,16 +1,11 @@
 path = File.expand_path(File.dirname(__FILE__))
 
+BASE_URL = 'http://localhost:9000/'
+
 AUTH_SERVER_PORT = 5000
-AUTH_DRB_PORT = 6000
-
-MESSAGING_DRB_PORT = 6001
-
 FRONTEND_SERVER_PORT = 5002
-
 CORE_SERVER_PORT = 5003
-
 GITHUB_PORT = 5004
-
 SEARCH_PORT = 5005
 
 # System files
@@ -25,49 +20,43 @@ SEARCH_PORT = 5005
 
 God.watch do |w|
   w.name = "authentication server"
-  w.start = "cd #{path}/speakeasy_bouncer/; bundle exec thin start -p #{AUTH_SERVER_PORT}"
-  w.keepalive
-end
-
-God.watch do |w|
-  w.name = "authentication drb"
-  w.start = "cd #{path}/speakeasy_bouncer/; DRB_PORT=#{AUTH_DRB_PORT} rake drb"
+  w.start = "cd #{path}/speakeasy_bouncer/; BASE_URL=#{BASE_URL} bundle exec thin start -p #{AUTH_SERVER_PORT}"
   w.keepalive
 end
 
 God.watch do |w|
   w.name = "faye"
-  w.start = "cd #{path}/speakeasy_dumbwaiter/; ruby server.rb"
+  w.start = "cd #{path}/speakeasy_dumbwaiter/; ruby faye.rb"
   w.keepalive
 end
 
 God.watch do |w|
-  w.name = "messaging drb service"
-  w.start = "cd #{path}/speakeasy_dumbwaiter/; DRB_PORT=#{MESSAGING_DRB_PORT} ruby drb.rb"
+  w.name = "messaging server"
+  w.start = "cd #{path}/speakeasy_dumbwaiter/; BASE_URL=#{BASE_URL} ruby server.rb"
   w.keepalive
 end
 
 God.watch do |w|
   w.name = "frontend server"
-  w.start = "cd #{path}/speakeasy_vaudeville/; bundle exec thin start -p #{FRONTEND_SERVER_PORT}"
+  w.start = "cd #{path}/speakeasy_vaudeville/; BASE_URL=#{BASE_URL} bundle exec thin start -p #{FRONTEND_SERVER_PORT}"
   w.keepalive
 end
 
 God.watch do |w|
   w.name = "core server"
-  w.start = "cd #{path}/speakeasy_core/; bundle exec thin start -p #{CORE_SERVER_PORT}"
+  w.start = "cd #{path}/speakeasy_core/; BASE_URL=#{BASE_URL} bundle exec thin start -p #{CORE_SERVER_PORT}"
   w.keepalive
 end
 
 God.watch do |w|
   w.name = "github server"
-  w.start = "cd #{path}/speakeasy_github/; bundle exec thin start -p #{GITHUB_PORT}"
+  w.start = "cd #{path}/speakeasy_github/; BASE_URL=#{BASE_URL} bundle exec thin start -p #{GITHUB_PORT}"
   w.keepalive
 end
 
 God.watch do |w|
   w.name = "search server"
-  w.start = "cd #{path}/speakeasy_gumshoe/; bundle exec thin start -p #{SEARCH_PORT}"
+  w.start = "cd #{path}/speakeasy_gumshoe/; BASE_URL=#{BASE_URL} bundle exec thin start -p #{SEARCH_PORT}"
   w.keepalive
 end
 
