@@ -18,6 +18,12 @@ class Api::UsersController < ApplicationController
     render :json => users
   end
 
+  def show_by_email
+    email = params[:email]
+    user = User.where(:email => email).first
+    success(UserDecorator.decorate(user), 200)
+  end
+
   def create
     user = User.new(params[:user], :as => :admin)
     if user.save
