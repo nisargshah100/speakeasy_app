@@ -13,5 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require cookie
+//= require linkify
 //= require app
 //= require home/home

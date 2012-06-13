@@ -55,7 +55,9 @@ class Messages extends Spine.Controller
   addOne: (item) =>
     return unless item.forRoom(Sidebar.room())
     msgItem = new MessagesItem(item)
-    @items.append msgItem.render()
+    html = linkify(msgItem.render())
+
+    @items.append html
     @scroll()
 
   addNew: (item) =>
@@ -75,7 +77,6 @@ class Messages extends Spine.Controller
       sid: @sid()
       'message[body]': value
     }, (data) =>
-      console.log(data)
       new Message(data).publish()
 
     @input.val ""
