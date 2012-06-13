@@ -39,9 +39,10 @@ class Sidebar extends Spine.Controller
     # adds current to the first room everytime render is called
     # we should probably change this behavior
 
-    room_id = parseInt($.cookie('current_room_id') || Room.first().id)
-    $("[data-name=rooms][id=#{room_id}]").addClass("current")
-    fayeHandler.publishJoinedRoom(Room.find(room_id))
+    room_id = parseInt($.cookie('current_room_id') || Room.first().id || -1)
+    item = $("[data-name=rooms][id=#{room_id}]")
+    @change(item)
+    item.addClass('current')
 
   createRoom: ->
     url = Room.url()
@@ -81,11 +82,10 @@ class Sidebar extends Spine.Controller
       type: "post"
     }
 
-    fayeHandler.publishLeftRoom(Room.find(prev_room_id))
-    fayeHandler.publishJoinedRoom(Room.find(current_id))
     $.cookie('current_room_id', current_id)
 
-    Sidebar.trigger 'changeRoom', Sidebar.room()
+    Sidebar.trigger 'leftRoom', prev_room_id
+    Sidebar.trigger 'joinedRoom', current_id
 
   click: (e) =>
     item = $(e.target)

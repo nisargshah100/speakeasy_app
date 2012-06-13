@@ -37,7 +37,7 @@ class Messages extends Spine.Controller
     Room.bind 'refresh', @loadMessages
     Message.bind 'create', @addNew
     Message.bind 'refresh', @render
-    Sidebar.bind 'changeRoom', @changeRoom
+    Sidebar.bind 'joinedRoom', @changeRoom
     
   render: =>
     Message.all()
