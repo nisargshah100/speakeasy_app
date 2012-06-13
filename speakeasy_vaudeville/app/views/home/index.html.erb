@@ -13,7 +13,11 @@
     $(function(){
       $('#sign_in').click(function(){
         $('#signin_form').slideDown();
-        $('#spotlight').toggle();
+        $('#door_panel').animate({
+            width: 1,
+            height: 22,
+            right: 0
+        }, 200);
         $('#buttons').toggle();
       });
     });
@@ -64,6 +68,7 @@
       <% end %>
     </div>
     <div id="door">
+      <img src="assets/door-panel.png" id="door_panel"></img>
     </div>
     <div id="spotlight">
       <img src="assets/lighton.png"></img>
