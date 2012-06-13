@@ -2,13 +2,16 @@ $ = jQuery
 
 class FayeHandler extends Spine.Module
 
-  constructor: (@url='http://localhost:9292/faye') ->
+  constructor: (@url=FayeHandler.url) ->
     @faye ||= new Faye.Client(@url)
     @connected ||= {}
 
     Room.bind 'refresh', @subscribeToRooms
     @publishJoinedRoom()
     @publishLeftRoom()
+
+  @url:
+    "#{window.location.host.replace(':9000', '')}:9292/faye"
 
   publishToRoom: (room, msg) =>
     @faye.publish "/room/#{room.id}", msg
