@@ -31,6 +31,12 @@ module SpeakeasyBouncerGem
     users = users.map { |user| user != {} ? Hashie::Mash.new(user) : nil }
   end
 
+  def self.get_user_by_email(email)
+    resp = self.conn.get "api/users/email/", { :email => email }
+    resp = get_response(resp)
+    Hashie::Mash.new(resp) if resp != {}
+  end
+
   private 
 
   def self.get_response(response)
