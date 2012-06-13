@@ -3,6 +3,7 @@ class PermissionsController < ApplicationController
 
   def create
     permission = @room.permissions.new(params[:permission])
+    permission.sid = invitee["sid"]
     if permission.save
       head status: :created, :location => [@room, permission]
     else
@@ -11,15 +12,17 @@ class PermissionsController < ApplicationController
   end
 
   def destroy
-    @room.permissions.where(id: params[:id]).first.destroy
+    @room.permissions.where(sid: invitee.sid).first.destroy
     head status: :ok
   end
 
   private
 
-  def confirm_room_owner
-    unless @user.sid == @room.sid
-      head status: :unauthorized
-    end
+  def invitee
+    @invitee ||= AuthService.get_user_by_email(params[:email])
+  end
+
+  def confirm_room_owner    
+    head status: :unauthorized unless @user.sid == @room.sid
   end
 end

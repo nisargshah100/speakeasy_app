@@ -54,11 +54,11 @@
     </div>
     <div id="signup_form">
       <%= form_tag "/api/users", id: "sign-up-form", method: :post do %>
-        <%= text_field_tag("email", nil, :placeholder => "Enter your email", :autofocus => true ) %>
+        <%= text_field_tag("user[email]", nil, :placeholder => "Enter your email", :autofocus => true ) %>
         <br>
-        <%= text_field_tag("display", nil, :placeholder => "Enter your name", :autofocus => true ) %>
+        <%= text_field_tag("user[name]", nil, :placeholder => "Enter your name", :autofocus => true ) %>
         <br>
-        <%= password_field_tag("password", nil, :placeholder => 'Password') %>
+        <%= password_field_tag("user[password]", nil, :placeholder => 'Password') %>
         <br>
         <%= submit_tag("Sign Up", :class => "btn btn-large btn-primary") %>&nbsp;<%= link_to "or log in", "#", :id => "signin" %>
       <% end %>

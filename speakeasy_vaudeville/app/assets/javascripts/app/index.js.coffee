@@ -18,6 +18,8 @@ class App extends Spine.Controller
   elements:
     "#messages": "messagesEl"
     ".lobby": "sidebarEl"
+    "#online": "onlineEl"
+    ".invites": "invitesEl"
 
   constructor: ->
     super
@@ -25,8 +27,10 @@ class App extends Spine.Controller
     # Initialize controllers:
     #  @append(@items = new App.Items)
     #  ...
+    @online = new Online({ el: @onlineEl })
     @sidebar = new Sidebar({el: @sidebarEl})
     @messages = new Messages({el: @messagesEl})
+    @inviter = new Inviter({el: @invitesEl})
 
     # Spine.Route.setup
 

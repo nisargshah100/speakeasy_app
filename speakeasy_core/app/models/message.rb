@@ -13,4 +13,13 @@ class Message < ActiveRecord::Base
   def username=(value)
     @username = value
   end
+
+  def as_json(*params)
+    {
+      :body => self.body,
+      :room_id => self.room_id,
+      :username => self.username,
+      :id => self.id
+    }
+  end
 end

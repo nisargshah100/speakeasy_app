@@ -24,6 +24,13 @@ class Message extends Spine.Model
   #     ).success(@recordResponse(options))
   #      .error(@errorResponse(options))
 
+  publish: (room = @room_id) ->
+    data =
+      body: @body
+      room_id: room
+      username: @username
+
+    fayeHandler.publishToRoom(Room.find(room), data)
 
   @fetch_all: ->
     Message.deleteAll()

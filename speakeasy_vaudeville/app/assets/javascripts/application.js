@@ -12,14 +12,20 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require cookie
+//= require linkify
 //= require app
 //= require home/home
 
-$(document).ready(function(){
-  $(window).unload(function() {
-    jQuery.ajax({
-      url:"/api/users/connection", 
-      async:false
+window.onbeforeunload = function() {
+  if(Sidebar && Sidebar.room()) {
+    Sidebar.trigger('leftRoom', Sidebar.room().id);
+
+    $.ajax({
+      url: "/api/users/connections",
+      data: { 'connected': -1, 'disconnected': Sidebar.room().id },
+      type: "post",
+      async: false
     });
-  });
-});
+  }
+};
