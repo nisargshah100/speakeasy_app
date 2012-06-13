@@ -37,7 +37,7 @@ class Messages extends Spine.Controller
     Room.bind 'refresh', @loadMessages
     Message.bind 'create', @addNew
     Message.bind 'refresh', @render
-    Sidebar.bind 'changeRoom', @changeRoom
+    Sidebar.bind 'joinedRoom', @changeRoom
     
   render: =>
     Message.all()
@@ -55,7 +55,9 @@ class Messages extends Spine.Controller
   addOne: (item) =>
     return unless item.forRoom(Sidebar.room())
     msgItem = new MessagesItem(item)
-    @items.append msgItem.render()
+    html = linkify(msgItem.render())
+
+    @items.append html
     @scroll()
 
   addNew: (item) =>
@@ -74,7 +76,8 @@ class Messages extends Spine.Controller
     $.post url, {
       sid: @sid()
       'message[body]': value
-    }
+    }, (data) =>
+      new Message(data).publish()
 
     @input.val ""
     @input.focus()

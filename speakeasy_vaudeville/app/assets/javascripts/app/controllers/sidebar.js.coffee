@@ -38,7 +38,11 @@ class Sidebar extends Spine.Controller
     Room.each(@addOneRoom)
     # adds current to the first room everytime render is called
     # we should probably change this behavior
-    $("[data-name=rooms]:last").addClass("current")
+
+    room_id = parseInt($.cookie('current_room_id') || Room.first().id || -1)
+    item = $("[data-name=rooms][id=#{room_id}]")
+    @change(item)
+    item.addClass('current')
 
   createRoom: ->
     url = Room.url()
@@ -65,17 +69,23 @@ class Sidebar extends Spine.Controller
 
   change: (item) =>
     prev_room_id = $(".current").attr('id');
+    current_id = $(item).attr('id')
+
+    return if prev_room_id == current_id
 
     @deactivate()
     $(item).addClass("current")
 
     $.ajax {
       url: "/api/users/connections"
-      data: { 'connected': $(item).attr('id'), 'disconnected': prev_room_id }
+      data: { 'connected': current_id, 'disconnected': prev_room_id }
       type: "post"
     }
 
-    Sidebar.trigger 'changeRoom', Sidebar.room()
+    $.cookie('current_room_id', current_id)
+
+    Sidebar.trigger 'leftRoom', prev_room_id
+    Sidebar.trigger 'joinedRoom', current_id
 
   click: (e) =>
     item = $(e.target)
