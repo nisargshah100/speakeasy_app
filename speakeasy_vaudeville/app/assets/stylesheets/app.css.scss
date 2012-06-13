@@ -234,7 +234,7 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
   p.validation { display: inline; font-size: 13px; margin-left: 5px; font-style:italic; }
 }
 
-#top { height: 650px; color: #F2F2F2; }
+#top { height: 522px; color: #F2F2F2; }
 
 .normal { background: url("background.png") right; }
 .spotlight { background: url("background-spotlight.png") right; }
@@ -249,12 +249,13 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
   }
 }
 
-#intro { position: relative; width: 900px; margin: 0 auto; top: 180px;
+#intro { position: relative; width: 900px; margin: 0 auto; top: 120px;
   h1 { position: relative; padding-bottom: 20px; background-size: 400px 518px; background: url("speakeasy.png") no-repeat left top; left: -15px; height: 60px; width: 400px; }
   p { margin-top: 20px; }
   div { position: relative; }
-  #door { right: 0px; top: -60px; position:absolute; height: 463px; width: 236px; background: url("door.png") 50% 50%; overflow: hide;
-    img#door_panel { position: relative; top: 85px; left: 73px; width: 88px; }
+  img#chad { position: absolute; top: 20px; right: 75px; width: 88px; z-index: 0; }
+  #door { right: 0px; top: -60px; position:absolute; height: 463px; width: 236px; background: url("door.png") 50% 50%; overflow: hide; z-index: 100;
+    img#door_panel { position: relative; top: 85px; left: 73px; width: 88px; z-index: 50; }
   }
   #buttons { top: 80px;
     a:first-child { margin-right: 10px; }
