@@ -3,7 +3,7 @@ $ = jQuery.sub()
 class Inviter extends Spine.Controller
 
   elements:
-    "input": "input"
+    "input#input": "input"
     ".invites input#submit": "submit"
 
   events:
