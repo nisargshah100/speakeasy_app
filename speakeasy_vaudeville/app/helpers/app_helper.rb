@@ -10,4 +10,8 @@ module AppHelper
   def current_sid_tag
     tag('meta', name: 'current-sid', content: current_user.sid)
   end
+
+  def current_user_gravatar_tag
+    tag('meta', name: 'current-user-gravatar', content: current_user.gravatar)
+  end
 end

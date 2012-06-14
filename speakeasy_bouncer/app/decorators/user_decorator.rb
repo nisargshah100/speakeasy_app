@@ -9,6 +9,8 @@ class UserDecorator < Draper::Base
       data.append(:token)
     end
 
-    model.as_json(:only => data)
+    data = model.as_json(:only => data)
+    data['gravatar'] = Gravatar.new(model.email).image_url
+    data
   end
 end

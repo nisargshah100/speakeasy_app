@@ -303,9 +303,13 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
 
 #messages { position: absolute; top:0; bottom:0; left:215px; right:315px; background: url("wood-bright.png") repeat;
 
-  #stuff { overflow:auto; position: absolute; top: 0; bottom: 100px; left: 0; right: 0;
-
-    ul.items { margin: 20px 20px 20px; background: #F8F8F8 url("https://www.simple.com/img/bg_pixel_texture.gif") repeat; border-top-right-radius:3px 3px; border-top-left-radius:3px 3px; border-bottom-left-radius: 3px 3px; border-bottom-right-radius: 3px 3px; -moz-border-radius-topleft:3px 3px; -moz-border-radius-topright:3px 3px; -moz-border-radius-bottomright: 3px 3px; -moz-border-radius-bottomleft: 3px 3px; -moz-box-shadow: 0 0 5px 1px $weathervane; -webkit-box-shadow: 0 0 5px 1px $weathervane; box-shadow: 0 0 5px 1px $weathervane;
+  #stuff { overflow:auto; position: absolute; top: 0; bottom: 100px; left: 0; right: 0; }
+  ul { border-top-right-radius:3px 3px; border-top-left-radius:3px 3px; border-bottom-left-radius: 3px 3px; border-bottom-right-radius: 3px 3px; -moz-border-radius-topleft:3px 3px; -moz-border-radius-topright:3px 3px; -moz-border-radius-bottomright: 3px 3px; -moz-border-radius-bottomleft: 3px 3px; -moz-box-shadow: 0 0 5px 1px $weathervane; -webkit-box-shadow: 0 0 5px 1px $weathervane; box-shadow: 0 0 5px 1px $weathervane; 
+    &#alert { position: absolute; margin: 10px 20px; top: -30px; z-index: 1; left: 0; right: 0; display: none; }
+    &#welcome { margin: 20px 20px 20px; background: #FCF8E3 url("https://www.simple.com/img/bg_pixel_texture.gif") repeat; display: none;
+      li { padding: 10px 20px; }
+    }
+    &.items { margin: 20px 20px 20px; background: #F8F8F8 url("https://www.simple.com/img/bg_pixel_texture.gif") repeat; 
       li.item { padding: 10px 20px; border-bottom: 1px solid #E4E4E4;
         &:last-child { border-bottom: 0px solid #E4E4E4; }
       }

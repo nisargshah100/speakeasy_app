@@ -48,7 +48,8 @@ class FayeHandler extends Spine.Module
             msg = Message.create(
               body: msg.body,
               room_id: msg.room_id,
-              username: msg.username
+              username: msg.username,
+              sid: msg.sid
             )
 
     @connected[room.id] = true
