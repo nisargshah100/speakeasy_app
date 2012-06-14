@@ -77,6 +77,7 @@ class Messages extends Spine.Controller
       sid: @sid()
       'message[body]': value
     }, (data) =>
+      data['sid'] = @sid()
       new Message(data).publish()
 
     @input.val ""

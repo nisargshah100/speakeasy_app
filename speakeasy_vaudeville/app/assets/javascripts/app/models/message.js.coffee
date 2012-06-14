@@ -29,6 +29,9 @@ class Message extends Spine.Model
       body: @body
       room_id: room
       username: @username
+      sid: @sid
+
+    console.log(data)
 
     fayeHandler.publishToRoom(Room.find(room), data)
 
