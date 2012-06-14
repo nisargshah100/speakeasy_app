@@ -8,7 +8,7 @@ jQuery ->
       url: $(this).attr('action')
       data: $(this).serialize()
       success: (data) ->
-        location.href = "/app"
+        location.href = "/"
       error: ->
         alert("Invalid Login")
 
