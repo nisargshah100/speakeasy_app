@@ -1,5 +1,6 @@
 class PermissionsController < ApplicationController
   before_filter :find_room, :authenticate_user, :confirm_room_owner
+  before_filter :invitee, only: [ :create, :destroy ]
 
   def index
     if @room
@@ -11,11 +12,11 @@ class PermissionsController < ApplicationController
 
   def create
     permission = @room.permissions.new(params[:permission])
-    permission.sid = invitee.sid
+    permission.sid = @invitee.sid
     if permission.save
       head status: :created, :location => [@room, permission]
     else
-      head status: :bad_request
+      render json: { message: "User already has permission to this room!" }, status: :bad_request
     end
   end
 
@@ -28,6 +29,10 @@ class PermissionsController < ApplicationController
 
   def invitee
     @invitee ||= SpeakeasyBouncerGem.get_user_by_email(params[:email])
+    unless @invitee
+      render json: { message: "Hmm, we couldn't find that user in the system."}, status: :bad_request
+      false
+    end
   end
 
   def confirm_room_owner    
