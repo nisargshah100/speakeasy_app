@@ -310,7 +310,7 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
       li { padding: 10px 20px; }
     }
     &.items { margin: 20px 20px 20px; background: #F8F8F8 url("https://www.simple.com/img/bg_pixel_texture.gif") repeat; 
-      li.item { padding: 10px 20px; border-bottom: 1px solid #E4E4E4;
+      li.item { padding: 10px 20px; border-bottom: 1px solid #E4E4E4; font-size: 15px;
         &:last-child { border-bottom: 0px solid #E4E4E4; }
       }
     }
@@ -321,10 +321,10 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
   div { float: left; }
   &:after { visibility: hidden; display: block; content: ""; clear: both; height: 0; }
   span.author { margin-right: 10px; text-align: right; width: 75px; display: inline-block; }
-  div.author-image { margin-right: 10px; text-align: right; width: 48px; display: inline-block; 
-    img { width: 48px; height: 48px; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; border: 1px solid $weathervane; }
+  div.author-image { margin-right: 10px; text-align: right; width: 35px; display: inline-block; 
+    img { width: 35px; height: 35px; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; border: 1px solid $weathervane; }
   }
-  div.author-body { margin-right: 10px; text-align: right; display: inline-block; width: 93%; min-height: 48px;
+  div.author-body { margin-right: 10px; text-align: right; display: inline-block; width: 93%; min-height: 35px;
     span { width: 100%; display: inline-block; }
     span.author-name { margin-right: 10px; text-align: left; color: #969696; font-size: 15px; font-weight: 600; padding-bottom: 5px; }
   }
