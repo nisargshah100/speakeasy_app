@@ -30,3 +30,11 @@ window.onbeforeunload = function() {
     });
   }
 };
+
+$(function(){
+  $('#log_out').live('click', function(e) {
+    e.preventDefault();
+    $.cookie("user", null);
+    location.href = "/";
+  });
+});
