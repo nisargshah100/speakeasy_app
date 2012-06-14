@@ -13,6 +13,7 @@ jQuery ->
         alert("Invalid Login")
 
   $('#sign-up-form').submit (e) ->
+    $('p.validation').remove();
     e.preventDefault() # removing throws error but redirects
     $.ajax
       type: "post"

@@ -31,7 +31,7 @@ class RoomModal extends Spine.Controller
     ".modal-body"   : "body"
 
   events:
-    "click": "save"
+    # "click": "save"
     "click #invite-submit" : "inviteMember"
 
   constructor: (params) ->
@@ -62,8 +62,9 @@ class RoomModal extends Spine.Controller
       success: (data) =>
         @addOneMember(value)
       error: (data) =>
+        message = JSON.parse(data.responseText)["message"]
         $("#invite-result").empty()
-        $("#invite-result").append "<td><p>Couldn't add that user!</p></td>"
+        $("#invite-result").append "<td><p>#{message}</p></td>"
 
     @inviteInput.val ""
     @inviteInput.focus()
