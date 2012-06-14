@@ -39,7 +39,7 @@ class Sidebar extends Spine.Controller
     # adds current to the first room everytime render is called
     # we should probably change this behavior
 
-    room_id = parseInt($.cookie('current_room_id') || Room.first().id || -1)
+    room_id = parseInt($.cookie('current_room_id') || Room?.first()?.id || -1)
     item = $("[data-name=rooms][id=#{room_id}]")
     @change(item)
     item.addClass('current')
