@@ -2,4 +2,4 @@ source :rubygems
 
 gem 'faye'
 gem 'thin'
-gem 'sinatra'
+gem 'speakeasy_on_tap', path: '../speakeasy_on_tap'

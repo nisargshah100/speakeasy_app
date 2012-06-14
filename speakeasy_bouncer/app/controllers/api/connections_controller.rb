@@ -21,10 +21,18 @@ class Api::ConnectionsController < ApplicationController
 
   def connect(channel)
     set_user("/channel/#{channel}")
+    $redis.publish :joined, {
+      :channel => channel,
+      :user => UserDecorator.decorate(current_user)
+    }.to_json
   end
 
   def disconnect(channel)
     remove_user("/channel/#{channel}")
+    $redis.publish :left, {
+      :channel => channel,
+      :user => UserDecorator.decorate(current_user)
+    }.to_json
   end
 
   def set_user(channel)

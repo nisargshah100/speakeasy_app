@@ -36,13 +36,12 @@ class Sidebar extends Spine.Controller
     
   render: =>
     Room.each(@addOneRoom)
-    # adds current to the first room everytime render is called
-    # we should probably change this behavior
+    @initialLoad()
 
+  initialLoad: ->
     room_id = parseInt($.cookie('current_room_id') || Room?.first()?.id || -1)
     item = $("[data-name=rooms][id=#{room_id}]")
     @change(item)
-    item.addClass('current')
 
   createRoom: ->
     url = Room.url()
