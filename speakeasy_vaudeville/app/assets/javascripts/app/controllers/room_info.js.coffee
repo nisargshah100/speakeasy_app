@@ -14,7 +14,8 @@ class RoomInfo extends Spine.Controller
     @el.empty()
     if room.owner
       $("#room-info").append(@admin_template(room))
-      @modal = new RoomModal( {el: $("#editRoom"), room} )
+      @inviteModal = new InviteModal( {el: $("#invite"), room} )
+      @editModal = new EditModal( {el: $("#editRoom"), room} )
     else
       $("#room-info").append(@template(room))
 
@@ -24,18 +25,54 @@ class RoomInfo extends Spine.Controller
   admin_template: (room) =>
     @view('rooms/admin_info')(room: room)
 
-class RoomModal extends Spine.Controller
+class EditModal extends Spine.Controller
+
+  events:
+    "submit #edit-room-form" : "updateRoom"
+
+  elements:
+    ".modal-header" : "header"
+    ".modal-body"   : "body"
+
+  constructor: (params) ->
+    super
+    @room = params.room
+    @render()
+
+  render: =>
+    @body.append(@template())
+
+  template: =>
+    @view('rooms/edit-modal')(room: @room)
+
+  updateRoom: (e) =>
+    e.preventDefault()
+    name = $("#edit_room_name").val()
+    desc = $("#edit_room_description").val()
+    return false unless name || desc
+    
+    $.ajax 
+      type: "put"
+      url: "/api/core/rooms/#{@room.id}"
+      data: $("#edit-room-form :input[value][value!='']").serialize()
+      success: (data) =>
+        alert "room updated!"
+        Room.trigger "refresh"
+      error: (data) =>
+        alert "room not updated!"
+
+class InviteModal extends Spine.Controller
 
   elements:
     ".modal-header" : "header"
     ".modal-body"   : "body"
 
   events:
-    # "click": "save"
     "click #invite-submit" : "inviteMember"
 
   constructor: (params) ->
     super
+    console.log @el
     @room = params.room
     @getPermissions()
 
@@ -48,7 +85,7 @@ class RoomModal extends Spine.Controller
     @body.append(@template())
 
   template: =>
-    @view('rooms/modal')(room: @room, permissions: @permissions)
+    @view('rooms/invite-modal')(room: @room, permissions: @permissions)
 
   inviteMember: =>
     @inviteInput = $("#invite-input")
