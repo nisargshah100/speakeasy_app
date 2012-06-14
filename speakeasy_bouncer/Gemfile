@@ -28,3 +28,4 @@ gem 'valid_email'
 gem 'draper'
 gem 'thin'
 gem 'redis'
+gem 'speakeasy_on_tap', path: "../speakeasy_on_tap"

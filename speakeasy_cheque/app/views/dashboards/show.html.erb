@@ -1,7 +1,16 @@
 <span id="created_messages">
   <%= pluralize(@total_messages, "Message") %>
   <%= pluralize(@total_rooms, "Room") %>
+  <%= pluralize(@total_users, "User") %>
+
 </span>
+
+<% @rooms.each do |room| %>
+  <ul>
+    <li>@room.name</li>
+    <li>@room.messages.count</li>
+  </ul>
+<% end %>
 
 <!-- <div id="created_messages_chart" style="width: 560px; height: 300px;"></div> -->
 
