@@ -22,6 +22,10 @@ module SpeakeasyOnTap
     queue.publish :created_permissions, permission.to_json
   end
 
+  def self.publish_created_user(user)
+    queue.publish :created_users, user.to_json
+  end
+
   def self.subscribe_to_channels(channels, &block)
     queue.subscribe(channels) do |on|
       on.message do |channel, json_data|
