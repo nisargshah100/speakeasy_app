@@ -57,7 +57,6 @@ class EditModal extends Spine.Controller
       data: $("#edit-room-form :input[value][value!='']").serialize()
       success: (data) =>
         alert "room updated!"
-        Room.trigger "refresh"
       error: (data) =>
         alert "room not updated!"
 
