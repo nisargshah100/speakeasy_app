@@ -3,6 +3,7 @@ $ = jQuery.sub()
 class RoomInfo extends Spine.Controller
 
   constructor: ->
+    super
     Sidebar.bind 'joinedRoom', @fetch_room_info
 
   fetch_room_info: (room_id) =>
@@ -10,9 +11,10 @@ class RoomInfo extends Spine.Controller
       @render(data)
 
   render: (room) =>
-    $("#room-info").empty()
+    @el.empty()
     if room.owner
       $("#room-info").append(@admin_template(room))
+      @modal = new RoomModal( {el: $("#editRoom"), room} )
     else
       $("#room-info").append(@template(room))
 
@@ -20,6 +22,30 @@ class RoomInfo extends Spine.Controller
     @view('rooms/info')(room: room)
 
   admin_template: (room) =>
-    @view('rooms/admin_info')(room: room)    
+    @view('rooms/admin_info')(room: room)
+
+class RoomModal extends Spine.Controller
+
+  elements:
+    ".modal-header" : "header"
+    ".modal-body"   : "body"
+
+  events:
+    "click": "save"
+
+  constructor: (params) ->
+    super
+    @room = params.room
+    console.log @room
+    @render()
+
+  render: =>
+    @body.append(@template())
+
+  template: =>
+    @view('rooms/modal')(room: @room)
+
+  save: =>
+    #alert "saving"
 
 window.RoomInfo = RoomInfo
