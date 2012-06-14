@@ -3,6 +3,7 @@ class CreateQueryItems < ActiveRecord::Migration
     create_table :query_items do |t|
       t.string :query
       t.text :content
+      t.string :ns
 
       t.timestamps
     end

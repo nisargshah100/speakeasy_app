@@ -11,7 +11,7 @@ class FayeHandler extends Spine.Module
     @publishLeftRoom()
 
   @url:
-    "#{window.location.host.replace(':9000', '')}:9292/faye"
+    "#{window.location.host.replace(':9000', '').replace(':9001', '')}:9292/faye"
 
   publishToRoom: (room, msg) =>
     @faye.publish "/room/#{room.id}", msg
@@ -33,22 +33,25 @@ class FayeHandler extends Spine.Module
   subscribeToRoom: (room) =>
     if not @connected[room.id]
       @faye.subscribe "/room/#{room.id}/joined", (msg) =>
-        Spine.Ajax.disable =>
-          @joinedRoom(msg)
+        if Search.isSearch == false
+          Spine.Ajax.disable =>
+            @joinedRoom(msg)
 
       @faye.subscribe "/room/#{room.id}/left", (msg) =>
-        Spine.Ajax.disable =>
-          @leftRoom(msg)
+        if Search.isSearch == false
+          Spine.Ajax.disable =>
+            @leftRoom(msg)
 
       @faye.subscribe "/room/#{room.id}", (msg) =>
-        Spine.Ajax.disable =>
-          msg = Message.create(
-            body: msg.body,
-            room_id: msg.room_id,
-            username: msg.username
-          )
+        if Search.isSearch == false
+          Spine.Ajax.disable =>
+            msg = Message.create(
+              body: msg.body,
+              room_id: msg.room_id,
+              username: msg.username
+            )
 
-      @connected[room.id] = true
+    @connected[room.id] = true
 
   subscribeToRooms: =>
     @rooms = Room.all()

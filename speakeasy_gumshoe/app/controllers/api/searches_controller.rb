@@ -2,9 +2,12 @@ class Api::SearchesController < ApplicationController
 
   def show
     query = params[:query]
+    ns = params[:ns]
 
-    if query
-      results = QueryItemDecorator.search(query).map { |i| i.decorate() if i }
+    if query and ns
+      results = QueryItemDecorator.by_ns(ns).search(query).map do |i| 
+        i.decorate() if i
+      end
     else
       results = {}
     end
