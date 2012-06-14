@@ -5,7 +5,6 @@ class CreatedRoom
   field :room_id, type: String
   field :created_at, type: DateTime
 
-  embeds_many :created_messages
   after_create :increment_rooms
 
   def self.create_from_on_tap(data)
