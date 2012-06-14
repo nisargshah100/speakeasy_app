@@ -2,15 +2,25 @@
   <%= pluralize(@total_messages, "Message") %>
   <%= pluralize(@total_rooms, "Room") %>
   <%= pluralize(@total_users, "User") %>
-
 </span>
-
-<% @rooms.each do |room| %>
-  <ul>
-    <li>@room.name</li>
-    <li>@room.messages.count</li>
-  </ul>
-<% end %>
+<br>
+<table>
+  <tr>
+    <th></th>
+    <th>Current</th>
+    <th>Trending</th>
+  </tr>
+  <tr>
+    <td>Users Per Day</td>
+    <td><%= @recent_users_per_day %></td>
+    <td><%= @recent_users_per_day > @historical_users_per_day ? "Up" : "Down" %></td>
+  </tr>
+  <tr>
+    <td>Users creating rooms</td>
+    <td><%= @all_percent_users_creating_room %>%</td>
+    <td><%= @all_percent_users_creating_room > @historical_percent_users_creating_room ? "Up" : "Down" %></td>
+  </tr>
+</table>
 
 <!-- <div id="created_messages_chart" style="width: 560px; height: 300px;"></div> -->
 
