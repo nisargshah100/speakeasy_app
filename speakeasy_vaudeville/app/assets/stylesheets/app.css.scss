@@ -253,7 +253,7 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
   h1 { position: relative; padding-bottom: 20px; background-size: 400px 518px; background: url("speakeasy.png") no-repeat left top; left: -15px; height: 60px; width: 400px; }
   p { margin-top: 20px; }
   div { position: relative; }
-  img#chad { position: absolute; top: 20px; right: 75px; width: 88px; z-index: 0; }
+  img#chad { position: absolute; top: 6px; right: 78px; width: 80px; z-index: 0; }
   #door { right: 0px; top: -60px; position:absolute; height: 463px; width: 236px; background: url("door.png") 50% 50%; overflow: hide; z-index: 100;
     img#door_panel { position: relative; top: 85px; left: 73px; width: 88px; z-index: 50; }
   }
