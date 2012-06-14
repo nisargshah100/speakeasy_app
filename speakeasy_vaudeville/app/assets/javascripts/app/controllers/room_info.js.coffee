@@ -32,20 +32,46 @@ class RoomModal extends Spine.Controller
 
   events:
     "click": "save"
+    "click #invite-submit" : "inviteMember"
 
   constructor: (params) ->
     super
     @room = params.room
-    console.log @room
-    @render()
+    @getPermissions()
+
+  getPermissions: =>
+    $.get "/api/core/rooms/#{@room.id}/permissions", (data) =>
+      @permissions = data
+      @render()
 
   render: =>
     @body.append(@template())
 
   template: =>
-    @view('rooms/modal')(room: @room)
+    @view('rooms/modal')(room: @room, permissions: @permissions)
 
-  save: =>
-    #alert "saving"
+  inviteMember: =>
+    @inviteInput = $("#invite-input")
+    value = @inviteInput.val()
+    return false unless value
+
+    $.ajax 
+      type: "post"
+      url: "/api/core/rooms/#{@room.id}/permissions"
+      data: { "email": value }
+      success: (data) =>
+        @addOneMember(value)
+      error: (data) =>
+        $("#invite-result").empty()
+        $("#invite-result").append "<td><p>Couldn't add that user!</p></td>"
+
+    @inviteInput.val ""
+    @inviteInput.focus()
+    false
+
+  addOneMember: (email) =>
+    $("#invite-result").empty()
+    $("#invite-result").append "<td><p>#{email} has been added!</p></td>"
+    $("#invited-members").append "<li>#{email}</li>"
 
 window.RoomInfo = RoomInfo
