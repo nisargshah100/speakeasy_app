@@ -271,7 +271,8 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
 .lobby { padding: 0 15px; }
 
 .header { padding: 20px 0 10px;
-  h4 { color: #878797; text-transform: uppercase; text-shadow: 0px 2px 3px #4E4E4E; font-weight: 600; font-size: 15px; }
+  h1 {color: #ccc; text-shadow: 0px 2px 3px #4E4E4E; font-weight: 600; }
+  h4 { margin-bottom: 5px; color: #878797; text-transform: uppercase; text-shadow: 0px 2px 3px #4E4E4E; font-weight: 600; font-size: 15px; }
 }
 
 .github h4 { 
@@ -353,12 +354,18 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
 
 /*-----------ROOM-INFO----------*/
 
+#room-info {
+  h4#proprietor { padding: 20px 0 5px; }
+}
+
 .right-nav { padding: 0 15px; }
 
 .right-nav { position: absolute; top:0; bottom:0; width:285px; right:0; background: url("http://www.hungryacademy.com/images/noise.png") repeat top left; overflow:auto; background: -webkit-gradient(linear, 100% 100%, 100% 0%, from($weathervane), to(#26262C));
   #room_name { padding: 25px 0 10px; color: #ccc; font-size: 26px; }
   #data { margin: 10px 0;
-    #ci_status {  }
+    .header { box-shadow: 0px 5px 7px -7px #333; }
+    .search { height: 50px; }
+    .github, .users { height: 100px; overflow-y: auto; }
     ul { 
       li { text-align: left; list-style-type:none; padding: 2px 0; color: #fff; font-size: 15px; }
     }    
