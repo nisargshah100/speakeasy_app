@@ -56,7 +56,6 @@ class Sidebar extends Spine.Controller
       room: { name: value }
     }, (data) =>
       Room.deleteAll()
-      # @rooms.empty()
       Room.fetch()
 
     @input.val ""
@@ -100,11 +99,5 @@ class Sidebar extends Spine.Controller
   @room: =>
     id = $(".item.current").attr('id')
     Room.find(id)
-
-  # sid: =>
-  #   $("meta[name=current-sid]").attr('content')
-
-  currentChannelEmpty: =>
-    return false unless Sidebar.channel() == "Unknown record"
 
 window.Sidebar = Sidebar

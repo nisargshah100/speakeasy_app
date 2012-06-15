@@ -28,6 +28,7 @@ class Messages extends Spine.Controller
   elements:
     ".items": "items"
     ".new textarea": "input"
+    "#welcome": "welcome"
 
   events:
     "click .new input#scroll": "createMessage"
@@ -64,8 +65,19 @@ class Messages extends Spine.Controller
     @addOne(item)
 
   changeRoom: (room) =>
+    @welcome.hide()
     @room = room
     @render()
+    @renderWelcome()
+
+  renderWelcome: =>
+    # request messages for the room
+    # if 0, render a welcome message for the room
+    $.get "/api/core/rooms/#{@room}/messages", (data) =>
+      if data.length == 0
+        @welcome.show()
+        
+
 
   createMessage: ->
     alert "Room required" unless Sidebar.room()

@@ -20,10 +20,10 @@ class RoomInfo extends Spine.Controller
       $("#room-info").append(@template(room))
 
   template: (room) =>
-    @view('rooms/info')(room: room)
+    @view('rooms/room_info')(room: room)
 
   admin_template: (room) =>
-    @view('rooms/admin_info')(room: room)
+    @view('rooms/admin_room_info')(room: room)
 
 class EditModal extends Spine.Controller
 
@@ -43,7 +43,7 @@ class EditModal extends Spine.Controller
     @body.append(@template())
 
   template: =>
-    @view('rooms/edit-modal')(room: @room)
+    @view('rooms/edit_modal')(room: @room)
 
   updateRoom: (e) =>
     e.preventDefault()
@@ -87,7 +87,7 @@ class InviteModal extends Spine.Controller
     @body.append(@template())
 
   template: =>
-    @view('rooms/invite-modal')(room: @room, permissions: @permissions)
+    @view('rooms/invite_modal')(room: @room, permissions: @permissions)
 
   inviteMember: =>
     @inviteInput = $("#invite-input")
