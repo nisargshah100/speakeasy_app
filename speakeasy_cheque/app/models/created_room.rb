@@ -1,5 +1,8 @@
+require 'chart_series_methods.rb'
+
 class CreatedRoom
   include Mongoid::Document
+  extend ChartSeriesMethods
 
   field :sid, type: String
   field :room_id, type: String

@@ -21,7 +21,26 @@ class DashboardsController < ApplicationController
     @recent_messages = CreatedMessage.where(:created_at.gt => DateTime.now - 1).count
     @historical_messages = CreatedMessage.where(:created_at.lte => DateTime.now - 1).count
 
-    #Convert to active users
-    # @recent_messages_per_user
+    if params[:num]
+      @chart_title = params[:num].titleize
+      num_series = params[:num].classify.constantize.series
+    else
+      @chart_title = "Select a Series"
+      num_series = []
+    end
+
+    if params[:denom]
+      @chart_title = "#{@chart_title} per #{params[:denom].titleize.singularize}"
+      denom_series = params[:denom].classify.constantize.series
+      denom_series = denom_series.map { |point| point == 0 ? 1 : point }
+    else
+      denom_series = (1..num_series.length).map { |n| 1 }
+    end
+
+    @series = num_series.each_with_index.map { |num, index| (num.to_f/denom_series[index].to_f).round(2) }
+    @denom = denom_series
+    @num = num_series
+
+    @point_interval, @point_start = TimePeriod.send(params[:x_axis] || "week")
   end
 end

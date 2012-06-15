@@ -1,5 +1,9 @@
+require 'chart_series_methods.rb'
+
 class CreatedUser
   include Mongoid::Document
+  extend ChartSeriesMethods
+
   field :sid, type: String
   field :created_at, type: DateTime
 
