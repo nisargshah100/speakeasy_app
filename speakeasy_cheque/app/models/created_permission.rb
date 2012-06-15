@@ -1,15 +1,22 @@
+require 'chart_series_methods.rb'
+
 class CreatedPermission
   include Mongoid::Document
-  field :sid
-  field :room_id
-  field :created_at
+  extend ChartSeriesMethods
+
+  field :sid, type: String
+  field :created_at, type: DateTime
+
+  after_create :increment_permissions
 
   def self.create_from_on_tap(data)
-    permission = CreatedPermission.new
-    permission.sid = data["sid"]
-    permission.room_id = data["room_id"]
-    permission.created_at = data["created_at"]
-    permission.save
+    CreatedPermission.create(:room_id => data["room_id"],
+                                    :sid => data["sid"],
+                                    :created_at => DateTime.parse(data["created_at"]))
+  end
+
+  def increment_permissions
+    Aggregate.increment_permissions
   end
 
 end

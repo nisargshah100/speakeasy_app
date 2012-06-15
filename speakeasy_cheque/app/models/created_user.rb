@@ -1,22 +1,20 @@
 require 'chart_series_methods.rb'
 
-class CreatedRoom
+class CreatedUser
   include Mongoid::Document
   extend ChartSeriesMethods
 
   field :sid, type: String
-  field :room_id, type: String
   field :created_at, type: DateTime
 
-  after_create :increment_rooms
+  after_create :increment_users
 
   def self.create_from_on_tap(data)
-    CreatedRoom.create( :sid => data["sid"],
-                        :room_id => data["id"],
+    CreatedUser.create( :sid => data["sid"],
                         :created_at => DateTime.parse(data["created_at"]) )
   end
 
-  def increment_rooms
-    Aggregate.increment_rooms
+  def increment_users
+    Aggregate.increment_users
   end
 end

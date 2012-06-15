@@ -29,3 +29,4 @@ gem 'draper'
 gem 'thin'
 gem 'redis'
 gem 'gravatar-ultimate'
+gem 'speakeasy_on_tap', path: "../speakeasy_on_tap"
