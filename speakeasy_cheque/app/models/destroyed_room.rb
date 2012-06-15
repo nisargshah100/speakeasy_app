@@ -1,14 +1,18 @@
 class DestroyedRoom
   include Mongoid::Document
-  field :sid
-  field :room_id
-  field :destroyed_at
+  field :sid, type: String
+  field :room_id, type: String
+  field :destroyed_at, type: DateTime
+
+  after_create :decrement_rooms
 
   def self.create_from_on_tap(data)
-    room = DestroyedRoom.new
-    room.sid = data["sid"]
-    room.room_id = data["id"]
-    room.destroyed_at = Time.now.to_s
-    room.save
+    DestroyedRoom.create( :sid => data["sid"],
+                        :room_id => data["id"],
+                        :destroyed_at => DateTime.now)
+  end
+
+  def decrement_rooms
+    Aggregate.decrement_rooms
   end
 end

@@ -1,3 +1,9 @@
+PATH
+  remote: ../speakeasy_on_tap
+  specs:
+    speakeasy_on_tap (0.0.1)
+      redis
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -187,6 +193,7 @@ DEPENDENCIES
   rspec-rails (~> 2.0)
   sass-rails (~> 3.2.3)
   sorcery
+  speakeasy_on_tap!
   sqlite3
   thin
   uglifier (>= 1.0.3)

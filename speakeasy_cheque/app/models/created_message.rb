@@ -1,14 +1,22 @@
+require 'chart_series_methods.rb'
+
 class CreatedMessage
   include Mongoid::Document
-  field :sid
-  field :room_id
-  field :created_at
+  extend ChartSeriesMethods
+
+  field :sid, type: String
+  field :created_at, type: DateTime
+
+  after_create :increment_messages
 
   def self.create_from_on_tap(data)
-    message = CreatedMessage.new
-    message.sid = data["sid"]
-    message.room_id = data["room_id"]
-    message.created_at = data["created_at"]
-    message.save
+    room = CreatedRoom.where(room_id: data["room_id"]).first
+    CreatedMessage.create( :room_id => data["room_id"],
+                                  :sid => data["sid"],
+                                  :created_at => DateTime.parse(data["created_at"]) )
+  end
+
+  def increment_messages
+    Aggregate.increment_messages
   end
 end
