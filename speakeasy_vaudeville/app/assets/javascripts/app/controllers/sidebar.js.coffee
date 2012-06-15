@@ -44,6 +44,8 @@ class Sidebar extends Spine.Controller
 
   initialLoad: ->
     room_id = parseInt($.cookie('current_room_id') || Room?.first()?.id || -1)
+    if room_id == -1
+      Room.trigger 'noRoom'
     item = $("[data-name=rooms][id=#{room_id}]")
     @change(item)
 

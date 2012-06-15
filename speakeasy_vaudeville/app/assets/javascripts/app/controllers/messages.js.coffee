@@ -36,6 +36,7 @@ class Messages extends Spine.Controller
   constructor: ->
     super
     Room.bind 'refresh', @loadMessages
+    Room.bind 'noRoom', @renderWelcome
     Message.bind 'create', @addNew
     Message.bind 'refresh', @render
     Sidebar.bind 'joinedRoom', @changeRoom
@@ -46,6 +47,13 @@ class Messages extends Spine.Controller
     Message.each(@addOne)
     @scroll()
 
+  renderWelcome: =>
+    @welcome.append @welcomeTemplate(@username())
+    @welcome.show()
+
+  welcomeTemplate: (username) =>
+    @view('messages/welcome')(username: username)
+
   loadMessages: =>
     Message.fetch_all()
 
@@ -54,6 +62,7 @@ class Messages extends Spine.Controller
     objDiv.scrollTop = objDiv.scrollHeight
 
   addOne: (item) =>
+    @welcome.empty()
     return unless item.forRoom(Sidebar.room())
     msgItem = new MessagesItem(item)
     html = linkify(msgItem.render())
@@ -68,17 +77,18 @@ class Messages extends Spine.Controller
     @welcome.hide()
     @room = room
     @render()
-    @renderWelcome()
+    @renderEmptyRoom()
 
-  renderWelcome: =>
-    # request messages for the room
-    # if 0, render a welcome message for the room
+  renderEmptyRoom: =>
     $.get "/api/core/rooms/#{@room}/messages", (data) =>
       if data.length == 0
+        @welcome.empty()
+        @welcome.append @emptyTemplate(@username())
         @welcome.show()
+
+  emptyTemplate: (username) =>
+    @view('messages/empty_room')(username: username)
         
-
-
   createMessage: ->
     alert "Room required" unless Sidebar.room()
     url = Message.url()
