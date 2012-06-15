@@ -10,7 +10,7 @@ development:
   # database: gumshoe_dev
   database: gumshoe_dev
   encoding: utf8
-  username: deployer
+  username: root
   password: hungry
   host: localhost
   pool: 5

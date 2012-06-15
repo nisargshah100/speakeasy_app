@@ -7,8 +7,9 @@ class Online extends Spine.Controller
 
   fetch_users_online: (room_id) => 
     $.get "/api/users/connections/", { 'channel': room_id }, (data) =>
-      @users = data
-      @render()
+      if Sidebar.room().id == room_id
+        @users = data
+        @render()
 
   render: =>
     $("#online").html('')
