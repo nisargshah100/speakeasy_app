@@ -310,7 +310,7 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
       li { padding: 10px 20px; }
     }
     &.items { margin: 20px 20px 20px; background: #F8F8F8 url("https://www.simple.com/img/bg_pixel_texture.gif") repeat; 
-      li.item { padding: 10px 20px; border-bottom: 1px solid #E4E4E4; font-size: 15px;
+      li.item { padding: 10px 15px; border-bottom: 1px solid #E4E4E4; font-size: 15px;
         &:last-child { border-bottom: 0px solid #E4E4E4; }
       }
     }
