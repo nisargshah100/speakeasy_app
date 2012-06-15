@@ -80,5 +80,9 @@ class FayeHandler extends Spine.Module
 
     Room.trigger 'refresh_users', msg.room_id
 
+  subscribeToGitHub: (url) =>
+    @faye.subscribe "/github/#{url}", (msg) =>
+      console.log(msg)
+
 $ -> 
   window.fayeHandler = new FayeHandler

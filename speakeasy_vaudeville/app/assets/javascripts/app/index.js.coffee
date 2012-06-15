@@ -22,6 +22,7 @@ class App extends Spine.Controller
     ".invites": "invitesEl"
     "#room-info": "roomInfoEl"
     "#room_search": 'searchEl'
+    '#github_activity': 'githubEl'
 
   constructor: ->
     super
@@ -35,6 +36,7 @@ class App extends Spine.Controller
     @room_info = new RoomInfo({el: @roomInfoEl})
     @search = new Search({ el: @searchEl})
     @inviter = new Inviter({el: @invitesEl})
+    @github = new GitHub({el: @githubEl})
 
     # Spine.Route.setup
 

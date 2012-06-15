@@ -1,0 +1,4 @@
+<ul>
+  <% for event in @events: %>
+    <li><%= event.data %></li>
+</ul>
