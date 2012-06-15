@@ -35,7 +35,6 @@ class App extends Spine.Controller
     @messages = new Messages({el: @messagesEl})
     @room_info = new RoomInfo({el: @roomInfoEl})
     @search = new Search({ el: @searchEl})
-    @inviter = new Inviter({el: @invitesEl})
     @github = new GitHub({el: @githubEl})
 
     # Spine.Route.setup

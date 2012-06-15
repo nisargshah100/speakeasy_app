@@ -35,8 +35,12 @@ class Sidebar extends Spine.Controller
     Room.bind 'create', @addNewRoom
     
   render: =>
+    @rooms.empty()
     Room.each(@addOneRoom)
     @initialLoad()
+
+  loadRooms: =>
+    Room.delete
 
   initialLoad: ->
     room_id = parseInt($.cookie('current_room_id') || Room?.first()?.id || -1)
@@ -52,7 +56,7 @@ class Sidebar extends Spine.Controller
       room: { name: value }
     }, (data) =>
       Room.deleteAll()
-      @rooms.empty()
+      # @rooms.empty()
       Room.fetch()
 
     @input.val ""

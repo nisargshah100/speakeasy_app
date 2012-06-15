@@ -56,9 +56,12 @@ class EditModal extends Spine.Controller
       url: "/api/core/rooms/#{@room.id}"
       data: $("#edit-room-form :input[value][value!='']").serialize()
       success: (data) =>
-        alert "room updated!"
+        console.log "updated."
+        Room.deleteAll()
+        Room.fetch()
+        $("#editRoom").modal('hide')
       error: (data) =>
-        alert "room not updated!"
+        console.log "not updated."
 
 class InviteModal extends Spine.Controller
 

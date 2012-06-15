@@ -6,7 +6,7 @@ class PermissionsController < ApplicationController
     if @room
       @permissions = attach_emails_to(@room.permissions)
     else
-      head status: :bad_found
+      head status: :bad_request
     end
   end
 
