@@ -24,11 +24,11 @@ God.watch do |w|
   w.keepalive
 end
 
-# God.watch do |w|
-#   w.name = "faye"
-#   w.start = "cd #{path}/speakeasy_dumbwaiter/; ruby faye.rb"
-#   w.keepalive
-# end
+God.watch do |w|
+  w.name = "faye"
+  w.start = "cd #{path}/speakeasy_dumbwaiter/; ruby faye.rb"
+  w.keepalive
+end
 
 # God.watch do |w|
 #   w.name = "messaging server"
@@ -60,11 +60,11 @@ God.watch do |w|
   w.keepalive
 end
 
-# God.watch do |w|
-#   w.name = "search redis server"
-#   w.start = "cd #{path}/speakeasy_gumshoe/; rake subscribe"
-#   w.keepalive
-# end
+God.watch do |w|
+  w.name = "search redis server"
+  w.start = "cd #{path}/speakeasy_gumshoe/; rake subscribe"
+  w.keepalive
+end
 
 God.watch do |w|
   w.name = "search indexer"
