@@ -48,6 +48,7 @@ class Sidebar extends Spine.Controller
       Room.trigger 'noRoom'
     item = $("[data-name=rooms][id=#{room_id}]")
     @change(item)
+    Room.trigger('refresh_users', room_id)
 
   createRoom: ->
     url = Room.url()
@@ -101,6 +102,6 @@ class Sidebar extends Spine.Controller
 
   @room: =>
     id = $(".item.current").attr('id')
-    Room.find(id)
+    Room.find(id) if id
 
 window.Sidebar = Sidebar

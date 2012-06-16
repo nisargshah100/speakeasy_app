@@ -90,7 +90,11 @@ class Messages extends Spine.Controller
     @view('messages/empty_room')(username: username)
         
   createMessage: ->
-    alert "Room required" unless Sidebar.room()
+    unless Sidebar.room()
+      alert "Room required"
+      $('#chat_message').val('')
+      return false
+
     url = Message.url()
     value = @input.val()
     return false unless value

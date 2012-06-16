@@ -9,29 +9,11 @@ class FayeHandler extends Spine.Module
     Room.bind 'refresh', @subscribeToRooms
     Sidebar.bind 'joinedRoom', @joinGitHub
 
-    # @publishJoinedRoom()
-    # @publishLeftRoom()
-
   @url:
     "#{window.location.host.replace(':9000', '').replace(':9001', '')}:9292/faye"
 
   publishToRoom: (room, msg) =>
     @faye.publish "/room/#{room.id}", msg
-
-  # publishJoinedRoom: =>
-  #   console.log('Publsih Joined Room Entered')
-  #   Sidebar.bind 'joinedRoom', (room_id) =>
-  #     @faye.publish "/room/#{room_id}/joined", { 
-  #       username: $("meta[name=current-user-name]").attr("content"), 
-  #       room_id: room_id 
-  #     }
-
-  # publishLeftRoom: =>
-  #   Sidebar.bind 'leftRoom', (room_id) =>
-  #     @faye.publish "/room/#{room_id}/left", { 
-  #       username: $("meta[name=current-user-name]").attr("content"), 
-  #       room_id: room_id
-  #     }
 
   subscribeToRoom: (room) =>
     if not @connected[room.id]
@@ -55,6 +37,8 @@ class FayeHandler extends Spine.Module
               username: msg.username,
               sid: msg.sid
             )
+
+      Room.trigger 'refresh_users', room.id
 
     @connected[room.id] = true
 
