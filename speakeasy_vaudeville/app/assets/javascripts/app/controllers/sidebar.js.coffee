@@ -101,6 +101,6 @@ class Sidebar extends Spine.Controller
 
   @room: =>
     id = $(".item.current").attr('id')
-    Room.find(id)
+    Room.find(id) if id
 
 window.Sidebar = Sidebar

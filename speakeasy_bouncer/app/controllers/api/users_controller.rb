@@ -27,6 +27,7 @@ class Api::UsersController < ApplicationController
   def create
     user = User.new(params[:user], :as => :admin)
     if user.save
+      cookies['user'] = user.token
       success(UserDecorator.decorate(user), 201)
     else
       validation_error(user)

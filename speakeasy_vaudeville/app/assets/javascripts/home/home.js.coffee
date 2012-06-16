@@ -20,7 +20,7 @@ jQuery ->
       url: $(this).attr('action')
       data: $(this).serialize()
       success: (data) ->
-        location.href = "/"
+        location.href = "/app"
       error: (data) ->
         validation = JSON.parse(data.responseText)
         $('#user_email').after("<p class='validation'>email " + (validation.email[0]) + "</p>") if validation.email?
