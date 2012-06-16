@@ -88,6 +88,7 @@ class Sidebar extends Spine.Controller
 
     $.cookie('current_room_id', current_id)
 
+    Room.trigger 'joined', current_id
     Sidebar.trigger 'leftRoom', prev_room_id
     Sidebar.trigger 'joinedRoom', current_id
 

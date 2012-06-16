@@ -15,6 +15,8 @@
 $ = jQuery.sub()
 
 class App extends Spine.Controller
+  @extend(Spine.Events)
+
   elements:
     "#messages": "messagesEl"
     ".lobby": "sidebarEl"

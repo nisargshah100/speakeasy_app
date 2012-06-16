@@ -1,5 +1,5 @@
 class Room < ActiveRecord::Base
-  attr_accessible :name, :description, :sid
+  attr_accessible :name, :description, :sid, :github_url
   has_many :messages
   has_many :permissions
   validates_presence_of :name

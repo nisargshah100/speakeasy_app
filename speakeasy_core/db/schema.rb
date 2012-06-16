@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120607194159) do
+ActiveRecord::Schema.define(:version => 20120616034836) do
 
   create_table "messages", :force => true do |t|
     t.text     "body"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20120607194159) do
     t.string   "sid"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "github_url"
   end
 
 end

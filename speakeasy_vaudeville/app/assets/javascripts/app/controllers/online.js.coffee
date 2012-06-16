@@ -3,6 +3,7 @@ $ = jQuery.sub()
 class Online extends Spine.Controller
   
   constructor: ->
+    super
     Room.bind 'refresh_users', @fetch_users_online
 
   fetch_users_online: (room_id) => 

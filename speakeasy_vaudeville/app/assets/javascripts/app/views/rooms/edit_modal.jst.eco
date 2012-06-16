@@ -15,7 +15,7 @@
         </tr>
         <tr>
           <td><label for="room_repo">Repo:</label></td>
-          <td><input id="edit_room_repo" placeholder="github repo" type="text" /></td>
+          <td><input id="edit_room_repo" name="room[github_url]" placeholder="<%= @room.github_url || 'Github Repo' %>" type="text" /></td>
         </tr>
         <tr>
           <td>

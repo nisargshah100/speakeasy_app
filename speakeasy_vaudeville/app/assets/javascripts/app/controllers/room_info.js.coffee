@@ -49,7 +49,8 @@ class EditModal extends Spine.Controller
     e.preventDefault()
     name = $("#edit_room_name").val()
     desc = $("#edit_room_description").val()
-    return false unless name || desc
+    url = $("#edit_room_repo").val()
+    return false unless name || desc || url
     
     $.ajax 
       type: "put"

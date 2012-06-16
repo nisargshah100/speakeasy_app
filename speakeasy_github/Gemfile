@@ -28,6 +28,8 @@ gem 'jquery-rails'
 gem 'hashie'
 gem 'draper'
 gem 'thin'
+gem 'redis'
+gem 'octokit'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

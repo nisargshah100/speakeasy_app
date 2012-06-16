@@ -7,6 +7,7 @@ class FayeHandler extends Spine.Module
     @connected ||= {}
 
     Room.bind 'refresh', @subscribeToRooms
+    Sidebar.bind 'joinedRoom', @joinGitHub
 
     # @publishJoinedRoom()
     # @publishLeftRoom()
@@ -80,9 +81,18 @@ class FayeHandler extends Spine.Module
 
     Room.trigger 'refresh_users', msg.room_id
 
+  joinGitHub: (room_id) =>
+    GitHubEvent.deleteAll()
+    room = Room.find(room_id)
+    @subscribeToGitHub(room.github_url) if room?.github_url
+
   subscribeToGitHub: (url) =>
-    @faye.subscribe "/github/#{url}", (msg) =>
-      console.log(msg)
+    faye_url = "/github/#{url.replace(/[^-a-z0-9]/ig,'')}"
+    if not @connected[faye_url]
+      @faye.subscribe faye_url, (msg) =>
+        if Sidebar.room().github_url == msg.repository.url
+          GitHubEvent.create(url: url, data: msg)
+      @connected[faye_url] = true
 
 $ -> 
   window.fayeHandler = new FayeHandler
