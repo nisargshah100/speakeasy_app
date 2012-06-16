@@ -1,0 +1,8 @@
+<li id="<%= @data.id %>" data-email="<%= @email %>">
+  <%= @email %>
+  <% if @admin: %>
+    <% unless $("meta[name=current-user-email]").attr("content") == @email: %>
+      <a href="#" id="remove-patron" class="btn">X</a>
+    <% end %>
+  <% end %>
+</li>

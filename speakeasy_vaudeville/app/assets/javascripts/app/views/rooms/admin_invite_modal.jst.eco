@@ -13,8 +13,11 @@
     <h5>Current Patrons:</h5>
     <ul id="invited-members">
     <% for permission in @permissions: %>
-      <li id="<%= permission.email %> <%= permission.id %>">
+      <li id="<%= permission.id %>" data-email="<%= permission.email %>">
         <%= permission.email %>
+        <% unless $("meta[name=current-user-email]").attr("content") == permission.email: %>
+          <a href="#" id="remove-patron" class="btn">X</a>
+        <% end %>
       </li>
     <% end %>
     </ul>
