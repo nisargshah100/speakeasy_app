@@ -1,5 +1,7 @@
 class PermissionsController < ApplicationController
-  before_filter :find_room, :authenticate_user, :confirm_room_owner
+  before_filter :find_room, :authenticate_user
+  before_filter :confirm_room_access, only: [ :index, :create ]
+  before_filter :confirm_room_owner, only: [ :update, :destroy ]
   before_filter :invitee, only: [ :create, :destroy ]
 
   def index
@@ -37,6 +39,10 @@ class PermissionsController < ApplicationController
 
   def confirm_room_owner    
     head status: :unauthorized unless @user.sid == @room.sid
+  end
+
+  def confirm_room_access
+    head status: :unauthorized unless @room.permissions.pluck(:sid).include?(@user.sid)
   end
 
   def attach_emails_to(permissions)
