@@ -6,8 +6,8 @@ class Online extends Spine.Controller
     super
     Room.bind 'refresh_users', @fetch_users_online
 
-  fetch_users_online: (room_id) => 
-    $.get "/api/users/connections/", { 'channel': room_id }, (data) =>
+  fetch_users_online: (room_id) =>
+    $.get "/api/users/connections/", { 'channel': room_id, 'rand': Math.random() }, (data) =>
       if Sidebar.room().id == room_id
         @users = data
         @render()
