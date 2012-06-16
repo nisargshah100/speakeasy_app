@@ -21,9 +21,9 @@
     <h2>
       <%= @recent_users_per_day %>
       <% if @recent_users_per_day > @historical_users_per_day %>
-        <span class="icon x-large gray" data-icon="~"></span>
+        <span class="icon x-large green" data-icon="~"></span>
       <% else %>
-        <span class="icon x-large gray" data-icon="|"></span>
+        <span class="icon x-large red" data-icon="|"></span>
       <% end %>
     </h2>
     <h6>Users Per Day</h6>
@@ -32,9 +32,9 @@
     <h2>
       <%= @all_percent_users_creating_room %>%
       <% if @all_percent_users_creating_room > @historical_percent_users_creating_room %></td>
-        <span class="icon x-large gray" data-icon="~"></span>
+        <span class="icon x-large green" data-icon="~"></span>
       <% else %>
-        <span class="icon x-large gray" data-icon="|"></span>
+        <span class="icon x-large red" data-icon="|"></span>
       <% end %>
     </h2>
     <h6>Users creating rooms</h6>
@@ -42,7 +42,7 @@
 
   <div class="col_3 align">
     <div>
-      <h6>Primary</h6>
+      <h6>Primary Metric</h6>
       <ul class="menu vertical">
         <%= clear_link "Clear", dashboard_path(x_axis: params[:x_axis]) %>
         <%= primary_link "Created Messages", "created_messages", dashboard_path(num: "created_messages", denom: params[:denom], x_axis: params[:x_axis]) %>
@@ -52,7 +52,7 @@
       </ul>
     </div>
     <div>
-      <h6>Secondary</h6>
+      <h6>Secondary Metric</h6>
       <ul class="menu vertical">
         <%= clear_link "Clear", dashboard_path(num: params[:num], x_axis: params[:x_axis]) %>
         <%= secondary_link "Created Messages", "created_messages", dashboard_path(num: params[:num], denom: "created_messages", x_axis: params[:x_axis]) %>
