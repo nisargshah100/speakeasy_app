@@ -30,6 +30,7 @@ class EditModal extends Spine.Controller
 
   events:
     "submit #edit-room-form" : "updateRoom"
+    "click #delete-room" : "deleteRoom"
 
   elements:
     ".modal-header" : "header"
@@ -45,6 +46,10 @@ class EditModal extends Spine.Controller
 
   template: =>
     @view('rooms/edit_modal')(room: @room)
+
+  deleteRoom: =>
+    if confirm "Are you sure you want to delete #{@room.name}?"
+      @el.modal('hide')
 
   updateRoom: (e) =>
     e.preventDefault()
