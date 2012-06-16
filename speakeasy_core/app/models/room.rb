@@ -3,6 +3,7 @@ class Room < ActiveRecord::Base
   has_many :messages
   has_many :permissions
   validates_presence_of :name
+  validates :name, length: { maximum: 20 }
   after_create :create_room_permission_for_owner
 
   attr_accessor :username

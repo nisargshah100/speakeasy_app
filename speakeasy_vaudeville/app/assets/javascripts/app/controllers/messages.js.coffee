@@ -91,7 +91,7 @@ class Messages extends Spine.Controller
         
   createMessage: ->
     unless Sidebar.room()
-      alert "Room required"
+      alert "You need to enter a room before you can start chatting!"
       $('#chat_message').val('')
       return false
 

@@ -22,7 +22,8 @@ class Sidebar extends Spine.Controller
 
   events:
     "click [data-name]": "click"
-    "click .createRoom button": "createRoom"
+    # "click .createRoom button": "createRoom"
+    "submit #create-room-form" : "createRoom"
 
   elements:
     "#rooms": "rooms"
@@ -50,20 +51,31 @@ class Sidebar extends Spine.Controller
     @change(item)
     Room.trigger('refresh_users', room_id)
 
-  createRoom: ->
-    url = Room.url()
-    value = @input.val()
-    return false  unless value
-    
-    $.post "/api/core/rooms", {
-      room: { name: value }
-    }, (data) =>
-      Room.deleteAll()
-      Room.fetch()
+  createRoom: (e) ->
+    e.preventDefault()
+    name = $("#create_room_name").val()
+    desc = $("#create_room_description").val()
+    url = $("#create_room_repo").val()
+    unless name
+      $("#validation").remove()
+      $("#room_name").append "<td id='validation'><p>Room name is required</p></td>"
+      return false
 
-    @input.val ""
-    @input.focus()
-    false
+    unless name.length <= 20
+      $("#validation").remove()
+      $("#room_name").append "<td id='validation'><p>Room name must be less than 20 characters.</p></td>"
+      return false
+    
+    $.ajax 
+      type: "post"
+      url: "/api/core/rooms"
+      data: $("#create-room-form :input[value][value!='']").serialize()
+      success: (data) ->
+        Room.deleteAll()
+        Room.fetch()
+        $("#createRoom").modal('hide')
+      error: (data) ->
+        alert "Hmm, something went wrong. Refresh the page and try again."
 
   addOneRoom: (item) =>
     roomItem = new RoomsItem(item)

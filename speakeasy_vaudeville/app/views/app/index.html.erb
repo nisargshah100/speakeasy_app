@@ -56,19 +56,49 @@
         </ul>
       </div>
       <div id="new_room">
-        <a href="#" id="add_room" class="btn">+</a>
-        <div class="createRoom">
-          <form>
-            <input type="text" placeholder="Room name">
-            <button>Add</button>
-          </form>
+        <a class="btn" data-toggle="modal" href="#createRoom">Create Room</a>
+        <div class="modal hide" id="createRoom">
+          <div class="modal-header">
+            <h3>Create a new room</h3>
+          </div>
+          <div class="modal-body">
+            <div id="create_form">
+              <form accept-charset="UTF-8" action="/api/core/rooms%>" id="create-room-form" method="post">
+                <div style="margin:0;padding:0;display:inline">
+                  <input name="utf8" type="hidden" value="&#x2713;" />
+                </div>
+                <table>
+                  <tbody>
+                    <tr id="room_name">
+                      <td><label for="create_room_name">Room name:</label></td>
+                      <td><input id="create_room_name" name="room[name]" type="text" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="room_description">Room description:</label></td>
+                      <td><input id="create_room_description" name="room[description]" type="text" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="room_repo">Repo:</label></td>
+                      <td><input id="create_room_repo" name="room[github_url]" placeholder="git://github.com/nisargshah100/speakeasy_app.git" type="text" /></td>
+                    </tr>
+                    <tr>
+                      <td>
+                      <td><input class="btn btn-primary" name="commit" type="submit" id="create-submit" value="Create Room" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">Close</a>
+          </div>
         </div>
       </div>
     </div>
 
     <div id="messages">
       <ul id="alert">
-        <li>This is a test</li>
       </ul>
       <div id="stuff">
         <ul id="welcome">

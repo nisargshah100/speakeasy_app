@@ -16,7 +16,6 @@ class PermissionsController < ApplicationController
     permission = @room.permissions.new(params[:permission])
     permission.sid = @invitee.sid
     if permission.save
-      # head status: :created, :location => [@room, permission]
       render json: permission, status: :created, location: [@room, permission]
     else
       render json: { message: "User already has permission to this room!" }, status: :bad_request
