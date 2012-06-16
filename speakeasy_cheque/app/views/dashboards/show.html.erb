@@ -1,10 +1,12 @@
-<span id="created_messages">
-  <%= pluralize(@total_messages, "Message") %>
+<div class="col_12 inner header"><h1>Speakeasy Cheque</h1></div>
+
+<div class="col_12 totals" id="created_messages">
+  <h4><%= pluralize(@total_messages, "Message") %>
   <%= pluralize(@total_rooms, "Room") %>
-  <%= pluralize(@total_users, "User") %>
-</span>
-<br>
-<table>
+  <%= pluralize(@total_users, "User") %></h4>
+</div>
+
+<table class = "kpis">
   <tr>
     <th></th>
     <th>Current</th>
@@ -23,24 +25,30 @@
 </table>
 
 
+<div class="row">
+  <div class="col_4">
+    <div class = "row">
+    <ul class="menu vertical col_">
+      <li>Primary</li>
+      <li><%= link_to "Clear", dashboard_path(denom: params[:denom], x_axis: params[:x_axis]) %>
+      <li><%= link_to "Created Messages", dashboard_path(num: "created_messages", denom: params[:denom], x_axis: params[:x_axis]) %></li>
+      <li><%= link_to "Created Rooms", dashboard_path(num: "created_rooms", denom: params[:denom], x_axis: params[:x_axis]) %></li>
+      <li><%= link_to "User Sign-Ups", dashboard_path(num: "created_users", denom: params[:denom], x_axis: params[:x_axis]) %>a</li>
+      <li><%= link_to "Room Invites", dashboard_path(num: "created_permissions", denom: params[:denom], x_axis: params[:x_axis]) %></li>
+    </ul>
+    <br>
+    Secondary
+    <%= link_to "Clear", dashboard_path(num: params[:num], x_axis: params[:x_axis]) %>
+    <%= link_to "Created Messages", dashboard_path(num: params[:num], denom: "created_messages", x_axis: params[:x_axis]) %>
+    <%= link_to "Created Rooms", dashboard_path(num: params[:num], denom: "created_rooms", x_axis: params[:x_axis]) %>
+    <%= link_to "User Sign-Ups", dashboard_path(num: params[:num], denom: "created_users", x_axis: params[:x_axis]) %>
+    <%= link_to "Room Invites", dashboard_path(num: params[:num], denom: "created_permissions", x_axis: params[:x_axis]) %>
+  </div>
+  </div>
 
 
-Numerator
-<%= link_to "Clear", dashboard_path() %>
-<%= link_to "Created Messages", dashboard_path(num: "created_messages", denom: params[:denom], x_axis: params[:x_axis]) %>
-<%= link_to "Created Rooms", dashboard_path(num: "created_rooms", denom: params[:denom], x_axis: params[:x_axis]) %>
-<%= link_to "User Sign-Ups", dashboard_path(num: "created_users", denom: params[:denom], x_axis: params[:x_axis]) %>
-<%= link_to "Room Invites", dashboard_path(num: "created_permissions", denom: params[:denom], x_axis: params[:x_axis]) %>
-<br>
-Denominator
-<%= link_to "Clear", dashboard_path() %>
-<%= link_to "Created Messages", dashboard_path(num: "created_messages", denom: "created_messages", x_axis: params[:x_axis]) %>
-<%= link_to "Created Rooms", dashboard_path(num: params[:num], denom: "created_rooms", x_axis: params[:x_axis]) %>
-<%= link_to "User Sign-Ups", dashboard_path(num: params[:num], denom: "created_users", x_axis: params[:x_axis]) %>
-<%= link_to "Room Invites", dashboard_path(num: params[:num], denom: "created_permissions", x_axis: params[:x_axis]) %>
-
-
-<div id="chart" style="width: 560px; height: 300px;"></div>
+  <div id="chart" class="col_8" style="width: 560px; height: 300px;"></div>
+</div>
 
 <%= link_to "Day", dashboard_path(x_axis: "day", num: params[:num], denom: params[:denom]) %>
 <%= link_to "Week", dashboard_path(x_axis: "week", num: params[:num], denom: params[:denom]) %>
