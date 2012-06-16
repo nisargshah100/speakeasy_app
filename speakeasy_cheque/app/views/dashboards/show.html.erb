@@ -19,8 +19,8 @@
 
   <div class="col_3 totals stats">
     <h2>
-      <%= @recent_users_per_day %>
-      <% if @recent_users_per_day > @historical_users_per_day %>
+      <%= @users_per_day %>
+      <% if @users_trending_up %>
         <span class="icon x-large green" data-icon="~"></span>
       <% else %>
         <span class="icon x-large red" data-icon="|"></span>
@@ -30,14 +30,14 @@
   </div>
   <div class="col_3 totals stats">
     <h2>
-      <%= @all_percent_users_creating_room %>%
-      <% if @all_percent_users_creating_room > @historical_percent_users_creating_room %></td>
+      <%= @messages_per_user %>
+      <% if @messages_per_user_trending_up %></td>
         <span class="icon x-large green" data-icon="~"></span>
       <% else %>
         <span class="icon x-large red" data-icon="|"></span>
       <% end %>
     </h2>
-    <h6>Users creating rooms</h6>
+    <h6>Messages Per User</h6>
   </div>
 
   <div class="col_3 align">

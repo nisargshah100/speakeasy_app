@@ -1,1 +1,1 @@
-DAY_ZERO = DateTime.new(2012, 6, 12)
+DAY_ZERO = DateTime.new(2012, 5, 7)
