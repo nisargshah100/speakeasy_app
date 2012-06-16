@@ -18,6 +18,7 @@ class RoomInfo extends Spine.Controller
       @editModal = new EditModal( {el: $("#editRoom"), room} )
     else
       $("#room-info").append(@template(room))
+      @inviteModal = new InviteModal( {el: $("#invite"), room} )
 
   template: (room) =>
     @view('rooms/room_info')(room: room)
@@ -75,7 +76,6 @@ class InviteModal extends Spine.Controller
 
   constructor: (params) ->
     super
-    console.log @el
     @room = params.room
     @getPermissions()
 
