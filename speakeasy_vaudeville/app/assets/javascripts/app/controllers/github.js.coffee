@@ -35,6 +35,7 @@ class GitHub extends Spine.Controller
       $("#github_content").hide()
 
   addOne: =>
+    @clear()
     @render()
 
   template: ->
