@@ -78,8 +78,11 @@
       new Highcharts.Chart({
         chart: { renderTo: 'chart' },
         title: { text: '<%= @chart_title %>' },
-        xAxis: { type: 'datetime' },
-        yAxis: { text: '<%= @chart_title %>' },
+        xAxis: { type: 'datetime',
+                 offset: 10 },
+        yAxis: { title: { text: '' },
+                 min: 0},
+        legend: { enabled: false },
         series: [{
                   name: "<%= @chart_title %>",
                   pointInterval: <%= @point_interval %>,
