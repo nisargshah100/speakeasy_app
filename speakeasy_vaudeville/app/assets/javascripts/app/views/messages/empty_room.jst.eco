@@ -1,4 +1,4 @@
 <li>
-  <h3>Hey there <%= @username %>!</h3>
-  <p>Doesn't look like anyone has started chatting here yet</p>
+  <h3>Doesn't look like anyone has started chatting here yet.</h3>
+  <p>Spread the word - invite patrons to the room <a data-toggle="modal" href="#invite">here</a>.</p>
 </li>

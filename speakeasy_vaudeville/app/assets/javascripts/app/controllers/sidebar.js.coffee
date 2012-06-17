@@ -22,7 +22,6 @@ class Sidebar extends Spine.Controller
 
   events:
     "click [data-name]": "click"
-    # "click .createRoom button": "createRoom"
     "submit #create-room-form" : "createRoom"
 
   elements:

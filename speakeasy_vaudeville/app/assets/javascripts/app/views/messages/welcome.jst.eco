@@ -1,5 +1,10 @@
 <li>
-  <h1>Hey there <%= @username %>!</h1>
-  <p>Welcome to Speakeasy!</p>
-  <p>Start by creating some rooms and inviting people!</p>
+  <h1>Hi, <%= @username %>.</h1>
+  <h2>Welcome to Speakeasy, the best way to collaborate instantly with your team.</h2>
+  <h2>Getting started is easy:</h2>
+  <p>1. Create a new room <a data-toggle="modal" href="#createRoom">here</a>.</p>
+  <p>2. Spread the word to your team members.</p>
+  <h4>Happy chatting,</h4>
+  <h4>- The Speakeasy team.</h4>
+>>>>>>> 61d9eccc270b822c2070ca335be7776732f6bf79
 </li>

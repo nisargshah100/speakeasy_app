@@ -27,6 +27,7 @@ class RoomInfo extends Spine.Controller
     @view('rooms/admin_room_info')(room: room)
 
 class EditModal extends Spine.Controller
+  @extend(Spine.Events)
 
   events:
     "submit #edit-room-form" : "updateRoom"
@@ -49,7 +50,17 @@ class EditModal extends Spine.Controller
 
   deleteRoom: =>
     if confirm "Are you sure you want to delete #{@room.name}?"
-      @el.modal('hide')
+
+      $.ajax 
+        type: "delete"
+        url: "/api/core/rooms/#{@room.id}"
+        success: (data) =>
+          $.cookie('current_room_id', null)
+          Room.deleteAll()
+          Room.fetch()
+          @el.modal('hide')
+        error: (data) =>
+          alert "Hmm, something went wrong. Please refresh the page and try again."
 
   updateRoom: (e) =>
     e.preventDefault()
@@ -65,7 +76,7 @@ class EditModal extends Spine.Controller
       success: (data) =>
         Room.deleteAll()
         Room.fetch()
-        $("#editRoom").modal('hide')
+        @el.modal('hide')
       error: (data) =>
         console.log "not updated."
 

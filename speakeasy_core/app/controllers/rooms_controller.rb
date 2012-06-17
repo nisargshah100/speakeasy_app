@@ -30,7 +30,7 @@ class RoomsController < ApplicationController
   end
 
   def destroy
-    @room.destroy
+    @room.permissions.destroy_all
     head status: :ok
   end
 
