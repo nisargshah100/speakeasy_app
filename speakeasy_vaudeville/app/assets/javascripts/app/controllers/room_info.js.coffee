@@ -68,6 +68,11 @@ class EditModal extends Spine.Controller
     desc = $("#edit_room_description").val()
     url = $("#edit_room_repo").val()
     return false unless name || desc || url
+
+    if name && name.length > 20
+      $("#edit_name_hint").children().remove()
+      $("#edit_name_hint").append "<h6 class='hint' style='color:red;'>Room name must be less than 20 characters!</h6>"
+      return false
     
     $.ajax 
       type: "put"
