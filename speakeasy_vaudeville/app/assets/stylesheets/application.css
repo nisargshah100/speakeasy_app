@@ -16,3 +16,8 @@
 .stack > *:not(.active) {
   display: none;
 }
+
+input[type=text], input[type=password] {
+  font-size: 11px;
+  padding: 3px;
+}
