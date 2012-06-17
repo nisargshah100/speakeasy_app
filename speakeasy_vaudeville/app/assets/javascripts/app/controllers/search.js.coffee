@@ -12,12 +12,17 @@ class Search extends Spine.Controller
 
   constructor: ->
     $("#search_form").live('submit', @searchSubmit)
+    $("#clear_search_results").live('click', @clearSearch)
     Sidebar.bind 'joinedRoom', Search.resetSearch
 
     @render()
 
   template: ->
     @view('rooms/search')()
+
+  clearSearch: (e) =>
+    e.preventDefault()
+    @search("")
 
   searchSubmit: (e) =>
     e.preventDefault()
@@ -41,12 +46,15 @@ class Search extends Spine.Controller
             Message.create(
               body: message.body
               username: message.username
-              room_id: message.room_id
+              room_id: message.room_id,
+              sid: message.sid
             )
 
         Message.trigger 'refresh'
+        $("#welcome").html("<div style='padding: 10px'>Searched for '#{q}'<div style='float:right'><a href='#' id='clear_search_results'>Clear Search Results</a></div></div>")
+        $("#welcome").show()
       else
-        alert 'No messages found'
+        alert 'No messages found. Messages are indexed every minute.'
 
   render: =>
     $("#room_search").html @template()

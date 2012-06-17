@@ -1,5 +1,5 @@
 class Message < ActiveRecord::Base
-  attr_accessible :body, :room_id, :username
+  attr_accessible :body, :room_id, :sid, :username
   attr_accessor :username
   belongs_to :room
 
@@ -18,6 +18,7 @@ class Message < ActiveRecord::Base
     {
       :body => self.body,
       :room_id => self.room_id,
+      :sid => self.sid,
       :username => self.username,
       :id => self.id
     }
