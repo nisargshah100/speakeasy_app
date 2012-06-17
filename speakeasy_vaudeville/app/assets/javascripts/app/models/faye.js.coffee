@@ -79,8 +79,13 @@ class FayeHandler extends Spine.Module
       @faye.subscribe faye_url, (msg) =>
         console.log(msg)
         if Sidebar.room().github_url == msg.repository.url
-          console.log('url matched')
-          GitHubEvent.create(url: url, data: msg)
+          # console.log('url matched')
+          # GitHubEvent.create(url: url, data: msg)
+          $.get "/api/github?url=#{url}", (data) =>
+            console.log(data)
+            for event in data
+              GitHubEvent.create(data: event)
+
       @connected[faye_url] = true
 
 $ -> 
