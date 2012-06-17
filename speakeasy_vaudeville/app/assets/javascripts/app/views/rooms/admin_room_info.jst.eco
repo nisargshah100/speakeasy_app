@@ -2,8 +2,8 @@
 <p id="room_description"><q><%= @room.description %></q></p>
 <h4 id="proprietor">Proprieter's Info</h4>
 
-<a class="btn" data-toggle="modal" href="#invite" >Manage Patrons</a>
-<a class="btn" data-toggle="modal" href="#editRoom" >Edit Room</a>
+<a class="btn" data-toggle="modal" href="#invite" id="manage">Manage Patrons</a>
+<a class="btn" data-toggle="modal" href="#editRoom">Edit Room</a>
 
 <div id="edit">
   <div class="modal hide" id="editRoom">

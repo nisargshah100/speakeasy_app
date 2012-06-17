@@ -280,8 +280,17 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
   &:after { margin-left: 8px; vertical-align: -2px; content: url("http://www.maxcutler.com/wp-content/themes/pixelpower/images/social_icons/octocat.png"); }
 }
 
-.search h4 { background: url("geomicons.png") no-repeat -384px -1408px; width: 128px; height: 128px; }
-  
+.search h4 { 
+ &:after { margin-left: 8px; vertical-align: -2px; content: url("search.png"); }
+}
+
+h4#proprietor { 
+ &:after { margin-left: 8px; vertical-align: -2px; content: url("proprietor.png"); }
+}
+
+.users h4 {
+ &:after { margin-left: 8px; vertical-align: -2px; content: url("patrons.png"); }
+}
 
 .new { height: 80px; background:#EEE; position:absolute; bottom:0px; left:0px; right:0px; -webkit-box-shadow: rgba(0, 0, 0, 0.549219) 0px .5px 10px; -moz-box-shadow: rgba(0, 0,
 0, 0.249219) 0px .5px 10px; -o-box-shadow: rgba(0, 0, 0, 0.449219) 0px .5px 10px; box-shadow: rgba(0, 0, 0, 0.449219) 0px .5px 10px;
@@ -355,6 +364,8 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
   a { padding: 0px 4px 4px; }
 }
 
+#new_room a.btn { padding: 4px 10px; margin-top: 10px; }
+
 #rooms { width: 220px; margin: 0 -20px;
   li { list-style-type: none; padding: 1px 0;
     a { padding: 7px 20px; display:block; text-shadow: 0px 1px 1px #000; font-size: 14px;
@@ -371,7 +382,9 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
 
 #room-info {
   h4#proprietor { padding: 20px 0 5px; }
-  .btn { font-size: 14px; }
+  a.btn { font-size: 14px; 
+    &#manage { margin-right: 10px; }
+  }
 }
 
 .right-nav { padding: 0 15px; }
@@ -380,11 +393,11 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
   #room_name { padding: 10px 0; color: #ccc; font-size: 26px; }
   #room_description q { color: #ccc; }
   #data { margin: 10px 0;
-    .header { border-top: 1px solid #ccc; }
+    .header {  }
     .search { height: 50px; }
     .github-events, .users { height: 225px }
     .github-events {
-      #github_activity { overflow-y: auto; height: 85%;
+      #github_activity { overflow-y: auto; height: 85%; overflow-x: hidden;
         a.commit { color: #B3B3B3; text-decoration: none;
           &:hover { color: #fefefe; text-decoration: underline; }
         }
@@ -398,10 +411,16 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
         }
       }
     }
-    #scroll { overflow-y: auto; height: 85%; }
-    ul { 
-      li { text-align: left; list-style-type:none; padding: 2px 0; color: #fff; font-size: 15px; }
-    }    
+    #scroll { overflow-y: auto; height: 85%;
+      li { color: #B3B3B3; padding: 5px 0; font-size: 15px;
+        &:nth-child(even) {
+          background-color: #2B2B31;
+        }
+        &:nth-child(odd) {
+          background-color: #1F1F24;
+        }
+      }
+    }
   }
 }
 
