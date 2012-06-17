@@ -1,15 +1,15 @@
-<!-- ><li class="item">
-  <span class="author">travis:</span><span class="body"><%= @message.body %></span>
-</li>< -->
-
-<li class="item">
-  <% if @message.plain: %>
-    <%= @message.body %>
-  <% else: %>
-    <div class="author-image"><img src="/api/users/gravatar/<%= @message.sid %>"></img></div>
-    <div class="author-body">
-      <span class="author-name"><%= @message.username %></span>
-      <span class="body"><%= @message.body %></span>
-    </div>
-  <% end %>
-</li>
+<% if $("meta[name=current-user-name]").attr("content") == @message.username:%>
+  <li class="item current">
+<% else: %>
+  <li class="item">
+<% end %>
+    <% if @message.plain: %>
+      <%= @message.body %>
+    <% else: %>
+      <div class="author-image"><img src="/api/users/gravatar/<%= @message.sid %>"></img></div>
+      <div class="author-body">
+        <div class="author-name"><%= @message.username %></div>
+        <div class="body"><%= @message.body %></div>
+      </div>
+    <% end %>
+  </li>
