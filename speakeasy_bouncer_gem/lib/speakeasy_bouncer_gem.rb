@@ -25,6 +25,10 @@ module SpeakeasyBouncerGem
     Hashie::Mash.new(resp) if resp != {}
   end
 
+  def self.user_is_admin?(token)
+    get_user(token).is_admin
+  end
+
   def self.get_users_by_sid(sids)
     resp = self.conn.get "api/users/sids/", { :sids => sids.to_json }
     users = get_response(resp)
