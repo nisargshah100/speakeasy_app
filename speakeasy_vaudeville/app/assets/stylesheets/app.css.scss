@@ -271,14 +271,17 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
 
 .lobby { padding: 0 15px; }
 
-.header { padding: 20px 0 10px;
+.header { padding: 20px 0 15px;
   h1 {color: #ccc; text-shadow: 0px 2px 3px #4E4E4E; font-weight: 600; }
   h4 { margin-bottom: 5px; color: #878797; text-transform: uppercase; text-shadow: 0px 2px 3px #4E4E4E; font-weight: 600; font-size: 15px; }
 }
 
-.github h4 { 
+.github-events h4 { 
   &:after { margin-left: 8px; vertical-align: -2px; content: url("http://www.maxcutler.com/wp-content/themes/pixelpower/images/social_icons/octocat.png"); }
 }
+
+.search h4 { background: url("geomicons.png") no-repeat -384px -1408px; width: 128px; height: 128px; }
+  
 
 .new { height: 80px; background:#EEE; position:absolute; bottom:0px; left:0px; right:0px; -webkit-box-shadow: rgba(0, 0, 0, 0.549219) 0px .5px 10px; -moz-box-shadow: rgba(0, 0,
 0, 0.249219) 0px .5px 10px; -o-box-shadow: rgba(0, 0, 0, 0.449219) 0px .5px 10px; box-shadow: rgba(0, 0, 0, 0.449219) 0px .5px 10px;
@@ -340,9 +343,11 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
 /*-----------ROOMS------------*/
 
 .lobby { position: absolute; top:0; bottom:0; width:185px; left:0; background: url("http://www.hungryacademy.com/images/noise.png") repeat top left; overflow:auto; background: -webkit-gradient(linear, 100% 100%, 100% 0%, from($weathervane), to(#26262C));
-  #existing_rooms { overflow:auto; position: absolute; top: 0; bottom: 120px; left: 0; right: 0; padding: 15px; }
+  #existing_rooms { overflow:auto; position: absolute; top: 0; bottom: 100px; left: 0; right: 0; padding: 5px 15px; }
   #new_room { padding: 10px 15px; height: 80px; position:absolute; bottom:0px; left:0px; right:0px; -webkit-box-shadow: rgba(0, 0, 0, 0.549219) 0px .5px 10px; -moz-box-shadow: rgba(0, 0,
-  0, 0.249219) 0px .5px 10px; -o-box-shadow: rgba(0, 0, 0, 0.449219) 0px .5px 10px; box-shadow: rgba(0, 0, 0, 0.449219) 0px .5px 10px; }
+  0, 0.249219) 0px .5px 10px; -o-box-shadow: rgba(0, 0, 0, 0.449219) 0px .5px 10px; box-shadow: rgba(0, 0, 0, 0.449219) 0px .5px 10px; 
+    .btn { font-size: 14px; }
+  }
 }
 
 #new_room, #invite_patrons, #edit {
@@ -359,13 +364,14 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
     &:hover { cursor: pointer; } /* background-color: $chocolate; color: #fff; box-shadow: 0 0px 2px $weathervane; -moz-box-shadow: 0 0px 2px $weathervane; -webkit-box-shadow: 0px 1px 2px 1px $weathervane; }*/
     }
   }
-  a { color: #fff; }
+  a { color: #B3B3B3; }
 }
 
 /*-----------ROOM-INFO----------*/
 
 #room-info {
   h4#proprietor { padding: 20px 0 5px; }
+  .btn { font-size: 14px; }
 }
 
 .right-nav { padding: 0 15px; }
@@ -374,14 +380,32 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
   #room_name { padding: 10px 0; color: #ccc; font-size: 26px; }
   #room_description q { color: #ccc; }
   #data { margin: 10px 0;
-    .header { box-shadow: 0px 5px 7px -7px #333; }
+    .header { border-top: 1px solid #ccc; }
     .search { height: 50px; }
-    .github, .users { height: 100px; overflow-y: auto; }
+    .github-events, .users { height: 225px }
+    .github-events {
+      #github_activity { overflow-y: auto; height: 85%;
+        a.commit { color: #B3B3B3; text-decoration: none;
+          &:hover { color: #fefefe; text-decoration: underline; }
+        }
+        li { color: #B3B3B3; padding: 5px 0; font-size: 13px;
+          &:nth-child(even) {
+            background-color: #2B2B31;
+          }
+          &:nth-child(odd) {
+            background-color: #1F1F24;
+          }
+        }
+      }
+    }
+    #scroll { overflow-y: auto; height: 85%; }
     ul { 
       li { text-align: left; list-style-type:none; padding: 2px 0; color: #fff; font-size: 15px; }
     }    
   }
 }
+
+
 
 .hint { float: right;}
 
@@ -408,6 +432,9 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
 
       &:focus { border-color:rgba(35,146,231,0.8); outline:0; outline:thin dotted \9; -webkit-box-shadow:inset 0 1px 3px rgba(0,0,0,0.075),0 0 12px rgba(82,168,236,0.6) !important;
       -moz-box-shadow:inset 0 1px 3px rgba(0,0,0,0.075),0 0 12px rgba(82,168,236,0.6) !important; box-shadow:inset 0 1px 3px rgba(0,0,0,0.075),0 0 12px rgba(82,168,236,0.6) !important; }
+    }
+    table {
+      tr.hint-bottom td:last-child { padding-bottom: 8px; }
     }
   }
   #edit-room-form, #create_form input { 
