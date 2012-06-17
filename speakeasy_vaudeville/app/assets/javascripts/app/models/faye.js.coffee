@@ -72,9 +72,14 @@ class FayeHandler extends Spine.Module
 
   subscribeToGitHub: (url) =>
     faye_url = "/github/#{url.replace(/[^-a-z0-9]/ig,'')}"
+    console.log('Faye url ' + faye_url)
+
     if not @connected[faye_url]
+      console.log('Faye connected')
       @faye.subscribe faye_url, (msg) =>
+        console.log(msg)
         if Sidebar.room().github_url == msg.repository.url
+          console.log('url matched')
           GitHubEvent.create(url: url, data: msg)
       @connected[faye_url] = true
 
