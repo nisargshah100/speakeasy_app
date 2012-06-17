@@ -1,14 +1,6 @@
 $ = jQuery.sub()
-# Message = App.Message
-# window.MessagesItem = App.MessagesItem
-
-# $.fn.item = ->
-#   elementID   = $(@).data('id')
-#   elementID or= $(@).parents('[data-id]').data('id')
-#   Message.find(elementID)
 
 class MessagesItem extends Spine.Controller
-  #proxied: [ "render", "remove" ]
 
   template: (message) ->
     @view('messages/message')(message: message)
