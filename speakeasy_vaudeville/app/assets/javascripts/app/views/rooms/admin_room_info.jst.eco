@@ -5,25 +5,29 @@
 <a class="btn" data-toggle="modal" href="#invite" >Manage Patrons</a>
 <a class="btn" data-toggle="modal" href="#editRoom" >Edit Room</a>
 
-<div class="modal hide" id="editRoom">
-  <div class="modal-header">
-    <h3>Edit room: <%= @room.name %></h3>
-  </div>
-  <div class="modal-body">
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="btn btn-danger" id="delete-room">Delete Room</a>
-    <a href="#" class="btn" data-dismiss="modal">Close</a>
+<div id="edit">
+  <div class="modal hide" id="editRoom">
+    <div class="modal-header">
+      <h3>Edit room: <%= @room.name %></h3>
+    </div>
+    <div class="modal-body">
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn btn-danger" id="delete-room">Delete Room</a>
+      <a href="#" class="btn" data-dismiss="modal">Close</a>
+    </div>
   </div>
 </div>
 
-<div class="modal hide" id="invite">
-  <div class="modal-header">
-    <h3>Invite patrons</h3>
-  </div>
-  <div class="modal-body">
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="btn" data-dismiss="modal">Close</a>
+<div id="invite_patrons">
+  <div class="modal hide" id="invite">
+    <div class="modal-header">
+      <h3>Invite patrons to <%= @room.name %></h3>
+    </div>
+    <div class="modal-body">
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn" data-dismiss="modal">Close</a>
+    </div>
   </div>
 </div>
