@@ -71,3 +71,9 @@ God.watch do |w|
   w.start = "cd #{path}/speakeasy_cheque/; rake subscribe"
   w.keepalive
 end
+
+God.watch do |w|
+  w.name = "logger mongo db"
+  w.start = "mongod"
+  w.keepalive
+end
