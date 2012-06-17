@@ -48,6 +48,7 @@ class Messages extends Spine.Controller
     @scroll()
 
   renderWelcome: =>
+    @welcome.empty()
     @welcome.append @welcomeTemplate(@username())
     @welcome.show()
 

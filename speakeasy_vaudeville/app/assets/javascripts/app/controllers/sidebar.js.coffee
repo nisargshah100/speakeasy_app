@@ -33,7 +33,6 @@ class Sidebar extends Spine.Controller
     Room.fetch()
     Room.bind 'refresh', @render
     Room.bind 'create', @addNewRoom
-    # Room.bind 'deleteRoom', @initialLoad
     
   render: =>
     @rooms.empty()
