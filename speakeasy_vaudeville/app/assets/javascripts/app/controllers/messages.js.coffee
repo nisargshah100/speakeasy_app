@@ -17,6 +17,8 @@ class MessagesItem extends Spine.Controller
 
 class Messages extends Spine.Controller
 
+  @photoRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|]).(?:jpg|gif|png)/ig
+
   elements:
     ".items": "items"
     ".new textarea": "input"
@@ -44,6 +46,12 @@ class Messages extends Spine.Controller
     @welcome.append @welcomeTemplate(@username())
     @welcome.show()
 
+  renderImages: =>
+    items = $("#messages ul.items").children().children(".author-body").children(".body").children("a")
+    for item in items 
+      if $(item).html().match(@photoRegex)
+        $(item).empty().append("<img src='#{item}' width='300'>")
+
   welcomeTemplate: (username) =>
     @view('messages/welcome')(username: username)
 
@@ -60,8 +68,23 @@ class Messages extends Spine.Controller
     msgItem = new MessagesItem(item)
     html = linkify(msgItem.render())
 
+    # link = $(html).children(".author-body").children(".body").children("a")
+    # if link && link.length > 0
+    #   if $(link).html().match(@photoRegex)
+    #       image = $(link).html()
+
     @items.append html
+    @renderImages()
     @scroll()
+
+  imageify: (html) =>
+    photoRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|]).(?:jpg|gif|png)/ig;
+    link = $(html).children(".author-body").children(".body").children("a")
+
+    if link && link.length > 0
+      if $(link).html().match(photoRegex)
+        image = $(link).html()
+        $(link).empty().append("<img src='#{image}' width='300'>")
 
   addNew: (item) =>
     @addOne(item)
