@@ -1,4 +1,6 @@
 class DashboardsController < ApplicationController
+  before_filter :authenticate_user
+
   def show
     get_aggregate_counts
 
@@ -18,5 +20,11 @@ class DashboardsController < ApplicationController
     @total_users = Aggregate.users
     @total_messages = Aggregate.messages
     @total_rooms = Aggregate.rooms
+  end
+
+  def authenticate_user
+    unless SpeakeasyBouncerGem.user_is_admin?(cookies['user'])
+      render status: :unauthorized, text: "Looks like you're not on the list."
+    end
   end
 end
