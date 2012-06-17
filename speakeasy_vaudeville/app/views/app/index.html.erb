@@ -37,7 +37,6 @@
     <ul>
       <li id="parent"><%= current_user.name %>
         <ul id="children">
-          <li><%= link_to 'Settings', nil %></li>
           <li><%= link_to 'Log Out', nil, id: "log_out" %></li>
         </ul>
       </li>
@@ -124,7 +123,7 @@
           <div id="room_search">
           </div>
         </div>
-        <div class="github header">
+        <div class="github header" id='github_content'>
           <h4>Github Activity</h4>
           <div id='github_activity' class='github'></div>
         </div>

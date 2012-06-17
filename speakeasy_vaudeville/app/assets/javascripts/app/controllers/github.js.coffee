@@ -21,6 +21,7 @@ class GitHub extends Spine.Controller
     if room.github_url
       $("#ci_status").attr('src', 'https://secure.travis-ci.org/jcasimir/draper.png')
       $("#travis_ci").show()
+      $("#github_content").show()
 
       $.get "/api/github?url=#{room.github_url}", (data) =>
         console.log(data)
@@ -29,7 +30,8 @@ class GitHub extends Spine.Controller
 
         @render()
     else
-      $("#travis_ci").hide()  
+      $("#travis_ci").hide()
+      $("#github_content").hide()
 
   addOne: ->
 
