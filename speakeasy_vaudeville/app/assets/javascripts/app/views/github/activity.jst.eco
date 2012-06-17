@@ -3,7 +3,7 @@
     <% pusher = event.data.pusher %>
     <% if (commit = event.data.commit): %>
       <li>
-        <a href='<%= commit.url %>' target='_blank'><%= commit.message %></a> by 
+        <a href='<%= commit.url %>' target='_blank' class="commit"><%= commit.message %></a><span class="by"> by</span> 
         (<%= pusher.username %>)
       </li>
     <% end %>
