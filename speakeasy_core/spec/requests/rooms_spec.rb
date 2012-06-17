@@ -197,8 +197,8 @@
               SpeakeasyBouncerGem.stub(:get_user).with(nil).and_return(double(sid: room.sid))
               delete room_path(room)
             end
-            it "destroys the room" do
-              Room.find_by_id(room.id).should be_nil
+            it "destroys the room's permissions" do
+              Room.find_by_id(room.id).permissions.count.should be(0)
             end
 
             it "returns a 200 status" do

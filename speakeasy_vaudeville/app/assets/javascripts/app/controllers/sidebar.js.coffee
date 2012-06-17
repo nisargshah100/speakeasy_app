@@ -22,7 +22,6 @@ class Sidebar extends Spine.Controller
 
   events:
     "click [data-name]": "click"
-    # "click .createRoom button": "createRoom"
     "submit #create-room-form" : "createRoom"
 
   elements:
@@ -34,6 +33,7 @@ class Sidebar extends Spine.Controller
     Room.fetch()
     Room.bind 'refresh', @render
     Room.bind 'create', @addNewRoom
+    # Room.bind 'deleteRoom', @initialLoad
     
   render: =>
     @rooms.empty()
