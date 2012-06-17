@@ -1,66 +1,93 @@
-<span id="created_messages">
-  <%= pluralize(@total_messages, "Message") %>
-  <%= pluralize(@total_rooms, "Room") %>
-  <%= pluralize(@total_users, "User") %>
-</span>
-<br>
-<table>
-  <tr>
-    <th></th>
-    <th>Current</th>
-    <th>Trending</th>
-  </tr>
-  <tr>
-    <td>Users Per Day</td>
-    <td><%= @recent_users_per_day %></td>
-    <td><%= @recent_users_per_day > @historical_users_per_day ? "Up" : "Down" %></td>
-  </tr>
-  <tr>
-    <td>Users creating rooms</td>
-    <td><%= @all_percent_users_creating_room %>%</td>
-    <td><%= @all_percent_users_creating_room > @historical_percent_users_creating_room ? "Up" : "Down" %></td>
-  </tr>
-</table>
+<div id="wrap" class="clearfix">
 
+  <div class="col_12 header">
+    <h3 class="inner">Ledger</h3>
+  </div>
 
+  <div class="col_2 totals stats">
+    <h2><%= @total_messages %></h2>
+    <h6><%= "Message".pluralize(@total_messages) %></h6>
+  </div>
+  <div class="col_2 totals stats">
+    <h2><%= @total_rooms %></h2>
+    <h6><%= "Room".pluralize(@total_rooms) %></h6>
+  </div>
+  <div class="col_2 totals stats">
+    <h2><%= @total_users %></h2>
+    <h6><%= "User".pluralize(@total_users) %></h6>
+  </div>
 
+  <div class="col_3 totals stats">
+    <h2>
+      <%= @recent_users_per_day %>
+      <% if @recent_users_per_day > @historical_users_per_day %>
+        <span class="icon x-large green" data-icon="~"></span>
+      <% else %>
+        <span class="icon x-large red" data-icon="|"></span>
+      <% end %>
+    </h2>
+    <h6>Users Per Day</h6>
+  </div>
+  <div class="col_3 totals stats">
+    <h2>
+      <%= @all_percent_users_creating_room %>%
+      <% if @all_percent_users_creating_room > @historical_percent_users_creating_room %></td>
+        <span class="icon x-large green" data-icon="~"></span>
+      <% else %>
+        <span class="icon x-large red" data-icon="|"></span>
+      <% end %>
+    </h2>
+    <h6>Users creating rooms</h6>
+  </div>
 
-Numerator
-<%= link_to "Clear", dashboard_path() %>
-<%= link_to "Created Messages", dashboard_path(num: "created_messages", denom: params[:denom], x_axis: params[:x_axis]) %>
-<%= link_to "Created Rooms", dashboard_path(num: "created_rooms", denom: params[:denom], x_axis: params[:x_axis]) %>
-<%= link_to "User Sign-Ups", dashboard_path(num: "created_users", denom: params[:denom], x_axis: params[:x_axis]) %>
-<%= link_to "Room Invites", dashboard_path(num: "created_permissions", denom: params[:denom], x_axis: params[:x_axis]) %>
-<br>
-Denominator
-<%= link_to "Clear", dashboard_path() %>
-<%= link_to "Created Messages", dashboard_path(num: "created_messages", denom: "created_messages", x_axis: params[:x_axis]) %>
-<%= link_to "Created Rooms", dashboard_path(num: params[:num], denom: "created_rooms", x_axis: params[:x_axis]) %>
-<%= link_to "User Sign-Ups", dashboard_path(num: params[:num], denom: "created_users", x_axis: params[:x_axis]) %>
-<%= link_to "Room Invites", dashboard_path(num: params[:num], denom: "created_permissions", x_axis: params[:x_axis]) %>
+  <div class="col_3 align">
+    <div>
+      <h6>Primary Metric</h6>
+      <ul class="menu vertical">
+        <%= clear_link "Clear", dashboard_path(x_axis: params[:x_axis]) %>
+        <%= primary_link "Created Messages", "created_messages", dashboard_path(num: "created_messages", denom: params[:denom], x_axis: params[:x_axis]) %>
+        <%= primary_link "Created Rooms", "created_rooms", dashboard_path(num: "created_rooms", denom: params[:denom], x_axis: params[:x_axis]) %>
+        <%= primary_link "User Sign-Ups", "created_users", dashboard_path(num: "created_users", denom: params[:denom], x_axis: params[:x_axis]) %>
+        <%= primary_link "Room Invites", "created_permissions", dashboard_path(num: "created_permissions", denom: params[:denom], x_axis: params[:x_axis]) %>
+      </ul>
+    </div>
+    <div>
+      <h6>Secondary Metric</h6>
+      <ul class="menu vertical">
+        <%= clear_link "Clear", dashboard_path(num: params[:num], x_axis: params[:x_axis]) %>
+        <%= secondary_link "Created Messages", "created_messages", dashboard_path(num: params[:num], denom: "created_messages", x_axis: params[:x_axis]) %>
+        <%= secondary_link "Created Rooms", "created_rooms", dashboard_path(num: params[:num], denom: "created_rooms", x_axis: params[:x_axis]) %>
+        <%= secondary_link "User Sign-Ups", "created_users", dashboard_path(num: params[:num], denom: "created_users", x_axis: params[:x_axis]) %>
+        <%= secondary_link "Room Invites", "created_permissions", dashboard_path(num: params[:num], denom: "created_permissions", x_axis: params[:x_axis]) %>
+      </ul>
+    </div>
+  </div>
 
-
-<div id="chart" style="width: 560px; height: 300px;"></div>
-
-<%= link_to "Day", dashboard_path(x_axis: "day", num: params[:num], denom: params[:denom]) %>
-<%= link_to "Week", dashboard_path(x_axis: "week", num: params[:num], denom: params[:denom]) %>
-<%= link_to "Month", dashboard_path(x_axis: "month", num: params[:num], denom: params[:denom]) %>
-<%= link_to "All Time", dashboard_path(x_axis: "all", num: params[:num], denom: params[:denom]) %>
-
-
-<script type="text/javascript" charset="utf-8">
- $(function () {
-    new Highcharts.Chart({
-      chart: { renderTo: 'chart' },
-      title: { text: '<%= @chart_title %>' },
-      xAxis: { type: 'datetime' },
-      yAxis: { text: '<%= @chart_title %>' },
-      series: [{
-                name: "<%= @chart_title %>",
-                pointInterval: <%= @point_interval %>,
-                pointStart: <%= @point_start %>,
-                data: <%= @series %>
-              }]
+  <div class="col_9">
+    <div id="chart">
+    </div>
+    <div class="col_7">
+      <ul class="menu">
+          <%= time_link "Day", "day", dashboard_path(x_axis: "day", num: params[:num], denom: params[:denom]) %>
+          <%= time_link "Week", "week", dashboard_path(x_axis: "week", num: params[:num], denom: params[:denom]) %>
+          <%= time_link "Month", "month", dashboard_path(x_axis: "month", num: params[:num], denom: params[:denom]) %>
+          <%= time_link "All Time", "all", dashboard_path(x_axis: "all", num: params[:num], denom: params[:denom]) %>
+      </ul>
+    </div>
+    <script type="text/javascript" charset="utf-8">
+   $(function () {
+      new Highcharts.Chart({
+        chart: { renderTo: 'chart' },
+        title: { text: '<%= @chart_title %>' },
+        xAxis: { type: 'datetime' },
+        yAxis: { text: '<%= @chart_title %>' },
+        series: [{
+                  name: "<%= @chart_title %>",
+                  pointInterval: <%= @point_interval %>,
+                  pointStart: <%= @point_start %>,
+                  data: <%= @series %>
+                }]
+      });
     });
-  });
-</script>
+  </script>
+</div>

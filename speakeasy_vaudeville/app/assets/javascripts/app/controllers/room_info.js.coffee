@@ -14,7 +14,7 @@ class RoomInfo extends Spine.Controller
     @el.empty()
     if room.owner
       $("#room-info").append(@admin_template(room))
-      @inviteModal = new InviteModal( {el: $("#invite"), room} )
+      @inviteModal = new InviteModal( {el: $("#invite"), room, admin: true} )
       @editModal = new EditModal( {el: $("#editRoom"), room} )
     else
       $("#room-info").append(@template(room))
@@ -30,6 +30,7 @@ class EditModal extends Spine.Controller
 
   events:
     "submit #edit-room-form" : "updateRoom"
+    "click #delete-room" : "deleteRoom"
 
   elements:
     ".modal-header" : "header"
@@ -46,6 +47,10 @@ class EditModal extends Spine.Controller
   template: =>
     @view('rooms/edit_modal')(room: @room)
 
+  deleteRoom: =>
+    if confirm "Are you sure you want to delete #{@room.name}?"
+      @el.modal('hide')
+
   updateRoom: (e) =>
     e.preventDefault()
     name = $("#edit_room_name").val()
@@ -58,7 +63,6 @@ class EditModal extends Spine.Controller
       url: "/api/core/rooms/#{@room.id}"
       data: $("#edit-room-form :input[value][value!='']").serialize()
       success: (data) =>
-        console.log "updated."
         Room.deleteAll()
         Room.fetch()
         $("#editRoom").modal('hide')
@@ -73,9 +77,11 @@ class InviteModal extends Spine.Controller
 
   events:
     "click #invite-submit" : "inviteMember"
+    "click #remove-patron" : "removeMember"
 
   constructor: (params) ->
     super
+    @admin = params.admin
     @room = params.room
     @getPermissions()
 
@@ -88,7 +94,27 @@ class InviteModal extends Spine.Controller
     @body.append(@template())
 
   template: =>
-    @view('rooms/invite_modal')(room: @room, permissions: @permissions)
+    if @admin
+      @view('rooms/admin_invite_modal')(room: @room, permissions: @permissions)
+    else
+      @view('rooms/invite_modal')(room: @room, permissions: @permissions)
+
+  removeMember: (e) =>
+    @member = $(e.target).parent().attr("data-email")
+    @id = $(e.target).parent().attr("@id")
+    if confirm "Are you sure you want to remove #{@member} from #{@room.name}?"
+      
+      $.ajax
+        type: "delete"
+        url: "/api/core/rooms/#{@room.id}/permissions/#{@id}"
+        data: { "email": @member }
+        success: (data) =>
+          $("#invite-result").empty()
+          $(e.target).parent().remove()
+          $("#invite-result").append "<td><p>#{@member} has been removed!</p></td>"
+        error: ->
+          $("#invite-result").empty()
+          $("#invite-result").append "<td><p>Hmm, something went wrong. Try refreshing the page.</p></td>"
 
   inviteMember: =>
     @inviteInput = $("#invite-input")
@@ -100,7 +126,7 @@ class InviteModal extends Spine.Controller
       url: "/api/core/rooms/#{@room.id}/permissions"
       data: { "email": value }
       success: (data) =>
-        @addOneMember(value)
+        @addOneMember(value, data)
       error: (data) =>
         message = JSON.parse(data.responseText)["message"]
         $("#invite-result").empty()
@@ -110,9 +136,12 @@ class InviteModal extends Spine.Controller
     @inviteInput.focus()
     false
 
-  addOneMember: (email) =>
+  addOneMember: (email, data) =>
     $("#invite-result").empty()
     $("#invite-result").append "<td><p>#{email} has been added!</p></td>"
-    $("#invited-members").append "<li>#{email}</li>"
+    $("#invited-members").append @memberTemplate(email, data)
+
+  memberTemplate: (email, data)=>
+    @view('rooms/member')(email: email, data: data, admin: @admin)
 
 window.RoomInfo = RoomInfo

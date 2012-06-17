@@ -13,7 +13,9 @@
     <h5>Current Patrons:</h5>
     <ul id="invited-members">
     <% for permission in @permissions: %>
-      <li><%= permission.email %></li>
+      <li id="<%= permission.email %> <%= permission.id %>">
+        <%= permission.email %>
+      </li>
     <% end %>
     </ul>
   </div>

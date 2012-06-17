@@ -1,0 +1,6 @@
+<li id="<%= @data.id %>" data-email="<%= @email %>">
+  <%= @email %>
+  <% if @admin: %>
+    <a href="#" id="remove-patron" class="btn">X</a>
+  <% end %>
+</li>

@@ -4,6 +4,7 @@ class CreatedPermission
   include Mongoid::Document
   extend ChartSeriesMethods
 
+  field :room_id, type: String
   field :sid, type: String
   field :created_at, type: DateTime
 
