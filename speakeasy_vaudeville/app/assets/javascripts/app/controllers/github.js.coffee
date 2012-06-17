@@ -15,19 +15,18 @@ class GitHub extends Spine.Controller
 
   clear: ->
     $("#github_activity").html('')
+    $("#travis_ci").hide()
 
   fetch_all: (room_id) =>
     room = Room.find(room_id)
     if room.github_url
       github_url = room.github_url.replace("https://github.com/", "")
 
-      $.ajax {
-        url: "https://secure.travis-ci.org/#{github_url}.png"
-        success: =>
-          $("#ci_status").attr('src', "https://secure.travis-ci.org/#{github_url}.png")
-          $("#travis_ci").show()
-        crossDomain: true
-      }
+      img = new Image()
+      img.src = "https://secure.travis-ci.org/#{github_url}.png"
+      img.onload = ->
+        $("#ci_status").attr('src', "https://secure.travis-ci.org/#{github_url}.png")
+        $("#travis_ci").show()
       
       $("#github_content").show()
 
