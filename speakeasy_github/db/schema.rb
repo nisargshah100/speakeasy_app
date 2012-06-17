@@ -11,11 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120605213507) do
+ActiveRecord::Schema.define(:version => 20120617172017) do
 
   create_table "events", :force => true do |t|
-    t.string   "repo_url"
+    t.integer  "repository_id"
     t.string   "data"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "repositories", :force => true do |t|
+    t.string   "url"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

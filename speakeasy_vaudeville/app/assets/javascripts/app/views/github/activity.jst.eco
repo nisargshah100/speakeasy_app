@@ -1,9 +1,10 @@
 <ul id='github_events_list'>
   <% for event in @events: %>
+    <% pusher = event.data.pusher %>
     <% if (commit = event.data.commit): %>
       <li>
         <a href='<%= commit.url %>' target='_blank'><%= commit.message %></a> by 
-        (<%= commit.username %>)
+        (<%= pusher.username %>)
       </li>
     <% end %>
   <% end %>

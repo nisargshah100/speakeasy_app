@@ -33,9 +33,8 @@ class GitHub extends Spine.Controller
       $("#travis_ci").hide()
       $("#github_content").hide()
 
-  addOne: ->
+  addOne: =>
     @render()
-    @scroll()
 
   template: ->
     @events = GitHubEvent.all()
@@ -44,7 +43,6 @@ class GitHub extends Spine.Controller
   render: =>
     @clear()
     $("#github_activity").html @template()
-    @scroll()
 
   scroll: =>
     objDiv = $("#github_activity")[0]

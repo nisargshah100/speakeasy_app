@@ -2,19 +2,20 @@ class EventDecorator < Draper::Base
   decorates :event
 
   def as_json(*params)
-    pusher = model.data['pusher']
     repository = model.data['repository']
     head_commit = model.data['head_commit'] || {}
     committer = head_commit['committer'] || {}
+    pusher = model.data['pusher'] || {
+      :username => committer['login'],
+      :email => head_commit['commit']['author']['email']
+    }
 
     resp = {
       :pusher => pusher,
-      :repository => repository.as_json(:only => [:name, :url]),
+      :repository => repository.as_json(:only => [:url]),
       :commit => {
-        :username => committer['username'],
-        :message => head_commit['message'],
-        :url => head_commit['url'],
-        :timestamp => head_commit['timestamp']
+        :message => head_commit['message'] || head_commit['commit']['message'],
+        :url => head_commit['url']
       }
     }
   end
