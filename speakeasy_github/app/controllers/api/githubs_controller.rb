@@ -7,7 +7,8 @@ class Api::GithubsController < ApplicationController
     events = []
 
     if url
-      repo = Repository.first_or_create(:url => url)
+      repo = Repository.where(:url => url).first
+      repo = Repository.create(:url => url) unless repo
 
       events = Event.joins(:repository).where('repositories.url' => url).reverse.map do |e| 
         EventDecorator.decorate(e) 
