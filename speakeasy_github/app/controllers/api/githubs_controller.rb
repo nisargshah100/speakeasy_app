@@ -7,7 +7,7 @@ class Api::GithubsController < ApplicationController
     events = []
 
     if url
-      repo = Repository.first_or_create(:url => url)
+      repo = get_repo(url)
 
       events = Event.joins(:repository).where('repositories.url' => url).reverse.map do |e| 
         EventDecorator.decorate(e) 
@@ -21,11 +21,21 @@ class Api::GithubsController < ApplicationController
     data = params["payload"]
     url = JSON.parse(data)["repository"]["url"]
     
-    repo = Repository.first_or_create(:url => url)
-    event = Event.create(:repository => repo, :data => data)
-    $redis.publish :github_event, EventDecorator.decorate(event).to_json
+    if url
+      repo = get_repo(url)
+      
+      event = Event.create(:repository => repo, :data => data)
+      $redis.publish :github_event, EventDecorator.decorate(event).to_json
+    end
 
     render :json => true, :status => 201
+  end
+
+  private
+
+  def get_repo(url)
+    repo = Repository.where(:url => url).first
+    repo ||= Repository.create(:url => url)
   end
 
 end

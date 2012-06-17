@@ -7,10 +7,10 @@ class Repository < ActiveRecord::Base
   private
 
   def fetch_events
-    # url = url.gsub("https://github.com/", "")
+    url = self.url.gsub("https://github.com/", "")
     commits = Octokit.commits(url) rescue []
     commits = commits.reverse
-    
+
     for commit in commits
       self.events.create(:data => { 
         :head_commit => commit,
