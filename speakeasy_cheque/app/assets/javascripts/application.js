@@ -14,3 +14,5 @@
 //= require jquery_ujs
 //= require highcharts
 //= require_tree .
+
+$('#metrics li a').click( function() { alert("BOOM"); });

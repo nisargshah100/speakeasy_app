@@ -1,7 +1,7 @@
 <div id="wrap" class="clearfix">
 
   <div class="col_12 header">
-    <h3 class="inner">Ledger</h3>
+    <h3 class="inner">Speakeasy Ledger</h3>
   </div>
 
   <div class="col_2 totals stats">
@@ -26,7 +26,7 @@
         <span class="icon x-large red" data-icon="|"></span>
       <% end %>
     </h2>
-    <h6>Users Per Day</h6>
+    <h6>User Sign-Ups Per Day</h6>
   </div>
   <div class="col_3 totals stats">
     <h2>
@@ -41,7 +41,7 @@
   </div>
 
   <div class="col_3 align">
-    <div>
+    <div id="metrics">
       <h6>Primary Metric</h6>
       <ul class="menu vertical">
         <%= clear_link "Clear", dashboard_path(x_axis: params[:x_axis]) %>
@@ -64,8 +64,7 @@
   </div>
 
   <div class="col_9">
-    <div id="chart">
-    </div>
+    <div id="chart"></div>
     <div class="col_7">
       <ul class="menu">
           <%= time_link "Day", "day", dashboard_path(x_axis: "day", num: params[:num], denom: params[:denom]) %>

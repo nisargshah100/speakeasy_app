@@ -1,19 +1,22 @@
 class Chart
   def self.title_for(primary, secondary)
-    if primary
-      @chart_title = primary.titleize
-      if secondary
-        "#{@chart_title} per #{secondary.titleize.singularize}"
-      end
+    if primary && secondary
+      "#{primary.titleize} per #{secondary.titleize.singularize}"
+    elsif primary
+      primary.titleize
     else
       "Select a Metric"
     end
   end
 
   def self.series_for(primary, secondary, time_period)
-    primary_series = primary_series_for(primary, time_period)
-    secondary_series = secondary_series_for(secondary, primary_series, time_period)
-    primary_series.each_with_index.map { |point, index| (point.to_f/secondary_series[index].to_f).round(2) }
+    if primary == secondary
+      set_series_to_ones_for(primary, time_period)
+    else
+      primary_series = primary_series_for(primary, time_period)
+      secondary_series = secondary_series_for(secondary, primary_series, time_period)
+      primary_series.each_with_index.map { |point, index| (point.to_f/secondary_series[index].to_f).round(2) }
+    end
   end
 
   private
@@ -37,6 +40,10 @@ class Chart
 
   def self.set_min_to_one_for(series)
     series.map { |point| point == 0 ? 1 : point }
+  end
+
+  def self.set_series_to_ones_for(metric, time_period)
+    primary_series_for(metric, time_period).map { |point| 1 }
   end
 
   module TimePeriod
