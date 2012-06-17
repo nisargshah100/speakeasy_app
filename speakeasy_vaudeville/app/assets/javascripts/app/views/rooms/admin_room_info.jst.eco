@@ -2,12 +2,11 @@
 <h2 id="room-description"><%= @room.description %></h2>
 <h4 id="proprietor">Proprieter's Info</h4>
 
-<a class="btn" data-toggle="modal" href="#invite" >Invite Patrons</a>
+<a class="btn" data-toggle="modal" href="#invite" >Manage Patrons</a>
 <a class="btn" data-toggle="modal" href="#editRoom" >Edit Room</a>
 
 <div class="modal hide" id="editRoom">
   <div class="modal-header">
-    <!--<button type="button" class="close" data-dismiss="modal">×</button>-->
     <h3>Edit room: <%= @room.name %></h3>
   </div>
   <div class="modal-body">
@@ -20,8 +19,7 @@
 
 <div class="modal hide" id="invite">
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">×</button>
-    <h3>Invite people</h3>
+    <h3>Invite patrons</h3>
   </div>
   <div class="modal-body">
   </div>

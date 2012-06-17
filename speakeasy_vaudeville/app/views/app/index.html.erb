@@ -70,15 +70,27 @@
                   <tbody>
                     <tr id="room_name">
                       <td><label for="create_room_name">Room name:</label></td>
-                      <td><input id="create_room_name" name="room[name]" type="text" /></td>
+                      <td><input id="create_room_name" name="room[name]" type="text"/></td>
                     </tr>
                     <tr>
-                      <td><label for="room_description">Room description:</label></td>
+                      <td></td>
+                      <td id="room_name_hint"><h6 class="hint">ex., Manhattan Project</h6></td>
+                    </tr>
+                    <tr>
+                      <td><label for="room_description">Room description (optional):</label></td>
                       <td><input id="create_room_description" name="room[description]" type="text" /></td>
                     </tr>
                     <tr>
-                      <td><label for="room_repo">Repo:</label></td>
-                      <td><input id="create_room_repo" name="room[github_url]" placeholder="(example) https://github.com/nisargshah100/speakeasy_app" type="text" /></td>
+                      <td></td>
+                      <td><h6 class="hint">ex., Top Secret.</h6></td>
+                    </tr>
+                    <tr>
+                      <td><label for="room_repo">Github Repo (optional):</label></td>
+                      <td><input id="create_room_repo" name="room[github_url]" type="text" /></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td><h6 class="hint">ex., https://github.com/nisargshah100/speakeasy_app</h6></td>
                     </tr>
                     <tr>
                       <td>

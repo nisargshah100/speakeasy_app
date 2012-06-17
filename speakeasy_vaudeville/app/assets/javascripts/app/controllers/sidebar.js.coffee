@@ -56,13 +56,13 @@ class Sidebar extends Spine.Controller
     desc = $("#create_room_description").val()
     url = $("#create_room_repo").val()
     unless name
-      $("#validation").remove()
-      $("#room_name").append "<td id='validation'><p>Room name is required</p></td>"
+      $("#room_name_hint").children().remove()
+      $("#room_name_hint").append "<h6 class='hint' style='color:red;'>Room name required!</h6>"
       return false
 
     unless name.length <= 20
-      $("#validation").remove()
-      $("#room_name").append "<td id='validation'><p>Room name must be less than 20 characters.</p></td>"
+      $("#room_name_hint").children().remove()
+      $("#room_name_hint").append "<h6 class='hint' style='color:red;'>Room name must be less than 20 characters!</h6>"
       return false
     
     $.ajax 

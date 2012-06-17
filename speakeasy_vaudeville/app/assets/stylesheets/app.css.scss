@@ -35,6 +35,7 @@ h2 { font-size:15pt; }
 h3 { font-size:14pt; }
 h4 { font-size:12pt; }
 h5 { font-size: 10pt; }
+h6 { font-size: 8pt; }
 
 a { text-decoration: none; outline: none; }
 
@@ -376,6 +377,8 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
   }
 }
 
+.hint { float: right;}
+
 .group:after { visibility: hidden; display: block; content: ""; clear: both; height: 0; }
 
 * html .group { zoom: 1; } /* IE6 */
@@ -395,9 +398,9 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
 }
 
 .modal-body { 
-  div { float: left; }
-  #edit_room_form, #invite_users { width: 250px;
-    label { font-size: 11px; float: right; font-weight: 600; }
+  div { margin-left: 60px; }
+  #edit-room-form, #invite_users, #create_form { width: 425px;
+    label { font-size: 11px; float: left; font-weight: 600; }
     input { padding: 5px 3px; font-size: 12px; margin: 3px 0 3px 5px; 
       &[type="text"] { -moz-box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868; -webkit-box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868; box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868; }
 
@@ -405,8 +408,8 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
       -moz-box-shadow:inset 0 1px 3px rgba(0,0,0,0.075),0 0 12px rgba(82,168,236,0.6) !important; box-shadow:inset 0 1px 3px rgba(0,0,0,0.075),0 0 12px rgba(82,168,236,0.6) !important; }
     }
   }
-  #edit_room_form input { 
-    &[type="text"] { width: 130px; }
+  #edit-room-form, #create_form input { 
+    &[type="text"] { width: 280px; }
     &[type="submit"] { width: 140px; }
   }
 
@@ -425,6 +428,10 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
 }
 
 .modal-footer a { padding: 5px 13px; min-width: 35px; font-size: 12px; margin: 3px 0 3px 5px; }
+
+.modal-footer a#delete-room.btn.btn-danger { color: red; padding: 5px 13px; min-width: 35px; font-size: 12px; margin: 3px 0 3px 5px; float: left;}
+
+
 
 /*-------------BUTTON-----------*/
 
