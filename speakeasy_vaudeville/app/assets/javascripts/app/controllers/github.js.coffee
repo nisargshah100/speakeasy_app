@@ -6,7 +6,7 @@ class GitHub extends Spine.Controller
     super
     @render()
 
-    GitHubEvent.bind 'create', @addOne
+    GitHubEvent.bind 'created', @addOne
     Room.bind 'joined', @joinedRoom
 
   joinedRoom: (room_id) =>
@@ -33,6 +33,7 @@ class GitHub extends Spine.Controller
 
       $.get "/api/github?url=#{room.github_url}", (data) =>
         GitHubEvent.deleteAll()
+        @clear()
         console.log(data)
         for event in data
           GitHubEvent.create(data: event)
@@ -44,9 +45,7 @@ class GitHub extends Spine.Controller
 
   addOne: =>
     console.log('add one')
-    GitHubEvent.deleteAll()
-    @clear()
-    @render()
+    @fetch_all(Sidebar.room().id)
 
   template: ->
     @events = GitHubEvent.all()

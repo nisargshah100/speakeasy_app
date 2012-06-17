@@ -80,7 +80,9 @@ class FayeHandler extends Spine.Module
         console.log(msg)
         if Sidebar.room().github_url == msg.repository.url
           GitHubEvent.create(data: msg)
-          
+
+        GitHubEvent.trigger 'created'
+      
       @connected[faye_url] = true
 
 $ -> 
