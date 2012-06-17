@@ -16,7 +16,7 @@ class GitHub extends Spine.Controller
   clear: ->
     $("#github_activity").html('')
 
-  fetch_all: (room_id) ->
+  fetch_all: (room_id) =>
     room = Room.find(room_id)
     if room.github_url
       github_url = room.github_url.replace("https://github.com/", "")
@@ -43,6 +43,8 @@ class GitHub extends Spine.Controller
       $("#github_content").hide()
 
   addOne: =>
+    console.log('add one')
+    GitHubEvent.deleteAll()
     @clear()
     @render()
 
