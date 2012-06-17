@@ -24,6 +24,7 @@ class GitHub extends Spine.Controller
       $("#github_content").show()
 
       $.get "/api/github?url=#{room.github_url}", (data) =>
+        GitHubEvent.deleteAll()
         console.log(data)
         for event in data
           GitHubEvent.create(data: event)
