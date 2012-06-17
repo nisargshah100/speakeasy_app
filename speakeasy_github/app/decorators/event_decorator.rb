@@ -9,6 +9,7 @@ class EventDecorator < Draper::Base
       :username => committer['login'],
       :email => head_commit['commit']['author']['email']
     }
+    pusher[:username] ||= pusher[:name] || pusher['name']
 
     resp = {
       :pusher => pusher,

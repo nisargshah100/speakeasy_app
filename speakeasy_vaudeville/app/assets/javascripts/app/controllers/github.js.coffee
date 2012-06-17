@@ -19,8 +19,16 @@ class GitHub extends Spine.Controller
   fetch_all: (room_id) ->
     room = Room.find(room_id)
     if room.github_url
-      $("#ci_status").attr('src', 'https://secure.travis-ci.org/jcasimir/draper.png')
-      $("#travis_ci").show()
+      github_url = room.github_url.replace("https://github.com/", "")
+
+      $.ajax {
+        url: "https://secure.travis-ci.org/#{github_url}.png"
+        success: =>
+          $("#ci_status").attr('src', "https://secure.travis-ci.org/#{github_url}.png")
+          $("#travis_ci").show()
+        crossDomain: true
+      }
+      
       $("#github_content").show()
 
       $.get "/api/github?url=#{room.github_url}", (data) =>
