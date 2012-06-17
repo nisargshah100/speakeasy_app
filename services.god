@@ -24,17 +24,11 @@ God.watch do |w|
   w.keepalive
 end
 
-# God.watch do |w|
-#   w.name = "faye"
-#   w.start = "cd #{path}/speakeasy_dumbwaiter/; ruby faye.rb"
-#   w.keepalive
-# end
-
-# God.watch do |w|
-#   w.name = "messaging server"
-#   w.start = "cd #{path}/speakeasy_dumbwaiter/; BASE_URL=#{BASE_URL} ruby server.rb"
-#   w.keepalive
-# end
+God.watch do |w|
+ w.name = "faye"
+ w.start = "cd #{path}/speakeasy_dumbwaiter/; ruby faye.rb"
+ w.keepalive
+end
 
 God.watch do |w|
   w.name = "frontend server"

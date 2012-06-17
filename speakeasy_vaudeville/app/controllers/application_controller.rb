@@ -7,4 +7,11 @@ class ApplicationController < ActionController::Base
   def current_user
     @user ||= SpeakeasyBouncerGem.get_user(cookies[:user])
   end
+
+  def require_login!
+    unless current_user.sid
+      redirect_to root_url 
+      false
+    end
+  end
 end

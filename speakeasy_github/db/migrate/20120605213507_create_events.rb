@@ -1,7 +1,7 @@
 class CreateEvents < ActiveRecord::Migration
   def change
     create_table :events do |t|
-      t.string :repo_url
+      t.integer :repository_id
       t.string :data
 
       t.timestamps
