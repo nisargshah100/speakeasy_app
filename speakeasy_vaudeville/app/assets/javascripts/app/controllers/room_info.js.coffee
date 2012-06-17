@@ -127,10 +127,10 @@ class InviteModal extends Spine.Controller
         success: (data) =>
           $("#invite-result").empty()
           $(e.target).parent().remove()
-          $("#invite-result").append "<td><p>#{@member} has been removed!</p></td>"
+          $("#invite-result").append "<td><p id='invite-notice'>#{@member} has been removed!</p></td>"
         error: ->
           $("#invite-result").empty()
-          $("#invite-result").append "<td><p>Hmm, something went wrong. Try refreshing the page.</p></td>"
+          $("#invite-result").append "<td><p id='invite-notice'>Hmm, something went wrong. Try refreshing the page.</p></td>"
 
   inviteMember: =>
     @inviteInput = $("#invite-input")
@@ -146,7 +146,7 @@ class InviteModal extends Spine.Controller
       error: (data) =>
         message = JSON.parse(data.responseText)["message"]
         $("#invite-result").empty()
-        $("#invite-result").append "<td><p>#{message}</p></td>"
+        $("#invite-result").append "<td><p id='invite-notice' style='color:red;'>#{message}</p></td>"
 
     @inviteInput.val ""
     @inviteInput.focus()
@@ -154,7 +154,7 @@ class InviteModal extends Spine.Controller
 
   addOneMember: (email, data) =>
     $("#invite-result").empty()
-    $("#invite-result").append "<td><p>#{email} has been added!</p></td>"
+    $("#invite-result").append "<td><p id='invite-notice'>#{email} has been added!</p></td>"
     $("#invited-members").append @memberTemplate(email, data)
 
   memberTemplate: (email, data)=>

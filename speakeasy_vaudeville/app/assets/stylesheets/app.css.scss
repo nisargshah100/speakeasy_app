@@ -345,7 +345,7 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
   0, 0.249219) 0px .5px 10px; -o-box-shadow: rgba(0, 0, 0, 0.449219) 0px .5px 10px; box-shadow: rgba(0, 0, 0, 0.449219) 0px .5px 10px; }
 }
 
-#new_room {
+#new_room, #invite_patrons, #edit {
   h3 { padding: 20px 0 10px 0; }
   a { padding: 0px 4px 4px; }
 }
@@ -399,10 +399,6 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
 
 #createRoom { display: none; }
 
-.modal-header h3 { display: inline-block; 
-  &:first-child { width: 230px; margin-left: 50px; }
-}
-
 .modal-body { 
   div { margin-left: 60px; }
   #edit-room-form, #invite_users, #create_form { width: 425px;
@@ -420,17 +416,28 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
   }
 
   #invite_users {
-    h5 { font-weight:bold; margin:2px 0px 5px 4px; }
+    h5 { font-weight:bold; margin:2px 0px 5px 4px; margin-left: 80px; }
     ul { margin-left: 4px; height: 100px; overflow-y: scroll; width: 240px;
-      li { font-size: 13px; margin: 3px 0; }
+      li { font-size: 13px; margin: 3px 0; margin-left: 50px; }
     }
     input { 
-      &[type="email"] { width: 195px !important; }
+      &[type="email"] { width: 195px !important; margin-left: 80px; }
       &[type="submit"] { width: 35px !important; }
     }
   }
 
   #empty { height: 175px; margin: 0 14px; border-left: 1px dotted #eee; }
+}
+
+a#remove-patron.btn {
+  font-size: 8px;
+  height: 14px;
+  width: 9px;
+}
+
+p#invite-notice {
+  font-size: 12px;
+  margin-left: 60px;
 }
 
 .modal-footer a { padding: 5px 13px; min-width: 35px; font-size: 12px; margin: 3px 0 3px 5px; }
