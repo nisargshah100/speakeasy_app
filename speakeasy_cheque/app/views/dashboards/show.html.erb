@@ -1,7 +1,7 @@
 <div id="wrap" class="clearfix">
 
   <div class="col_12 header">
-    <h3 class="inner">Ledger</h3>
+    <h3 class="inner">Speakeasy Ledger</h3>
   </div>
 
   <div class="col_2 totals stats">
@@ -19,29 +19,29 @@
 
   <div class="col_3 totals stats">
     <h2>
-      <%= @recent_users_per_day %>
-      <% if @recent_users_per_day > @historical_users_per_day %>
+      <%= @users_per_day %>
+      <% if @users_trending_up %>
         <span class="icon x-large green" data-icon="~"></span>
       <% else %>
         <span class="icon x-large red" data-icon="|"></span>
       <% end %>
     </h2>
-    <h6>Users Per Day</h6>
+    <h6>User Sign-Ups Per Day</h6>
   </div>
   <div class="col_3 totals stats">
     <h2>
-      <%= @all_percent_users_creating_room %>%
-      <% if @all_percent_users_creating_room > @historical_percent_users_creating_room %></td>
+      <%= @messages_per_user %>
+      <% if @messages_per_user_trending_up %></td>
         <span class="icon x-large green" data-icon="~"></span>
       <% else %>
         <span class="icon x-large red" data-icon="|"></span>
       <% end %>
     </h2>
-    <h6>Users creating rooms</h6>
+    <h6>Messages Per User</h6>
   </div>
 
   <div class="col_3 align">
-    <div>
+    <div id="metrics">
       <h6>Primary Metric</h6>
       <ul class="menu vertical">
         <%= clear_link "Clear", dashboard_path(x_axis: params[:x_axis]) %>
@@ -64,8 +64,7 @@
   </div>
 
   <div class="col_9">
-    <div id="chart">
-    </div>
+    <div id="chart"></div>
     <div class="col_7">
       <ul class="menu">
           <%= time_link "Day", "day", dashboard_path(x_axis: "day", num: params[:num], denom: params[:denom]) %>
@@ -79,8 +78,11 @@
       new Highcharts.Chart({
         chart: { renderTo: 'chart' },
         title: { text: '<%= @chart_title %>' },
-        xAxis: { type: 'datetime' },
-        yAxis: { text: '<%= @chart_title %>' },
+        xAxis: { type: 'datetime',
+                 offset: 10 },
+        yAxis: { title: { text: '' },
+                 min: 0},
+        legend: { enabled: false },
         series: [{
                   name: "<%= @chart_title %>",
                   pointInterval: <%= @point_interval %>,
