@@ -333,7 +333,7 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
     div { width: 100%; display: inline-block; }
     div.author-name { text-align: left; color: #969696; font-size: 15px; font-weight: 600; padding-bottom: 5px; }
   }
-  div.body { margin-right: 20px; display: inline-block; text-align: left; font-size: 15px; word-wrap: break-word; }
+  div.body { margin-right: 20px; display: inline-block; text-align: left; font-size: 15px; word-wrap: break-word; line-height: 1.1; }
 }
 
 /*-----------ROOMS------------*/
