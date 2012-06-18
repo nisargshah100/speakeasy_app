@@ -7,10 +7,10 @@ test:
   database: speakeasy_cheque_test
 
 # set these environment variables on your prod server
-development:
+production:
   host: localhost
   database: speakeasy_cheque_production
-  
+
   # slaves:
   #   - host: slave1.local
   #     port: 27018
