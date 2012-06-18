@@ -1,7 +1,7 @@
 <h1><%= @room.name %></h1>
 <h2><%= @room.description %></h2>
 
-<a class="btn" data-toggle="modal" href="#invite" >Invite Patrons</a>
+<a class="btn btn-info" data-toggle="modal" href="#invite" >Invite Patrons</a>
 
 <div id="invite_patrons">
   <div class="modal hide" id="invite">
