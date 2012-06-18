@@ -7,7 +7,8 @@ class ApplicationController < ActionController::Base
   end
 
   def find_room
-    head status: 404 unless @room = Room.find_by_id(params[:room_id] || params[:id])
+    head status: 404 unless @room = Room.find_by_id(
+      params[:room_id] || params[:id])
   end
 
   def authenticate_user

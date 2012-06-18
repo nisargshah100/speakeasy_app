@@ -12,8 +12,8 @@ class CreatedPermission
 
   def self.create_from_on_tap(data)
     CreatedPermission.create(:room_id => data["room_id"],
-                                    :sid => data["sid"],
-                                    :created_at => DateTime.parse(data["created_at"]))
+                          :sid => data["sid"],
+                          :created_at => DateTime.parse(data["created_at"]))
   end
 
   def increment_permissions
