@@ -34,5 +34,6 @@ USERS.each do |username, name|
   user.email = "#{username}@livingsocial.com"
   user.name = name
   user.password = "hungry"
+  user.is_admin = true
   user.save
 end
