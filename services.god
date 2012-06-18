@@ -1,6 +1,8 @@
 path = File.expand_path(File.dirname(__FILE__))
 
 BASE_URL = 'http://localhost:9000/'
+MYSQL_USERNAME = ''
+MYSQL_PASSWORD = ''
 
 AUTH_SERVER_PORT = 5000
 FRONTEND_SERVER_PORT = 5002
@@ -23,7 +25,7 @@ RAILS_ENV = 'development'
 
 God.watch do |w|
   w.name = "authentication server"
-  w.start = "cd #{path}/speakeasy_bouncer/; RAILS_ENV=#{RAILS_ENV} BASE_URL=#{BASE_URL} bundle exec thin start -p #{AUTH_SERVER_PORT}"
+  w.start = "cd #{path}/speakeasy_bouncer/; MYSQL_USERNAME=#{MYSQL_USERNAME} MYSQL_PASSWORD=#{MYSQL_PASSWORD} RAILS_ENV=#{RAILS_ENV} BASE_URL=#{BASE_URL} bundle exec thin start -p #{AUTH_SERVER_PORT}"
   w.keepalive
 end
 
@@ -35,31 +37,31 @@ end
 
 God.watch do |w|
   w.name = "frontend server"
-  w.start = "cd #{path}/speakeasy_vaudeville/; RAILS_ENV=#{RAILS_ENV} BASE_URL=#{BASE_URL} bundle exec thin start -p #{FRONTEND_SERVER_PORT}"
+  w.start = "cd #{path}/speakeasy_vaudeville/; MYSQL_USERNAME=#{MYSQL_USERNAME} MYSQL_PASSWORD=#{MYSQL_PASSWORD} RAILS_ENV=#{RAILS_ENV} BASE_URL=#{BASE_URL} bundle exec thin start -p #{FRONTEND_SERVER_PORT}"
   w.keepalive
 end
 
 God.watch do |w|
   w.name = "core server"
-  w.start = "cd #{path}/speakeasy_core/; RAILS_ENV=#{RAILS_ENV} BASE_URL=#{BASE_URL} bundle exec thin start -p #{CORE_SERVER_PORT}"
+  w.start = "cd #{path}/speakeasy_core/; MYSQL_USERNAME=#{MYSQL_USERNAME} MYSQL_PASSWORD=#{MYSQL_PASSWORD} RAILS_ENV=#{RAILS_ENV} BASE_URL=#{BASE_URL} bundle exec thin start -p #{CORE_SERVER_PORT}"
   w.keepalive
 end
 
 God.watch do |w|
   w.name = "github server"
-  w.start = "cd #{path}/speakeasy_github/; RAILS_ENV=#{RAILS_ENV} BASE_URL=#{BASE_URL} bundle exec thin start -p #{GITHUB_PORT}"
+  w.start = "cd #{path}/speakeasy_github/; MYSQL_USERNAME=#{MYSQL_USERNAME} MYSQL_PASSWORD=#{MYSQL_PASSWORD} RAILS_ENV=#{RAILS_ENV} BASE_URL=#{BASE_URL} bundle exec thin start -p #{GITHUB_PORT}"
   w.keepalive
 end
 
 God.watch do |w|
   w.name = "search server"
-  w.start = "cd #{path}/speakeasy_gumshoe/; RAILS_ENV=#{RAILS_ENV} BASE_URL=#{BASE_URL} bundle exec thin start -p #{SEARCH_PORT}"
+  w.start = "cd #{path}/speakeasy_gumshoe/; MYSQL_USERNAME=#{MYSQL_USERNAME} MYSQL_PASSWORD=#{MYSQL_PASSWORD} RAILS_ENV=#{RAILS_ENV} BASE_URL=#{BASE_URL} bundle exec thin start -p #{SEARCH_PORT}"
   w.keepalive
 end
 
 God.watch do |w|
   w.name = "cheque (dashboard) server"
-  w.start = "cd #{path}/speakeasy_cheque/; RAILS_ENV=#{RAILS_ENV} BASE_URL=#{BASE_URL} bundle exec thin start -p #{DASHBOARD_PORT}"
+  w.start = "cd #{path}/speakeasy_cheque/; MYSQL_USERNAME=#{MYSQL_USERNAME} MYSQL_PASSWORD=#{MYSQL_PASSWORD} RAILS_ENV=#{RAILS_ENV} BASE_URL=#{BASE_URL} bundle exec thin start -p #{DASHBOARD_PORT}"
   w.keepalive
 end
 
