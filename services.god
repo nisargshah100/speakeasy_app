@@ -49,7 +49,7 @@ end
 
 God.watch do |w|
   w.name = "github server"
-  w.start = "cd #{path}/speakeasy_github/; BASE_URL=#{BASE_URL} bundle exec thin start -p #{GITHUB_PORT}"
+  w.start = "cd #{path}/speakeasy_github/; RAILS_ENV=development BASE_URL=#{BASE_URL} bundle exec thin start -p #{GITHUB_PORT}"
   w.keepalive
 end
 
@@ -79,7 +79,7 @@ end
 
 God.watch do |w|
   w.name = "search indexer"
-  w.start = "cd #{path}/speakeasy_gumshoe/; MYSQL_USERNAME=#{MYSQL_USERNAME} MYSQL_PASSWORD=#{MYSQL_PASSWORD} RAILS_ENV=#{RAILS_ENV} rake index"
+  w.start = "cd #{path}/speakeasy_gumshoe/; MYSQL_USERNAME=#{MYSQL_USERNAME} MYSQL_PASSWORD=#{MYSQL_PASSWORD} RAILS_ENV=#{RAILS_ENV}  rake index"
   w.keepalive
 end
 
