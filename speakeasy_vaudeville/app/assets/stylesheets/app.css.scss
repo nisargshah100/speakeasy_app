@@ -81,7 +81,7 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
   
   li { float: left; margin-right:25px; background-color: $weathervane;
 
-    li { float:none; border-bottom:1px solid $user-border; width:105%; font-size: 14px;
+    li { float:none; border-bottom:1px solid $user-border; width:102%; font-size: 14px;
 
       a { border:0; border-left:1px solid $user-border; border-right: 1px solid $user-border; }
     }
@@ -95,7 +95,7 @@ z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weather
     }
 
     ul { /*position: absolute; top: 100%; left: 0; right: 100px; z-index: 1000; display: none; float: left; min-width: 80px; padding: 4px 0; margin: 1px 0 0; list-style: none; background-color: #ffffff; border: 1px solid #ccc; border: 1px solid rgba(0, 0, 0, 0.2); *border-right-width: 2px; *border-bottom-width: 2px; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); -webkit-background-clip: padding-box; -moz-background-clip: padding; background-clip: padding-box;*/ 
-      display:none; padding:0; position:absolute; width:80px; -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); }
+      display:none; padding:0; position:absolute; width:150px; -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); }
   }
 
   ul {
@@ -289,7 +289,7 @@ h4#proprietor {
 }
 
 .users h4 {
- &:after { margin-left: 8px; vertical-align: -2px; content: url("patrons.png"); }
+ &:after { margin-left: 8px; vertical-align: -2px; content: url("patrons.png"), url("test"); }
 }
 
 .new { height: 80px; background:#EEE; position:absolute; bottom:0px; left:0px; right:0px; -webkit-box-shadow: rgba(0, 0, 0, 0.549219) 0px .5px 10px; -moz-box-shadow: rgba(0, 0,
@@ -384,6 +384,7 @@ h4#proprietor {
   h4#proprietor { padding: 20px 0 5px; }
   a.btn { font-size: 14px; 
     &#manage { margin-right: 10px; }
+    &#room-info-modal { margin-top: 10px; }
   }
 }
 
