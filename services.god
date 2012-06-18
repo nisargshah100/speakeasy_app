@@ -49,19 +49,19 @@ end
 
 God.watch do |w|
   w.name = "github server"
-  w.start = "cd #{path}/speakeasy_github/; MYSQL_USERNAME=#{MYSQL_USERNAME} MYSQL_PASSWORD=#{MYSQL_PASSWORD} RAILS_ENV=#{RAILS_ENV} BASE_URL=#{BASE_URL} bundle exec thin start -p #{GITHUB_PORT}"
+  w.start = "cd #{path}/speakeasy_github/; BASE_URL=#{BASE_URL} bundle exec thin start -p #{GITHUB_PORT}"
   w.keepalive
 end
 
 God.watch do |w|
   w.name = "search server"
-  w.start = "cd #{path}/speakeasy_gumshoe/; MYSQL_USERNAME=#{MYSQL_USERNAME} MYSQL_PASSWORD=#{MYSQL_PASSWORD} RAILS_ENV=#{RAILS_ENV} BASE_URL=#{BASE_URL} bundle exec thin start -p #{SEARCH_PORT}"
+  w.start = "cd #{path}/speakeasy_gumshoe/; BASE_URL=#{BASE_URL} bundle exec thin start -p #{SEARCH_PORT}"
   w.keepalive
 end
 
 God.watch do |w|
   w.name = "cheque (dashboard) server"
-  w.start = "cd #{path}/speakeasy_cheque/; MYSQL_USERNAME=#{MYSQL_USERNAME} MYSQL_PASSWORD=#{MYSQL_PASSWORD} RAILS_ENV=development BASE_URL=#{BASE_URL} bundle exec thin start -p #{DASHBOARD_PORT}"
+  w.start = "cd #{path}/speakeasy_cheque/; RAILS_ENV=development BASE_URL=#{BASE_URL} bundle exec thin start -p #{DASHBOARD_PORT}"
   w.keepalive
 end
 
@@ -73,13 +73,13 @@ end
 
 God.watch do |w|
   w.name = "gumshoe subscribe"
-  w.start = "cd #{path}/speakeasy_gumshoe/; RAILS_ENV=#{RAILS_ENV} rake subscribe"
+  w.start = "cd #{path}/speakeasy_gumshoe/; rake subscribe"
   w.keepalive
 end
 
 God.watch do |w|
   w.name = "search indexer"
-  w.start = "cd #{path}/speakeasy_gumshoe/; RAILS_ENV=#{RAILS_ENV} rake index"
+  w.start = "cd #{path}/speakeasy_gumshoe/; rake index"
   w.keepalive
 end
 
