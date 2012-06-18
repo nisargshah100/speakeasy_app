@@ -64,13 +64,13 @@ God.watch do |w|
 end
 
 God.watch do |w|
-  w.name = "search redis server"
+  w.name = "cheque subscribe"
   w.start = "cd #{path}/speakeasy_cheque/; rake subscribe"
   w.keepalive
 end
 
 God.watch do |w|
-  w.name = "search redis server"
+  w.name = "gumshoe subscribe"
   w.start = "cd #{path}/speakeasy_gumshoe/; rake subscribe"
   w.keepalive
 end
