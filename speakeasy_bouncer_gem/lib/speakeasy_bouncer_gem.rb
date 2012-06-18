@@ -10,7 +10,8 @@ module SpeakeasyBouncerGem
   end
 
   def self.authenticate(email, password)
-    resp = self.conn.post 'api/users/sessions', { :email => email, :password => password }
+    resp = self.conn.post 'api/users/sessions', { :email => email,
+                                                  :password => password }
     resp = get_response(resp)
     Hashie::Mash.new(resp) if resp
   end
@@ -41,7 +42,7 @@ module SpeakeasyBouncerGem
     Hashie::Mash.new(resp) if resp != {}
   end
 
-  private 
+  private
 
   def self.get_response(response)
     if response.status == 200 || response.status == 201

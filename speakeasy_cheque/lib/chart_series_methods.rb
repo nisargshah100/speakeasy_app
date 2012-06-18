@@ -18,6 +18,7 @@ module ChartSeriesMethods
 
   def total_at(number_of_hours)
     where(:created_at.gt => 1.day.ago.at_midnight + number_of_hours.hours,
-          :created_at.lte => 1.day.ago.at_midnight + (number_of_hours + 1).hours).count
+          :created_at.lte => 1.day.ago.at_midnight +
+          (number_of_hours + 1).hours).count
   end
 end

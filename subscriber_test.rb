@@ -2,7 +2,8 @@ require 'rubygems'
 require 'redis'
 require 'json'
 
-CHANNELS = ['created_messages', 'created_rooms', 'destroyed_rooms', 'created_permissions', 'created_users']
+CHANNELS = ['created_messages', 'created_rooms', 'destroyed_rooms',
+            'created_permissions', 'created_users']
 
 redis = Redis.new(:timeout => 0)
 

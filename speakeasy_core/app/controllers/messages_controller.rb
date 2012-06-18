@@ -30,11 +30,14 @@ class MessagesController < ApplicationController
 
   def attach_usernames_to(messages)
     username_array = get_username_array_for(messages)
-    messages.each_with_index { |message, index| message.username = username_array[index] }
+    messages.each_with_index { 
+      |message, index| message.username = username_array[index]
+    }
   end
 
   def get_username_array_for(messages)
-   users = SpeakeasyBouncerGem.get_users_by_sid(messages.map { |message| message.sid })
+   users = SpeakeasyBouncerGem.get_users_by_sid(
+    messages.map { |message| message.sid })
    users.map { |message_user| message_user ? message_user.name : "" }
   end
 end

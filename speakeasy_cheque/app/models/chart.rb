@@ -14,8 +14,11 @@ class Chart
       set_series_to_ones_for(primary, time_period)
     else
       primary_series = primary_series_for(primary, time_period)
-      secondary_series = secondary_series_for(secondary, primary_series, time_period)
-      primary_series.each_with_index.map { |point, index| (point.to_f/secondary_series[index].to_f).round(2) }
+      secondary_series = secondary_series_for(secondary,
+                                              primary_series, time_period)
+      primary_series.each_with_index.map { 
+        |point, index| (point.to_f/secondary_series[index].to_f).round(2)
+      }
     end
   end
 

@@ -1,5 +1,6 @@
 # The first thing you need to configure is which modules you need in your app.
-# The default is nothing which will include only core features (password encryption, login/logout).
+# The default is nothing which will include only core features (password encryption,
+  # login/logout).
 # Available submodules are: :user_activation, :http_basic_auth, :remember_me,
 # :reset_password, :session_timeout, :brute_force_protection, :activity_logging, :external
 Rails.application.config.sorcery.submodules = []
@@ -67,7 +68,8 @@ Rails.application.config.sorcery.configure do |config|
 
 
   # -- external --
-  # What providers are supported by this app, i.e. [:twitter, :facebook, :github, :google, :liveid] .
+  # What providers are supported by this app, i.e. [:twitter, :facebook, :github,
+  # :google, :liveid] .
   # Default: `[]`
   #
   # config.external_providers =
@@ -122,7 +124,8 @@ Rails.application.config.sorcery.configure do |config|
     user.username_attribute_names = [:email]
 
 
-    # change *virtual* password attribute, the one which is used until an encrypted one is generated.
+    # change *virtual* password attribute, the one which is used until an encrypted one is
+    # generated.
     # Default: `:password`
     #
     # user.password_attribute_name =
@@ -165,7 +168,8 @@ Rails.application.config.sorcery.configure do |config|
 
 
     # encryption key used to encrypt reversible encryptions such as AES256.
-    # WARNING: If used for users' passwords, changing this key will leave passwords undecryptable!
+    # WARNING: If used for users' passwords, changing this key will leave passwords
+    # undecryptable!
     # Default: `nil`
     #
     # user.encryption_key =

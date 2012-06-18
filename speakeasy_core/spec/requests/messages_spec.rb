@@ -15,7 +15,8 @@ describe "Messages" do
           context "the room has under 50 messages" do
             it "returns a json with all of the room's messages" do
               SpeakeasyBouncerGem.stub(:get_user).with(nil).and_return(double)
-              SpeakeasyBouncerGem.stub(:get_users_by_sid).and_return([double(name: 'First'), double(name: 'Second'),  double(name: 'Third')])
+              SpeakeasyBouncerGem.stub(
+                :get_users_by_sid).and_return([double(name: 'First'), double(name: 'Second'),  double(name: 'Third')])
               SpeakeasyBouncerGem.stub(:get_user_by_sid).and_return(double)
               get room_messages_url(room, :format => :json)
               response_json = JSON.parse(response.body)

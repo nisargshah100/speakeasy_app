@@ -14,7 +14,8 @@ SpeakeasyGithub::Application.routes.draw do
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
+  # Sample resource route (maps HTTP verbs to controller actions
+    # automatically):
   #   resources :products
 
   # Sample resource route with options:
@@ -56,7 +57,9 @@ SpeakeasyGithub::Application.routes.draw do
 
   # See how all your routes lay out with "rake routes"
 
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
+  # This is a legacy wild controller route that's not recommended for
+  # RESTful applications.
+  # Note: This route will make all actions in every controller accessible
+  # via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 end
