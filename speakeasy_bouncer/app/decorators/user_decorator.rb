@@ -4,7 +4,7 @@ class UserDecorator < Draper::Base
   def as_json(*params)
     return {} unless model
     
-    data = [:email, :name, :sid]
+    data = [:email, :name, :sid, :is_admin]
     if h.current_user and h.current_user == model
       data.append(:token)
     end
