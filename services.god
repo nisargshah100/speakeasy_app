@@ -61,7 +61,7 @@ end
 
 God.watch do |w|
   w.name = "cheque (dashboard) server"
-  w.start = "cd #{path}/speakeasy_cheque/; MYSQL_USERNAME=#{MYSQL_USERNAME} MYSQL_PASSWORD=#{MYSQL_PASSWORD} RAILS_ENV=#{RAILS_ENV} BASE_URL=#{BASE_URL} bundle exec thin start -p #{DASHBOARD_PORT}"
+  w.start = "cd #{path}/speakeasy_cheque/; MYSQL_USERNAME=#{MYSQL_USERNAME} MYSQL_PASSWORD=#{MYSQL_PASSWORD} RAILS_ENV=development BASE_URL=#{BASE_URL} bundle exec thin start -p #{DASHBOARD_PORT}"
   w.keepalive
 end
 
