@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  
+
   private
 
   def success(obj, code=201)

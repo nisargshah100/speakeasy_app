@@ -23,13 +23,15 @@ class Metric
     end
 
     def self.historical_count
-      CreatedUser.where(:created_at.lte => DateTime.now - KPI_TIME_PERIOD).count
+      CreatedUser.where(
+        :created_at.lte => DateTime.now - KPI_TIME_PERIOD).count
     end
 
     private
 
     def self.recent_count
-      CreatedUser.where(:created_at.gt => DateTime.now - KPI_TIME_PERIOD).count
+      CreatedUser.where(
+        :created_at.gt => DateTime.now - KPI_TIME_PERIOD).count
     end
 
     def self.historical_per_day
@@ -53,7 +55,8 @@ class Metric
     end
 
     def self.historical_count
-      CreatedMessage.where(:created_at.lte => DateTime.now - KPI_TIME_PERIOD).count
+      CreatedMessage.where(
+        :created_at.lte => DateTime.now - KPI_TIME_PERIOD).count
     end
   end
 end

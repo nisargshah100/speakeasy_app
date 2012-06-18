@@ -45,7 +45,7 @@ EM.run {
     }
 
     message = {
-      :channel => "/room/#{data[:room_id]}/#{channel}", 
+      :channel => "/room/#{data[:room_id]}/#{channel}",
       :data => data
     }
 

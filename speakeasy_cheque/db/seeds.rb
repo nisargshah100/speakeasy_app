@@ -16,10 +16,14 @@ puts "Finished creating users at #{Time.now}"
 CreatedUser.all.each do |user|
   if rand < 0.6
     (rand(3) + 1).times do
-      room = CreatedRoom.create(created_at: user.created_at + rand(DateTime.now - user.created_at).to_i,
+      room = CreatedRoom.create(
+        created_at: user.created_at + rand(DateTime.now - user.created_at).to_i,
                          sid: user.sid,
-                         room_id: CreatedRoom.count + 1)
-      CreatedPermission.create(room_id: room.room_id, sid: room.sid, created_at: room.created_at)
+                         room_id: CreatedRoom.count + 1
+                         )
+      CreatedPermission.create(
+        room_id: room.room_id, sid: room.sid, created_at: room.created_at
+        )
     end
   end
 end
@@ -33,8 +37,9 @@ CreatedUser.all.each do |user|
     room = CreatedRoom.all.sample
     unless CreatedPermission.where(sid: user.sid, room_id: room.room_id).first
       CreatedPermission.create(sid: user.sid,
-                               created_at: room.created_at + rand(DateTime.now - room.created_at).to_i,
-                               room_id: room.room_id)
+            created_at: room.created_at +
+            rand(DateTime.now - room.created_at).to_i,
+            room_id: room.room_id)
     end
   end
 end
@@ -47,8 +52,9 @@ CreatedUser.all.each do |user|
   rand(21).times do
     permission = CreatedPermission.where(sid: user.sid).sample
     CreatedMessage.create(sid: user.sid,
-                          created_at: permission.created_at + rand(DateTime.now - permission.created_at).to_i,
-                          room_id: permission.room_id)
+          created_at: permission.created_at +
+          rand(DateTime.now - permission.created_at).to_i,
+          room_id: permission.room_id)
   end
 end
 

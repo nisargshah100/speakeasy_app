@@ -12,7 +12,7 @@ class Repository < ActiveRecord::Base
     commits = commits.reverse
 
     for commit in commits
-      self.events.create(:data => { 
+      self.events.create(:data => {
         :head_commit => commit,
         :repository => {
           :url => url

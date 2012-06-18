@@ -2,10 +2,13 @@ require 'spec_helper'
 
 describe CreatedUser do
   describe "#create_from_on_tap" do
-    let(:data) { {"sid" => "SID", "created_at" => DateTime.now.to_s} }
+    let(:data) { {"sid" => "SID",
+                  "created_at" => DateTime.now.to_s} }
 
     it "creates a new created_user record" do
-      expect{ CreatedUser.create_from_on_tap(data) }.to change{CreatedUser.count}.by(1)
+      expect{
+        CreatedUser.create_from_on_tap(data)
+        }.to change{CreatedUser.count}.by(1)
     end
 
     it "increases the aggregate users count by 1" do

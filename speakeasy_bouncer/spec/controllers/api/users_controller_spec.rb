@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Api::UsersController, :type => :api do
   context '#create' do
-    let(:valid_user) { 
+    let(:valid_user) {
       {:email => 'test@test.com', :password => 'testing', :name => 'Tester'}
     }
 
@@ -80,7 +80,9 @@ describe Api::UsersController, :type => :api do
 
     it 'successfully updates the name' do
       cookies['user'] = user.token
-      post 'edit', { :token => user.token, :user => { :name => 'Name 2', :password => 'testing' }}
+      post 'edit', { :token => user.token, :user => { :name => 'Name 2',
+                                                      :password => 'testing' }
+                                                    }
       JSON.parse(response.body)['name'].should == 'Name 2'
       user.reload.name.should == 'Name 2'
     end

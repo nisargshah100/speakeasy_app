@@ -92,12 +92,22 @@ class Messages extends Spine.Controller
     value = @input.val()
     return false unless value
 
+    data = {
+      body: value,
+      sid: @sid(),
+      username: @username(),
+      room_id: Sidebar.room().id
+    }
+    
+    new Message(data).publish()
+
     $.post url, {
       sid: @sid()
       'message[body]': value
     }, (data) =>
-      data['sid'] = @sid()
-      new Message(data).publish()
+      # console.log("LOGGED #{data}")
+      # data['sid'] = @sid()
+      # new Message(data).publish()
 
     @input.val ""
     @input.focus()
