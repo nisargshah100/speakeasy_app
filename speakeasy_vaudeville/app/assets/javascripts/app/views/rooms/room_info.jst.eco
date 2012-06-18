@@ -1,5 +1,5 @@
 <h1><%= @room.name %></h1>
-<h2><%= @room.description %></h2>
+<p id="room_description"><q><%= @room.description %></q></p>
 
 <a class="btn btn-info" data-toggle="modal" href="#invite" id="room-info-modal">Invite Patrons</a>
 
