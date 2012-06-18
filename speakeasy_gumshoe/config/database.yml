@@ -10,8 +10,8 @@ development:
   # database: gumshoe_dev
   database: gumshoe_dev
   encoding: utf8
-  username: root
-  password: hungry
+  username: <%= ENV['MYSQL_USERNAME'] %>
+  password: <%= ENV['MYSQL_PASSWORD'] %>
   host: localhost
   pool: 5
   timeout: 5000
@@ -31,10 +31,10 @@ test:
   adapter: mysql2
 
 production:
-  database: gumshoe_prod
+  database: gumshoe
   encoding: utf8
-  username: deployer
-  password: hungry
+  username: <%= ENV['MYSQL_USERNAME'] %>
+  password: <%= ENV['MYSQL_PASSWORD'] %>
   host: localhost
   pool: 5
   timeout: 5000

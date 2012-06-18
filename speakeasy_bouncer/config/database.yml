@@ -21,8 +21,8 @@ test:
 production:
   database: bouncer
   encoding: utf8
-  username: deployer
-  password: hungry
+  username: <%= ENV['MYSQL_USERNAME'] %>
+  password: <%= ENV['MYSQL_PASSWORD'] %>
   host: localhost
   pool: 5
   timeout: 5000
