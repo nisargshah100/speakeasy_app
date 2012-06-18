@@ -54,7 +54,7 @@ class Search extends Spine.Controller
         $("#welcome").html("<div style='padding: 10px'>Searched for '#{q}'<div style='float:right'><a href='#' id='clear_search_results'>Clear Search Results</a></div></div>")
         $("#welcome").show()
       else
-        alert 'No messages found. Messages are indexed every minute.'
+        alert 'No messages found. Messages are indexed every 3 minutes.'
 
   render: =>
     $("#room_search").html @template()
