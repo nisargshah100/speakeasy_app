@@ -73,19 +73,13 @@ end
 
 God.watch do |w|
   w.name = "gumshoe subscribe"
-  w.start = "cd #{path}/speakeasy_gumshoe/; rake subscribe"
+  w.start = "cd #{path}/speakeasy_gumshoe/; RAILS_ENV=#{RAILS_ENV} rake subscribe"
   w.keepalive
 end
 
 God.watch do |w|
   w.name = "search indexer"
-  w.start = "cd #{path}/speakeasy_gumshoe/; rake index"
-  w.keepalive
-end
-
-God.watch do |w|
-  w.name = "logger redis server"
-  w.start = "cd #{path}/speakeasy_cheque/; rake subscribe"
+  w.start = "cd #{path}/speakeasy_gumshoe/; RAILS_ENV=#{RAILS_ENV} rake index"
   w.keepalive
 end
 
