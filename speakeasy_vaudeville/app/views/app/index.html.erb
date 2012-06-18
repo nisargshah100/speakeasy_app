@@ -42,7 +42,7 @@
       <li id="parent"><%= current_user.name %>
         <ul id="children">
           <% if current_user.is_admin %>
-            <li><%= link_to 'Dashboard', "http://speakeasy.im/dashboard?x_axis=week" %></li>
+            <li><%= link_to 'Dashboard', "http://speakeasy.im:5006/?x_axis=week" %></li>
           <% end %>
           <li><%= link_to 'Log Out', nil, id: "log_out" %></li>
         </ul>
