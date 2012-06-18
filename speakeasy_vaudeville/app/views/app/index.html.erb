@@ -3,6 +3,10 @@
   <%= current_user_email_tag %>
   <%= current_sid_tag %>
   <%= current_user_gravatar_tag %>
+
+  <% if current_user.is_admin %>
+    <meta content="yes" name="current-user-is-admin" />
+  <% end %>
   
   <script type="text/javascript">
   $(function(){
@@ -37,6 +41,9 @@
     <ul>
       <li id="parent"><%= current_user.name %>
         <ul id="children">
+          <% if current_user.is_admin %>
+            <li><%= link_to 'Dashboard', "http://dashboard.speakeasy.im/?x_axis=week" %></li>
+          <% end %>
           <li><%= link_to 'Log Out', nil, id: "log_out" %></li>
         </ul>
       </li>
