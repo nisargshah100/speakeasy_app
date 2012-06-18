@@ -20,7 +20,8 @@ class Message < ActiveRecord::Base
       :room_id => self.room_id,
       :sid => self.sid,
       :username => self.username,
-      :id => self.id
+      :id => self.id,
+      :created_at => self.created_at
     }
   end
 end
