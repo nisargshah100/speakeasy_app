@@ -37,6 +37,12 @@ h4 { font-size:12pt; }
 h5 { font-size: 10pt; }
 h6 { font-size: 8pt; }
 
+::-moz-selection { background: #9F80FF; color: #fff; }
+ 
+::-webkit-selection { background: #9F80FF; color: #fff; }
+ 
+::selection { background: #9F80FF; color: #fff; }
+
 a { text-decoration: none; outline: none; }
 
 .clearfix:after { content: "."; visibility: hidden; display: block; height: 0; clear: both; }
@@ -50,13 +56,7 @@ a { text-decoration: none; outline: none; }
 #header { position: absolute; height: 70px; background: $weathervane url(http://www.hungryacademy.com/images/noise.png) repeat top left; bottom:0px; left:0px; right:0px; top:0px;
 z-index: 100; background: -webkit-gradient(linear, 0% 100%, 0% 0%, from($weathervane), to(#323239)); }
 
-/*#logo { padding: 8px 0 0 25px; 
-  a { text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000; color: #000; opacity: 0.3; 
-    &:hover { color: $pencil; text-shadow: 0 0 0 $pencil, 0 0 0 $pencil; opacity: 1; }
-  } 
-}*/
-
-#logo { position: absolute; overflow:hidden; padding: 0; width: 400px; height: 58px; left:25px;
+#logo { position: absolute; overflow:hidden; padding: 0; width: 400px; height: 58px; left:5px;
   a { padding-top: 58px; background-size: 308px 400px; background: url("speakeasy.png") no-repeat left top; position: absolute; height: 0; width: 400px; 
     &:hover { background-size: 308px 400px; background: url("speakeasy.png") no-repeat left top; position: absolute; height: 0; width: 400px; }
   }
@@ -390,12 +390,12 @@ h4#proprietor {
 .right-nav { padding: 0 15px; }
 
 .right-nav { position: absolute; top:0; bottom:0; width:285px; right:0; background: url("http://www.hungryacademy.com/images/noise.png") repeat top left; overflow:auto; background: -webkit-gradient(linear, 100% 100%, 100% 0%, from($weathervane), to(#26262C));
-  #room_name { padding: 10px 0; color: #ccc; font-size: 26px; }
+  #room_name { padding: 10px 0; color: #fff; font-size: 26px; }
   #room_description q { color: #ccc; }
   #data { margin: 10px 0;
     .header {  }
     .search { height: 50px; }
-    .github-events, .users { height: 225px }
+    .github-events, .users { height: 230px }
     .github-events {
       #github_activity { overflow-y: auto; height: 85%; overflow-x: hidden;
         a.commit { color: #B3B3B3; text-decoration: none;
@@ -442,6 +442,10 @@ h4#proprietor {
 
 #createRoom { display: none; }
 
+#invite_patrons a.btn, #edit .modal-footer a.btn { padding: 4px 10px; }
+
+#edit #edit_form input#edit-submit { padding: 4px 10px; }
+
 .modal-body { 
   div { margin-left: 60px; }
   #edit-room-form, #invite_users, #create_form { width: 425px;
@@ -456,6 +460,7 @@ h4#proprietor {
       tr.hint-bottom td:last-child { padding-bottom: 8px; }
     }
   }
+  #create_form table h6.hint { padding-bottom: 8px; }
   #edit-room-form, #create_form input { 
     &[type="text"] { width: 280px; }
     &[type="submit"] { width: 140px; }
@@ -475,6 +480,8 @@ h4#proprietor {
   #empty { height: 175px; margin: 0 14px; border-left: 1px dotted #eee; }
 }
 
+.modal-body #invite_users ul#invited-members li { margin-left: 0; }
+
 a#remove-patron.btn {
   font-size: 8px;
   height: 14px;
@@ -484,9 +491,14 @@ a#remove-patron.btn {
 p#invite-notice {
   font-size: 12px;
   margin-left: 60px;
+  padding-top: 5px;
 }
 
 .modal-footer a { padding: 5px 13px; min-width: 35px; font-size: 12px; margin: 3px 0 3px 5px; }
+
+.modal-footer a#delete-room { float: left; padding-top: 7px;
+  &:hover { color: red; }
+}
 
 .modal-footer a#delete-room.btn.btn-danger { color: red; padding: 5px 13px; min-width: 35px; font-size: 12px; margin: 3px 0 3px 5px; float: left;}
 
@@ -540,3 +552,24 @@ progid:dximagetransform.microsoft.gradient(enabled=false); }
 .btn-primary:active, .btn-primary.active { background-color: #004099 \9; }
 
 .btn-primary, .btn-primary:hover { color: #ffffff; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); font-size: 18px; }
+
+.btn-info {
+  color: #fefefe;
+  background-color: #49afcd;
+  *background-color: #2f96b4;
+  background-image: -ms-linear-gradient(top, #5bc0de, #2f96b4);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5bc0de), to(#2f96b4));
+  background-image: -webkit-linear-gradient(top, #5bc0de, #2f96b4);
+  background-image: -o-linear-gradient(top, #5bc0de, #2f96b4);
+  background-image: -moz-linear-gradient(top, #5bc0de, #2f96b4);
+  background-image: linear-gradient(top, #5bc0de, #2f96b4);
+  background-repeat: repeat-x;
+  border-color: #2f96b4 #2f96b4 #1f6377;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#5bc0de', endColorstr='#2f96b4', GradientType=0);
+  filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}
+
+.btn-info:hover, .btn-info:active, .btn-info.active, .btn-info.disabled, .btn-info[disabled] { color: #fefefe; background-color: #2f96b4; *background-color: #2a85a0; }
+
+.btn-info:active, .btn-info.active { background-color: #24748c \9; }
